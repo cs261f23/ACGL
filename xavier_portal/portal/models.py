@@ -9,8 +9,8 @@ class student(models.Model):
     password = models.CharField(
         max_length=30, null=True)  # need to hash passwords
 
-    def __dict__(self):
-        return {'student_id': self.student_id, 'student_email': self.student_email, 'password': self.password}
+    def dict(self):
+        return {'student_id': self.student_id, 'student_email': self.student_email}
 
     class Meta:
         constraints = [
@@ -25,8 +25,8 @@ class community_partner(models.Model):
     partner_id = models.IntegerField(
         unique=True, default=0, null=False, primary_key=True)
 
-    def __dict__(self):
-        return {'partner_email': self.partner_email, 'password': self.password, 'partner_id': self.partner_id}
+    def dict(self):
+        return {'partner_email': self.partner_email,  'partner_id': self.partner_id}
 
     class Meta:
         constraints = [
@@ -41,7 +41,7 @@ class job_opportunity(models.Model):
     community_partner_id = models.ForeignKey(
         community_partner, on_delete=models.CASCADE, related_name='+', to_field='partner_id', default=0)
 
-    def __dict__(self):
+    def dict(self):
         # check_students = opportunity_to_student.objects.filter(
         #     opportunity_id=self.id)
         students: list = [
@@ -57,8 +57,8 @@ class opportunity_to_student(models.Model):
     student_id = models.ForeignKey(
         student, on_delete=models.CASCADE, related_name='+', to_field='student_id', default=0)
 
-    def __dict__(self):
-        return {'opportunity_id': self.opportunity_id, 'student_id': self.student_id}
+    def dict(self):
+        return {'opportunity_id': self.opportunity_id.id, 'student_id': self.student_id.student_id}
 
     class Meta:
         constraints = [
