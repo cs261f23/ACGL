@@ -1,3 +1,10 @@
 <p>community-member-view works!</p>
 
 <button (click)="getStudentsByOpportunity()" style="text-align: center">example api call</button>
+<div *ngIf="selectedOpportunity!=undefined">
+  <div *ngFor="let student of selectedOpportunity.students">
+    <div *ngFor="let attr of student | keyvalue">
+      {{attr.key}}:{{attr.value}}
+    </div>
+  </div>
+</div>
