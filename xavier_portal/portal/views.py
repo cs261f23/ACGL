@@ -13,6 +13,3 @@ def get_students_by_opportunity(request) -> HttpResponse:
         opportunity_id=opportunity_id)
     ids = [i.student_id.dict() for i in list(search)]
     return JsonResponse(ids, headers={'Access-Control-Allow-Origin': '*'}, safe=False)
-
-
-# Create your views here.

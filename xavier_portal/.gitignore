@@ -1,3 +1,7 @@
 portal/__pycache__/*
 portal/migrations/*
 xavier_portal/__pycache__/*
+portal/__pycache__
+portal/migrations
+xavier_portal/__pycache__
+

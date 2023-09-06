@@ -6,11 +6,11 @@ import { Opportunity } from '../models/opportunity';
 import { Student } from '../models/student';
 
 @Component({
-  selector: 'app-community-member-view',
-  templateUrl: './community-member-view.component.html',
-  styleUrls: ['./community-member-view.component.css']
+  selector: 'app-community-partner-view',
+  templateUrl: './community-partner-view.component.html',
+  styleUrls: ['./community-partner-view.component.css']
 })
-export class CommunityMemberViewComponent {
+export class CommunityPartnerViewComponent {
 
   selectedOpportunity?: Opportunity;
   selectedOpportunityID: number = 1; //for example
@@ -19,9 +19,9 @@ export class CommunityMemberViewComponent {
 
   getStudentsByOpportunity() {
     this.apiCallService.getStudentsByOpportunity(this.selectedOpportunityID).subscribe((response: any) => {
-      let studentList: Array<Student> = response;
+      // let studentList: Array<Student> = response;
       this.selectedOpportunity = {
-        students: studentList
+        students: response
       };
     })
 
