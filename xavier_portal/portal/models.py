@@ -21,6 +21,7 @@ class student(models.Model):
 
 class community_partner(models.Model):
     partner_email = models.EmailField()
+    partner_title = models.CharField(max_length=30, default='')
     password = models.CharField(max_length=30)  # need to hash passwords
     partner_id = models.IntegerField(
         unique=True, default=0, null=False, primary_key=True)

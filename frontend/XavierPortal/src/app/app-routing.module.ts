@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CommunityMemberViewComponent } from './community-member-view/community-member-view.component';
+import { CommunityPartnerViewComponent } from './community-partner-view/community-partner-view.component';
 
 const routes: Routes = [
-  { path: 'community_member_view', component: CommunityMemberViewComponent }
+  { path: 'community_partner_view', component: CommunityPartnerViewComponent }
 ];
 
 

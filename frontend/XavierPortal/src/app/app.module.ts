@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CommunityMemberViewComponent } from './community-member-view/community-member-view.component';
+import { CommunityPartnerViewComponent } from './community-partner-view/community-partner-view.component';
 import { StudentViewComponent } from './student-view/student-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
-    CommunityMemberViewComponent,
+    CommunityPartnerViewComponent,
     StudentViewComponent,
     AdminViewComponent
   ],
