@@ -3,3 +3,4 @@ xavier_portal/portal/__pycache__
 xavier_portal/portal/migrations/__pycache__
 xavier_portal/xavier_portal/__pycache__
 xavier_portal/db.sqlite3
+xavier_portal/env
