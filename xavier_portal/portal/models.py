@@ -3,6 +3,7 @@ from django.db import models
 
 
 class student(models.Model):
+    name = models.CharField(max_length=50, null=False, default='')
     student_email = models.EmailField()
     student_id = models.IntegerField(
         unique=True, default=0, null=False, primary_key=True)
@@ -10,7 +11,7 @@ class student(models.Model):
         max_length=30, null=True)  # need to hash passwords
 
     def dict(self):
-        return {'student_id': self.student_id, 'student_email': self.student_email}
+        return {'name': self.name, 'student_id': self.student_id, 'student_email': self.student_email}
 
     class Meta:
         constraints = [
@@ -27,7 +28,7 @@ class community_partner(models.Model):
         unique=True, default=0, null=False, primary_key=True)
 
     def dict(self):
-        return {'partner_email': self.partner_email,  'partner_id': self.partner_id}
+        return {'partner_title': self.partner_title, 'partner_email': self.partner_email,  'partner_id': self.partner_id}
 
     class Meta:
         constraints = [
@@ -36,7 +37,7 @@ class community_partner(models.Model):
         ]
 
 
-class job_opportunity(models.Model):
+class opportunity(models.Model):
     description = models.CharField(max_length=200, null=True)
     keywords = models.CharField(max_length=200,  null=True)
     community_partner_id = models.ForeignKey(
@@ -54,7 +55,7 @@ class job_opportunity(models.Model):
 
 class opportunity_to_student(models.Model):
     opportunity_id = models.ForeignKey(
-        job_opportunity, on_delete=models.CASCADE, related_name='+', default=0)
+        opportunity, on_delete=models.CASCADE, related_name='+', default=0)
     student_id = models.ForeignKey(
         student, on_delete=models.CASCADE, related_name='+', to_field='student_id', default=0)
 
