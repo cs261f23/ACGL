@@ -1,0 +1,17 @@
+description
+<div>
+  <input type="text" class="form-control" id="email" required [(ngModel)]="info.description" name="email">
+  {{info.description}}
+</div>
+keywords
+<div>
+  <input type="text" class="form-control" id="password" required [(ngModel)]="info.keywords" name="keywords">
+</div>
+
+partner title
+<div>
+  <input type="text" class="form-control" id="password" required [(ngModel)]="info.communityPartnerTitle"
+    name="communityPartnerTitle">
+</div>
+
+<button (click)="onSubmit()">Submit</button>
