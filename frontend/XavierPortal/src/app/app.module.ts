@@ -7,18 +7,24 @@ import { CommunityPartnerViewComponent } from './community-partner-view/communit
 import { StudentViewComponent } from './student-view/student-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { StudentOpportunityViewComponent } from './student-view/student-opportunity-view/student-opportunity-view.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CommunityPartnerViewComponent,
     StudentViewComponent,
-    AdminViewComponent
+    AdminViewComponent,
+    StudentOpportunityViewComponent,
+    StudentSearchFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    FormsModule
   ],
   providers: [HttpClientModule,],
   bootstrap: [AppComponent]

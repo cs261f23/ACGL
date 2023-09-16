@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient, HttpHeaders
 } from '@angular/common/http';
+import { Opportunity } from './models/opportunity';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +20,7 @@ export class ApiCallService {
     return this.http.get(this.url + '/portal/get_students_by_opportunity?id=' + opportunityID);
   }
 
+  getAvailableOpportunitiesForStudent(): any {
+    return this.http.get(this.url + '/portal/get_available_opportunities_for_student');
+  }
 }
