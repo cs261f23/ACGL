@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
@@ -10,20 +10,24 @@ import { Student } from '../models/student';
   templateUrl: './community-partner-view.component.html',
   styleUrls: ['./community-partner-view.component.css']
 })
-export class CommunityPartnerViewComponent {
+export class CommunityPartnerViewComponent implements OnInit {
 
-  selectedOpportunity?: Opportunity;
-  selectedOpportunityID: number = 1; //for example
+  partnerID: number = 0;
+  myOpportunities: Array<Opportunity> = [];
   constructor(private apiCallService: ApiCallService, private router: Router) {
   }
 
-  getStudentsByOpportunity() {
-    this.apiCallService.getStudentsByOpportunity(this.selectedOpportunityID).subscribe((response: any) => {
-      // let studentList: Array<Student> = response;
-      this.selectedOpportunity = {
-        students: response
-      };
+  getStudentsByOpportunity(id: number) {
+    this.apiCallService.getStudentsByOpportunity(id).subscribe((response: any) => {
+      let studentList: Array<Student> = response;
     })
+  }
+
+  ngOnInit() {
+    this.apiCallService.getOpportunitiesByPartnerID(this.partnerID).subscribe((response: any) => {
+      this.myOpportunities = response;
+    })
+
 
 
   }

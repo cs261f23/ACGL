@@ -1,1 +1,8 @@
-<p>student-view works!</p>
+<div *ngFor="let item of opportunities" style="text-align:center">
+  <button>
+    <div *ngFor="let stat of item | keyvalue">
+      {{stat.key}}:{{stat.value}}
+    </div>
+  </button>
+  <hr style="width:500px" />
+</div>
