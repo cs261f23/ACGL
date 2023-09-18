@@ -40,6 +40,7 @@ def get_available_opportunities_for_student(request) -> HttpResponse:
 def get_opportunities_by_partner_id(request) -> HttpResponse:
     """
     returns all the opportunities that are associated with the given partner_id
+    url = http://ip_address:port/porta/get_opportunities_by_partner_id?id=1
     """
     ops = list(opportunity.objects.filter(
         community_partner_id=request.GET.get('id')))
@@ -54,7 +55,7 @@ def create_opportunity(request) -> HttpResponse | None:
     import json
     body_unicode = request.body.decode('utf-8')
     f = {}
-    if (len(body_unicode) > 0):  # this line avoids an error from the options request that precedes the post request
+    if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
         new_opportunity = json.loads(body_unicode)
         partner = community_partner.objects.filter(
             partner_title=new_opportunity['communityPartnerTitle'])[0]
@@ -63,6 +64,6 @@ def create_opportunity(request) -> HttpResponse | None:
         f = opportunity(description=description, keywords=keywords,
                         community_partner_id=partner)
         f.save()
-    if (isinstance(f, opportunity)):
+    if isinstance(f, opportunity):
         f = f.dict()
     return JsonResponse(f, headers={'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'}, safe=False)
