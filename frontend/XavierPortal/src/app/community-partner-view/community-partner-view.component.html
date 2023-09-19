@@ -1,10 +1,21 @@
-<p>community-member-view works!</p>
+<button (click)="getStudentsByOpportunity(1)" style="text-align: center">example api call</button>
 
-<button (click)="getStudentsByOpportunity()" style="text-align: center">example api call</button>
-<div *ngIf="selectedOpportunity!=undefined">
-  <div *ngFor="let student of selectedOpportunity.students">
-    <div *ngFor="let attr of student | keyvalue">
-      {{attr.key}}:{{attr.value}}
-    </div>
-  </div>
-</div>
+
+<button routerLink="/community_partner_opportunity_creation_view" routerLinkActive="active"
+  areaCurrentWhenActive="page">
+  create new opportunity
+</button>
+
+
+<ngb-accordion #acc="ngbAccordion">
+  <ngb-panel title="My Opportunities">
+    <ng-template ngbPanelContent>
+      <div *ngFor="let item of myOpportunities">
+        <div *ngFor="let stat of item | keyvalue">
+          {{stat.key}}: {{stat.value}}
+        </div>
+        <hr />
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

@@ -44,13 +44,11 @@ class opportunity(models.Model):
         community_partner, on_delete=models.CASCADE, related_name='+', to_field='partner_id', default=0)
 
     def dict(self):
-        # check_students = opportunity_to_student.objects.filter(
-        #     opportunity_id=self.id)
         students: list = [
             i[0] for i in opportunity_to_student.objects.filter(
                 opportunity_id=self.id).values_list('student_id')
         ]
-        return {'description': self.description, 'keywords': self.keywords, 'community_partner_id': self.community_partner_id, 'students': students}
+        return {'description': self.description, 'keywords': self.keywords, 'community_partner_id': self.community_partner_id.partner_title, 'students': students}
 
 
 class opportunity_to_student(models.Model):
