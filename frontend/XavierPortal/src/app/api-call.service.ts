@@ -34,4 +34,10 @@ export class ApiCallService {
   getOpportunitiesByPartnerID(partnerID: number): any {
     return this.http.get(this.url + 'portal/get_opportunities_by_partner_id?id=' + partnerID)
   }
+
+  attemptLogin(email: string, password: string) {
+    let headers = new HttpHeaders()
+    headers.append('Access-Control-Allow-Origin', '*');
+    return this.http.post(this.url + 'portal/attempt_login', { email: email, password: password }, { headers: headers })
+  }
 }

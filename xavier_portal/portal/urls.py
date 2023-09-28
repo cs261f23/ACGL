@@ -11,6 +11,8 @@ urlpatterns = [
          name='available_opportunities'),
     path('create_opportunity', views.create_opportunity, name='create_opportunity'),
     path('get_opportunities_by_partner_id',
-         views.get_opportunities_by_partner_id, name='get_opportunities_by_partner_id')
+         views.get_opportunities_by_partner_id, name='get_opportunities_by_partner_id'),
+    path('attempt_login',
+         views.attempt_login, name='attempt_login')
 
 ]
