@@ -13,7 +13,7 @@ import { StudentSearchFormComponent } from './student-view/student-search-form/s
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommunityPartnerOpportunityCreationFormComponent } from './community-partner-view/community-partner-opportunity-creation-form/community-partner-opportunity-creation-form.component';
 import { FormsModule } from '@angular/forms';
-import { CommunityPartnerOpportunityCreationViewComponent } from './community-partner-view/community-partner-opportunity-creation-view/community-partner-opportunity-creation-view.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { CommunityPartnerOpportunityCreationViewComponent } from './community-pa
     CommunityPartnerOpportunityViewComponent,
     StudentSearchFormComponent,
     CommunityPartnerOpportunityCreationFormComponent,
-    CommunityPartnerOpportunityCreationViewComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
