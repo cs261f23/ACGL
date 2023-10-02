@@ -1,1 +1,12 @@
-<p>student-search-form works!</p>
+<input type="text" class="form-control" id="searchString" required [(ngModel)]="searchString" (input)="filter()">
+{{searchString}}
+<div *ngFor="let item of filteredOpportunities" style="text-align:center">
+  <div class="btn" display="flex">
+    <button>
+      <div *ngFor="let stat of item | keyvalue">
+        {{stat.key}}:{{stat.value}}
+      </div>
+    </button>
+  </div>
+  <hr style="width:500px" />
+</div>

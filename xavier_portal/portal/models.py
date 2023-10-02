@@ -8,7 +8,7 @@ class student(models.Model):
     student_id = models.IntegerField(
         unique=True, default=0, null=False, primary_key=True)
     password = models.CharField(
-        max_length=30, null=True)  # need to hash passwords
+        max_length=256, null=True)  # need to hash passwords
 
     def dict(self):
         return {'name': self.name, 'student_id': self.student_id, 'student_email': self.student_email}
@@ -23,7 +23,7 @@ class student(models.Model):
 class community_partner(models.Model):
     partner_email = models.EmailField()
     partner_title = models.CharField(max_length=30, default='')
-    password = models.CharField(max_length=30)  # need to hash passwords
+    password = models.CharField(max_length=256)  # need to hash passwords
     partner_id = models.IntegerField(
         unique=True, default=0, null=False, primary_key=True)
 
@@ -43,12 +43,14 @@ class opportunity(models.Model):
     community_partner_id = models.ForeignKey(
         community_partner, on_delete=models.CASCADE, related_name='+', to_field='partner_id', default=0)
 
-    def dict(self):
-        students: list = [
+    def students():
+        return [
             i[0] for i in opportunity_to_student.objects.filter(
                 opportunity_id=self.id).values_list('student_id')
         ]
-        return {'description': self.description, 'keywords': self.keywords, 'community_partner_id': self.community_partner_id.partner_title, 'students': students}
+
+    def dict(self):
+        return {'description': self.description, 'keywords': self.keywords, 'community_partner_id': self.community_partner_id.partner_title}
 
 
 class opportunity_to_student(models.Model):
