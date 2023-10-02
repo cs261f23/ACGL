@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Role } from './enums/role';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  loginUsername: string = "";
-  userRole?: Role;
-  authorized: boolean = false;
+  partnerID: number = -1;
+  studentID: number = -1;
   constructor() { }
 }

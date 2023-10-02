@@ -4,17 +4,20 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { Opportunity } from '../models/opportunity';
 import { Student } from '../models/student';
-
+import { AuthService } from '../auth.service';
+import { CommunityPartnerOpportunityCreationFormComponent } from './community-partner-opportunity-creation-form/community-partner-opportunity-creation-form.component';
 @Component({
   selector: 'app-community-partner-view',
   templateUrl: './community-partner-view.component.html',
-  styleUrls: ['./community-partner-view.component.css']
+  styleUrls: ['./community-partner-view.component.css', '../app.component.css']
 })
 export class CommunityPartnerViewComponent implements OnInit {
+  form?: CommunityPartnerOpportunityCreationFormComponent
 
-  partnerID: number = 0;
   myOpportunities: Array<Opportunity> = [];
-  constructor(private apiCallService: ApiCallService, private router: Router) {
+  section: string = "";
+  constructor(private apiCallService: ApiCallService, private router: Router, private authService: AuthService, private route: ActivatedRoute) {
+
   }
 
   getStudentsByOpportunity(id: number) {
@@ -24,11 +27,14 @@ export class CommunityPartnerViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiCallService.getOpportunitiesByPartnerID(this.partnerID).subscribe((response: any) => {
+    if (this.authService.partnerID == -1)
+      this.router.navigate(['/'], { relativeTo: this.route })
+    this.getOpportunitiesByPartnerID()
+  }
+  getOpportunitiesByPartnerID() {
+    this.apiCallService.getOpportunitiesByPartnerID(this.authService.partnerID!).subscribe((response: any) => {
       this.myOpportunities = response;
     })
-
-
 
   }
 
