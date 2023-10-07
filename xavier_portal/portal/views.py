@@ -70,17 +70,18 @@ def create_opportunity(request) -> HttpResponse:
     return JsonResponse(new_opportunity, headers=post_headers, safe=False)
 
 
-
-
 @csrf_exempt
 def attempt_login(request) -> HttpResponse:
+    """
+    Attempts to login by first checking for email/password in the partners table, then if there isn't a match there, it checks the student table 
+    """
     import json
     import hashlib
     body_unicode = request.body.decode('utf-8')
     if len(body_unicode) > 0:
         hash = hashlib.new('sha256')
         login = json.loads(body_unicode)
-        hash.update(bytes(login['password'], encoding='utf-8'))
+        hash.update(bytes(login['password'], 'utf-8'))
         partner_check = community_partner.objects.filter(
             password=hash.hexdigest(), partner_email=login['email'])
         if len(list(partner_check)) == 1:
@@ -93,3 +94,50 @@ def attempt_login(request) -> HttpResponse:
         return JsonResponse({'outcome': 'failed'}, headers=post_headers)
     else:
         return JsonResponse({}, headers=post_headers)
+
+
+@csrf_exempt
+def attempt_partner_register(request) -> HttpResponse:
+    """
+    Checks validity of wannabe partner's info and creates partner
+    """
+    import json
+    import hashlib
+    body_unicode = request.body.decode('utf-8')
+    if len(body_unicode) > 0:
+        hash = hashlib.new('sha256')
+        partner_json = json.loads(body_unicode)
+        hash_password = hash.hexdigest()
+        hash.update(bytes(partner_json['password'], 'utf-8'))
+        partner_check = community_partner.objects.filter(
+            password=hash_password)
+        if len(partner_check) == 0 and '@' in partner_json['email']:
+            partner = community_partner(
+                partner_email=partner_json['email'],
+                partner_title=partner_json['title'],
+                password=hash_password
+            )
+
+
+# @csrf_exempt
+# def attempt_login(request) -> HttpResponse:
+#     """
+#     Attempts to login by first checking for email/password in the partners table, then if there isn't a match there, it checks the student table
+#     """
+#     import json
+#     import hashlib
+#     body_unicode = request.body.decode('utf-8')
+#     if len(body_unicode) > 0:
+#         hash = hashlib.new('sha256')
+#         login = json.loads(body_unicode)
+#         hash.update(bytes(login['password'], encoding='utf-8'))
+#         possible_partners = community_partner.objects.filter(
+#             partner_email=login['email'])
+#         for i in possible_partners:
+#             salt = i.salt
+#             part = hash.hexdigest()
+#             hash.update(bytes(f'{salt}{part}'))
+#             if i.password == hash.hexdigest():
+#                 return JsonResponse({'outcome': 'partner', 'id': i.partner_id}, headers=post_headers)
+#         return JsonResponse({'outcome': 'failed'}, headers=post_headers)
+#     return JsonResponse({}, headers=post_headers)

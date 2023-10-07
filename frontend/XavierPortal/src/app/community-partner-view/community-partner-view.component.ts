@@ -27,9 +27,9 @@ export class CommunityPartnerViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.authService.partnerID == -1)
-      this.router.navigate(['/'], { relativeTo: this.route })
-    this.getOpportunitiesByPartnerID()
+    (this.authService.partnerID == -1)
+      ? this.router.navigate(['/'], { relativeTo: this.route })
+      : this.getOpportunitiesByPartnerID()
   }
   getOpportunitiesByPartnerID() {
     this.apiCallService.getOpportunitiesByPartnerID(this.authService.partnerID!).subscribe((response: any) => {

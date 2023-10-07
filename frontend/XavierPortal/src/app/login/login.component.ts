@@ -13,6 +13,7 @@ export class LoginComponent {
 
   email: string = '';
   password: string = '';
+  showPassword = false;
   loggedIn: boolean = false;
   role: number = -1;
   constructor(private apiCallService: ApiCallService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
@@ -33,10 +34,14 @@ export class LoginComponent {
       if (response["outcome"] == "student") {
         this.role = 0;
         this.loggedIn = true;
-        this.authService.partnerID = response["id"]
+        this.authService.studentID = response["id"]
         this.router.navigate(['/student_view'], { relativeTo: this.route })
       }
     });
+  }
+
+  toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
 }

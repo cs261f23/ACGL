@@ -1,23 +1,16 @@
-<div *ngIf="!loggedIn">
+<div *ngIf="!loggedIn" style="padding-left: 30%; padding-right: 30%">
   email
   <input type="text" class="form-control" id="email" required [(ngModel)]="email">
 
 
   password
-  <input type="text" class="form-control" id="password" required [(ngModel)]="password">
+  <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="password">
+  <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()">
+    show password
+  </button>
 
 
   <button (click)="login()">
     Login
   </button>
 </div>
-
-<!-- <div *ngIf="role==0 && loggedIn"> -->
-<!---->
-<!--   <app-student-view></app-student-view> -->
-<!---->
-<!-- </div> -->
-
-<!-- <div *ngIf="role==1 && loggedIn"> -->
-<!--   <app-community-partner-view></app-community-partner-view> -->
-<!-- </div> -->
