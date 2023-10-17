@@ -1,3 +1,4 @@
+import { Binary } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,5 +7,6 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   partnerID: number = -1;
   studentID: number = -1;
+  hash?: Binary;
   constructor() { }
 }

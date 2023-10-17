@@ -9,6 +9,11 @@ class student(models.Model):
         unique=True, default=0, null=False, primary_key=True)
     password = models.CharField(
         max_length=256, null=True)  # need to hash passwords
+    salt = models.BinaryField(
+        max_length=32, null=True)
+
+    # salt = models.CharField(
+    #     max_length=256, null=True)
 
     def dict(self):
         return {'name': self.name, 'student_id': self.student_id, 'student_email': self.student_email}
@@ -26,6 +31,9 @@ class community_partner(models.Model):
     password = models.CharField(max_length=256)  # need to hash passwords
     partner_id = models.IntegerField(
         unique=True, default=0, null=False, primary_key=True)
+    salt = models.BinaryField(max_length=32, null=True)
+    # salt = models.CharField(
+    #     max_length=256, null=True)
 
     def dict(self):
         return {'partner_title': self.partner_title, 'partner_email': self.partner_email,  'partner_id': self.partner_id}
@@ -43,7 +51,7 @@ class opportunity(models.Model):
     community_partner_id = models.ForeignKey(
         community_partner, on_delete=models.CASCADE, related_name='+', to_field='partner_id', default=0)
 
-    def students():
+    def students(self):
         return [
             i[0] for i in opportunity_to_student.objects.filter(
                 opportunity_id=self.id).values_list('student_id')

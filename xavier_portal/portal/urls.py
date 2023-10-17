@@ -13,6 +13,10 @@ urlpatterns = [
     path('get_opportunities_by_partner_id',
          views.get_opportunities_by_partner_id, name='get_opportunities_by_partner_id'),
     path('attempt_login',
-         views.attempt_login, name='attempt_login')
+         views.attempt_login, name='attempt_login'),
+    path('attempt_student_register',
+         views.attempt_student_register, name='attempt_student_register'),
+    path('attempt_partner_register',
+         views.attempt_partner_register, name='attempt_partner_register'),
 
 ]

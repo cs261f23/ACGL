@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommunityPartnerViewComponent } from './community-partner-view/community-partner-view.component';
 import { LoginComponent } from './login/login.component';
+import { PartnerUserRegisterComponent } from './partner-user-register/partner-user-register.component';
+import { StudentUserRegisterComponent } from './student-user-register/student-user-register.component';
 import { StudentViewComponent } from './student-view/student-view.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'community_partner_view', component: CommunityPartnerViewComponent },
   { path: 'student_view', component: StudentViewComponent },
+  { path: 'student_register', component: StudentUserRegisterComponent },
+  { path: 'partner_register', component: PartnerUserRegisterComponent },
 ];
 
 
