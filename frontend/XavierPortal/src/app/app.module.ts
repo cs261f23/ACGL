@@ -15,6 +15,8 @@ import { CommunityPartnerOpportunityCreationFormComponent } from './community-pa
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { MatIconModule } from '@angular/material/icon';
+import { StudentUserRegisterComponent } from './student-user-register/student-user-register.component';
+import { PartnerUserRegisterComponent } from './partner-user-register/partner-user-register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,9 @@ import { MatIconModule } from '@angular/material/icon';
     CommunityPartnerOpportunityViewComponent,
     StudentSearchFormComponent,
     CommunityPartnerOpportunityCreationFormComponent,
-    LoginComponent
+    LoginComponent,
+    StudentUserRegisterComponent,
+    PartnerUserRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     NgbModule,
     FormsModule,
+    MatIconModule
   ],
   providers: [HttpClientModule,],
   bootstrap: [AppComponent]

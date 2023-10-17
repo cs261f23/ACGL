@@ -9,6 +9,9 @@ class student(models.Model):
         unique=True, default=0, null=False, primary_key=True)
     password = models.CharField(
         max_length=256, null=True)  # need to hash passwords
+    salt = models.BinaryField(
+        max_length=32, null=True)
+
     # salt = models.CharField(
     #     max_length=256, null=True)
 
@@ -28,6 +31,7 @@ class community_partner(models.Model):
     password = models.CharField(max_length=256)  # need to hash passwords
     partner_id = models.IntegerField(
         unique=True, default=0, null=False, primary_key=True)
+    salt = models.BinaryField(max_length=32, null=True)
     # salt = models.CharField(
     #     max_length=256, null=True)
 

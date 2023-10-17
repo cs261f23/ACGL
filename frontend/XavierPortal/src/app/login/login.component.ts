@@ -3,11 +3,10 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ApiCallService } from '../api-call.service';
 import { AuthService } from '../auth.service';
 import { CommunityPartnerViewComponent } from '../community-partner-view/community-partner-view.component';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css', '../material-icons.css']
 })
 export class LoginComponent {
 
