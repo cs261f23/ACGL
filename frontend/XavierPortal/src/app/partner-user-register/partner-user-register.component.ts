@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from '../api-call.service';
 import { AuthService } from '../auth.service';
 
@@ -13,7 +14,7 @@ export class PartnerUserRegisterComponent implements OnInit {
   password: string = '';
   title: string = '';
 
-  constructor(private apiCallService: ApiCallService, private authService: AuthService) { }
+  constructor(private apiCallService: ApiCallService, private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -24,6 +25,9 @@ export class PartnerUserRegisterComponent implements OnInit {
 
   register(): any {
     this.apiCallService.partnerRegister(this.email, this.title, this.password).subscribe((response) => {
+      if (response == 'success') {
+        this.router.navigate(['/'], { relativeTo: this.route })
+      }
     })
   }
 

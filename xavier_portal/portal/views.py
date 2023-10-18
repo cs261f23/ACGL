@@ -187,7 +187,7 @@ def attempt_login(request) -> HttpResponse:
                 'sha256', login['password'].encode('utf-8'), salt, 100000)
             print(hashed_password)
             print(partner_check.password)
-            if str(hashed_password, 'utf-8') == str(partner_check.password, 'utf-8'):
+            if str(hashed_password) == str(partner_check.password):
                 auth_hash = os.urandom(32)
                 authorization_hashes.append({auth_hash: partner_check})
                 return JsonResponse({'outcome': 'partner', 'id': partner_check.partner_id, 'hash': str(auth_hash)}, headers=post_headers, safe=False)
