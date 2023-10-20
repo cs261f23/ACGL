@@ -14,7 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommunityPartnerOpportunityCreationFormComponent } from './community-partner-view/community-partner-opportunity-creation-form/community-partner-opportunity-creation-form.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { StudentUserRegisterComponent } from './student-user-register/student-user-register.component';
+import { PartnerUserRegisterComponent } from './partner-user-register/partner-user-register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +27,17 @@ import { LoginComponent } from './login/login.component';
     CommunityPartnerOpportunityViewComponent,
     StudentSearchFormComponent,
     CommunityPartnerOpportunityCreationFormComponent,
-    LoginComponent
+    LoginComponent,
+    StudentUserRegisterComponent,
+    PartnerUserRegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   providers: [HttpClientModule,],
   bootstrap: [AppComponent]
