@@ -28,13 +28,17 @@ export class LoginComponent {
         this.role = 1;
         this.loggedIn = true;
         this.authService.partnerID = response["id"]
+        this.authService.hash = response['hash']
         this.router.navigate(['/community_partner_view'], { relativeTo: this.route })
+        return
       }
       if (response["outcome"] == "student") {
         this.role = 0;
         this.loggedIn = true;
         this.authService.studentID = response["id"]
+        this.authService.hash = response['hash']
         this.router.navigate(['/student_view'], { relativeTo: this.route })
+        return
       }
     });
   }

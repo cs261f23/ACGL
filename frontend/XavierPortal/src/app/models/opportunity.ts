@@ -5,4 +5,5 @@ export interface Opportunity {
   communityPartnerTitle: string;
   description: string;
   keywords: string;
+  id: number;
 }
