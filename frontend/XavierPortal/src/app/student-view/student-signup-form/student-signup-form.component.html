@@ -4,7 +4,8 @@
   <div class="form-group">
     <label for="name">Name:</label>
     <div>
-      <input type="text" id="name" name="name" [(ngModel)]="model.name" required #name="ngModel" [pattern]="validNamePattern">
+      <input class="form-control" type="text" id="model.name" name="model.name" required [(ngModel)]="model.name"
+        #name="ngModel" [pattern]="validNamePattern">
     </div>
     <div [hidden]="name.valid || (name.pristine && !submitted)" class="alert alert-danger">
       Name is required and must not contain numbers.
@@ -14,7 +15,8 @@
   <div class="form-group">
     <label for="email">Email:</label>
     <div>
-      <input type="email" id="email" name="email" [(ngModel)]="model.email" required [ngModelOptions]="{updateOn: 'blur'}" #email="ngModel" pattern="[a-zA-Z0-9._%+-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}">
+      <input type="email" id="model.email" name="model.email" [(ngModel)]="model.email" required
+        [ngModelOptions]="{updateOn: 'blur'}" #email="ngModel" pattern="[a-zA-Z0-9._%+-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}">
     </div>
     <div [hidden]="email.valid || (email.pristine && !submitted)" class="alert alert-danger">
       Email is required and must be valid.
@@ -24,12 +26,13 @@
   <div class="form-group">
     <label for="phoneNumber">Phone Number (format: 333-333-3333, digits only):</label>
     <div>
-      <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="model.phoneNumber" required #phoneNumber="ngModel" pattern="\d{3}-\d{3}-\d{4}">
+      <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="model.phoneNumber" required
+        #phoneNumber="ngModel" pattern="\d{3}-\d{3}-\d{4}">
     </div>
     <div [hidden]="phoneNumber.valid || (phoneNumber.pristine && !submitted)" class="alert alert-danger">
       Phone Number is required and must be in the format 333-333-3333, containing only digits.
     </div>
   </div>
-  
+
   <button type="submit" (click)="onSubmit()">Submit</button>
 </form>

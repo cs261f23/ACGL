@@ -13,7 +13,12 @@ export class StudentViewComponent implements OnInit {
   opportunities: Array<Opportunity> = [];
   selectedOpportunities: Array<Opportunity> = [];
 
-  constructor(private apiCallService: ApiCallService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private apiCallService: ApiCallService,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
@@ -22,6 +27,9 @@ export class StudentViewComponent implements OnInit {
       : this.getAvailableOpportunitiesForStudent();
   }
 
+  /**
+  * Make an api call to get a list of the currently listed opportunities
+  * */
   getAvailableOpportunitiesForStudent(): void {
     this.apiCallService.getAvailableOpportunitiesForStudent().subscribe((response: any) => {
       this.opportunities = response;

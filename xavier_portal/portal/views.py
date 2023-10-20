@@ -36,9 +36,21 @@ def get_available_opportunities_for_student(request) -> HttpResponse:
             partner_id=i.community_partner_id.partner_id)
         idict = i.dict()
         idict['community_partner_title'] = partner[0].partner_title
+        idict['id'] = i.id
         idict.pop('community_partner_id')
         y.append(idict)
     return JsonResponse(y, headers=get_headers, safe=False)
+
+
+def get_opportunity_info(request) -> HttpResponse:
+    """
+    gets opportunity info by id
+    """
+    try:
+        op = opportunity.objects.get(id=request.GET.get('id'))
+        return JsonResponse(op.dict(), headers=get_headers, safe=False)
+    except opportunity.DoesNotExist:
+        return JsonResponse("major error")
 
 
 def get_opportunities_by_partner_id(request) -> HttpResponse:
@@ -204,7 +216,7 @@ def attempt_login(request) -> HttpResponse:
                 if str(hashed_password) == str(student_check.password):
                     auth_hash = os.urandom(32)
                     authorization_hashes.append({auth_hash: student_check})
-                    return JsonResponse({'outcome': 'partner', 'id': student_check.student_id, 'hash': str(auth_hash)}, headers=post_headers, safe=False)
+                    return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': str(auth_hash)}, headers=post_headers, safe=False)
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
             except student.DoesNotExist:
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)

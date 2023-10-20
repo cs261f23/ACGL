@@ -4,6 +4,7 @@ import { CommunityPartnerViewComponent } from './community-partner-view/communit
 import { LoginComponent } from './login/login.component';
 import { PartnerUserRegisterComponent } from './partner-user-register/partner-user-register.component';
 import { StudentUserRegisterComponent } from './student-user-register/student-user-register.component';
+import { StudentOpportunityViewComponent } from './student-view/student-opportunity-view/student-opportunity-view.component';
 import { StudentViewComponent } from './student-view/student-view.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'student_view', component: StudentViewComponent },
   { path: 'student_register', component: StudentUserRegisterComponent },
   { path: 'partner_register', component: PartnerUserRegisterComponent },
+  { path: 'student_view/opportunity_view/:id', component: StudentOpportunityViewComponent }
 ];
 
 

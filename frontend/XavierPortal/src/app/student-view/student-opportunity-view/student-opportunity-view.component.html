@@ -1,1 +1,14 @@
-<p>student-opportunity-view works!</p>
+<div>
+  <div *ngFor="let data of this.info | keyvalue" style="display: flex; justify-content: center;">
+    {{data.key}} : {{data.value}}
+  </div>
+</div>
+
+<div style="display: flex; justify-content: center;">
+  <button (click)="signup=true">
+    Sign Up ?
+  </button>
+</div>
+<div *ngIf="signup==true" style="display: flex; justify-content: center;">
+  <app-student-signup-form></app-student-signup-form>
+</div>

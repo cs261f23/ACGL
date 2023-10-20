@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { StudentUserRegisterComponent } from './student-user-register/student-user-register.component';
 import { PartnerUserRegisterComponent } from './partner-user-register/partner-user-register.component';
+import { StudentSignupFormComponent } from './student-view/student-signup-form/student-signup-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { PartnerUserRegisterComponent } from './partner-user-register/partner-us
     CommunityPartnerOpportunityCreationFormComponent,
     LoginComponent,
     StudentUserRegisterComponent,
-    PartnerUserRegisterComponent
+    PartnerUserRegisterComponent,
+    StudentSignupFormComponent
   ],
   imports: [
     BrowserModule,
