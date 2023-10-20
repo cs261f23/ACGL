@@ -1,0 +1,18 @@
+/* Default input styles */
+input[type="text"], input[type="email"], input[type="tel"] {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+/* Styles for ng-touched and ng-dirty states */
+input.ng-touched.ng-dirty.ng-valid {
+  border-left: 5px solid #42A948; /* green for valid and touched inputs */
+  background-color: white;
+}
+
+input.ng-touched.ng-dirty.ng-invalid {
+  border-left: 5px solid #a94442; /* red for invalid and touched inputs */
+  background-color: white;
+}

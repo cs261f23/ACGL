@@ -18,5 +18,7 @@ urlpatterns = [
          views.attempt_student_register, name='attempt_student_register'),
     path('attempt_partner_register',
          views.attempt_partner_register, name='attempt_partner_register'),
+    path('get_opportunity_info', views.get_opportunity_info,
+         name='get_opportunity_info')
 
 ]

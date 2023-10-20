@@ -42,6 +42,17 @@ def get_available_opportunities_for_student(request) -> HttpResponse:
     return JsonResponse(y, headers=get_headers, safe=False)
 
 
+def get_opportunity_info(request) -> HttpResponse:
+    """
+    gets opportunity info by id
+    """
+    try:
+        op = opportunity.objects.get(id=request.GET.get('id'))
+        return JsonResponse(op.dict(), headers=get_headers, safe=False)
+    except opportunity.DoesNotExist:
+        return JsonResponse("major error")
+
+
 def get_opportunities_by_partner_id(request) -> HttpResponse:
     """
     returns all the opportunities that are associated with the given partner_id

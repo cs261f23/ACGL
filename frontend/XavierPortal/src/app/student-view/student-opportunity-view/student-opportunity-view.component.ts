@@ -1,5 +1,6 @@
-import { Component, Input, numberAttribute, OnInit } from '@angular/core';
+import { Component, Input, numberAttribute, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiCallService } from 'src/app/api-call.service';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
@@ -9,13 +10,22 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class StudentOpportunityViewComponent implements OnInit {
   id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
+  signup: boolean = false;
+  info!: {}
 
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private apiCallService: ApiCallService
+  ) {
   }
 
   ngOnInit(): void {
-    console.log(this.id)
+    this.apiCallService.getOpportunityInfo(this.id).subscribe((response) => {
+      this.info = response
+    })
   }
 
 
