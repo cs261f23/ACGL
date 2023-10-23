@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatDividerModule } from '@angular/material/divider';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommunityPartnerViewComponent } from './community-partner-view/community-partner-view.component';
@@ -31,7 +31,7 @@ import { StudentSignupFormComponent } from './student-view/student-signup-form/s
     LoginComponent,
     StudentUserRegisterComponent,
     PartnerUserRegisterComponent,
-    StudentSignupFormComponent
+    StudentSignupFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +39,8 @@ import { StudentSignupFormComponent } from './student-view/student-signup-form/s
     HttpClientModule,
     NgbModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule
   ],
   providers: [HttpClientModule,],
   bootstrap: [AppComponent]

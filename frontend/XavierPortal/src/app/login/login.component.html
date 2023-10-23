@@ -1,4 +1,7 @@
-<div *ngIf="!loggedIn" style="padding-left: 30%; padding-right: 30%">
+<div *ngIf="!loggedIn" style="padding-left: 30%; padding-right: 30%; padding-top: 10%">
+  <h2>
+    Login
+  </h2>
   email
   <input type="text" class="form-control" id="email" required [(ngModel)]="email">
   password
@@ -10,13 +13,20 @@
       <mat-icon fontIcon="remove_red_eye"></mat-icon>
     </button>
   </div>
-  <button (click)="login()">
+  <button (click)="login()" class="btn btn-primary">
+
     Login
   </button>
-  <button routerLink="/student_register" routerLinkActive="active" areaCurrentWhenActive="page">
-    student register
-  </button>
-  <button routerLink="/partner_register" routerLinkActive="active" areaCurrentWhenActive="page">
-    partner register
-  </button>
+  <hr />
+  <div style="display: flex;flex-direction: row;padding-left: 30%;padding-right:30%">
+    <button class="btn btn-secondary" routerLink="/student_register" routerLinkActive="active"
+      areaCurrentWhenActive="page">
+      student register
+    </button>
+    <mat-divider vertical style="height:50px;color:white"></mat-divider>
+    <button class="btn btn-secondary" routerLink="/partner_register" routerLinkActive="active"
+      areaCurrentWhenActive="page">
+      partner register
+    </button>
+  </div>
 </div>
