@@ -13,7 +13,7 @@ interface signup {
 export class StudentSignupFormComponent {
 
   model: signup = { name: '', phoneNumber: '', email: '' };
-  submitted: boolean = false;
+  submitted = false;
 
   validNamePattern = '^[A-Za-z]*$';
   onSubmit() {
