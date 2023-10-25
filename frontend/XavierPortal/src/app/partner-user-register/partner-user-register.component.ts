@@ -3,6 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from '../api-call.service';
 import { AuthService } from '../auth.service';
 
+interface partnerregister {
+  email: string
+  password: string
+  title: string
+}
+
 @Component({
   selector: 'app-partner-user-register',
   templateUrl: './partner-user-register.component.html',
@@ -10,9 +16,8 @@ import { AuthService } from '../auth.service';
 })
 export class PartnerUserRegisterComponent implements OnInit {
   showPassword: boolean = false;
-  email: string = '';
-  password: string = '';
-  title: string = '';
+  submitted: boolean = false;
+  partnerRegister: partnerregister = { email: '', password: '', title: '' }
 
   constructor(private apiCallService: ApiCallService, private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
@@ -24,7 +29,7 @@ export class PartnerUserRegisterComponent implements OnInit {
   }
 
   register(): any {
-    this.apiCallService.partnerRegister(this.email, this.title, this.password).subscribe((response) => {
+    this.apiCallService.partnerRegister(this.partnerRegister.email, this.partnerRegister.title, this.partnerRegister.password).subscribe((response) => {
       if (response == 'success') {
         this.router.navigate(['/'], { relativeTo: this.route })
       }

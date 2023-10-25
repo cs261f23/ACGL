@@ -8,10 +8,7 @@ import { Opportunity } from 'src/app/models/opportunity';
   styleUrls: ['./student-search-form.component.css']
 })
 export class StudentSearchFormComponent {
-
-
   searchString: string = "";
-
   opportunities: Array<Opportunity> = [];
   filteredOpportunities: Array<Opportunity> = [];
 
@@ -21,13 +18,14 @@ export class StudentSearchFormComponent {
   ngOnInit(): void {
     this.apiCallService.getAvailableOpportunitiesForStudent().subscribe((response: any) => {
       this.opportunities = response;
+      this.filteredOpportunities = this.opportunities;
 
     });
   }
 
   filter(): void {
-    this.filteredOpportunities = this.opportunities.filter((x) => {
-      return (x.keywords.includes(this.searchString) || x.description.includes(this.searchString))
+    this.filteredOpportunities = this.opportunities.filter((opp: Opportunity) => {
+      return (opp.keywords.includes(this.searchString) || opp.description.includes(this.searchString))
     })
   }
 

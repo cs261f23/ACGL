@@ -22,10 +22,8 @@ export class CommunityPartnerOpportunityCreationFormComponent {
 
   }
   onSubmit() {
-    this.apiCallService.createOpportunity(this.info).subscribe((response) => {
+    this.apiCallService.createOpportunity(this.info).subscribe(() => {
       this.updateMyOpportunities.emit();
     })
   }
-
-
 }

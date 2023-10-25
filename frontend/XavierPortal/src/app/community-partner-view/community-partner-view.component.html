@@ -5,6 +5,8 @@
   <button (click)="section='new_opportunity'">
     create new opportunity
   </button>
+
+
   <div *ngIf="section=='new_opportunity'">
     <div style="display: flex; justify-content:center;">
       <app-community-partner-opportunity-creation-form [id]="form"
@@ -15,17 +17,19 @@
 
   <div *ngIf="section=='my_opportunities'" style="padding-left:20%;padding-right:20%">
 
-    <ngb-accordion #acc="ngbAccordion">
-      <ngb-panel title="My Opportunities">
-        <ng-template ngbPanelContent>
-          <div *ngFor="let item of myOpportunities">
-            <div *ngFor="let stat of item | keyvalue">
-              {{stat.key}}: {{stat.value}}
-            </div>
-            <hr />
-          </div>
-        </ng-template>
-      </ngb-panel>
-    </ngb-accordion>
+    <table>
+      <tr>
+        <th *ngFor="let data of this.myOpportunities[0] | keyvalue">
+          {{data.key}}
+        </th>
+      </tr>
+
+      <tr *ngFor="let data of this.myOpportunities" [routerLink]="['/community_partner_view/opportunity_view/',data.id]"
+        routerLinkActive="active">
+        <td *ngFor="let info of data | keyvalue">
+          {{info.value}}
+        </td>
+      </tr>
+    </table>
   </div>
 </div>

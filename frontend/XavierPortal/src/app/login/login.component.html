@@ -1,22 +1,79 @@
-<div *ngIf="!loggedIn" style="padding-left: 30%; padding-right: 30%">
-  email
-  <input type="text" class="form-control" id="email" required [(ngModel)]="email">
-  password
-  <div style="display: flex;flex-direction: row">
-    <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="password"
-      style="float:left">
-    <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false"
-      style="background-color: transparent; border-color:transparent;">
-      <mat-icon fontIcon="remove_red_eye"></mat-icon>
-    </button>
-  </div>
-  <button (click)="login()">
-    Login
-  </button>
-  <button routerLink="/student_register" routerLinkActive="active" areaCurrentWhenActive="page">
-    student register
-  </button>
-  <button routerLink="/partner_register" routerLinkActive="active" areaCurrentWhenActive="page">
-    partner register
-  </button>
+<!-- <div *ngIf="!loggedIn" style="padding-left: 30%; padding-right: 30%; padding-top: 10%"> -->
+<!--   <h2> -->
+<!--     Login -->
+<!--   </h2> -->
+<!--   email -->
+<!--   <input type="text" class="form-control" id="email" required [(ngModel)]="email"> -->
+<!--   password -->
+<!--   <div style="display: flex;flex-direction: row"> -->
+<!--     <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="password" -->
+<!--       style="float:left"> -->
+<!--     <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false" -->
+<!--       style="background-color: transparent; border-color:transparent;"> -->
+<!--       <mat-icon fontIcon="remove_red_eye"></mat-icon> -->
+<!--     </button> -->
+<!--   </div> -->
+<!--   <button (click)="login()" class="btn btn-primary"> -->
+<!---->
+<!--     Login -->
+<!--   </button> -->
+<!--   <hr /> -->
+<!--   <div style="display: flex;flex-direction: row;padding-left: 30%;padding-right:30%"> -->
+<!--     <button class="btn btn-secondary" routerLink="/student_register" routerLinkActive="active" -->
+<!--       areaCurrentWhenActive="page"> -->
+<!--       student register -->
+<!--     </button> -->
+<!--     <mat-divider vertical style="height:50px;color:white"></mat-divider> -->
+<!--     <button class="btn btn-secondary" routerLink="/partner_register" routerLinkActive="active" -->
+<!--       areaCurrentWhenActive="page"> -->
+<!--       partner register -->
+<!--     </button> -->
+<!--   </div> -->
+<!-- </div> -->
+<div style="padding-left:30%;padding-right: 30%;padding-top:10%; text-align:center">
+  <form (ngSubmit)="login()" [ngFormOptions]="{updateOn: 'submit'}">
+    <h2>Login</h2>
+
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <div>
+        <input type="email" id="partnerRegister.email" name="partnerRegister.email" [(ngModel)]="user.email" required
+          [ngModelOptions]="{updateOn: 'blur'}" #email="ngModel"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}">
+      </div>
+      <div [hidden]="email.valid || (email.pristine && !submitted)" class="alert alert-danger">
+        Email is required and must be valid.
+      </div>
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <div>
+
+          <div style="flex-direction: row; text-align:  center;">
+            <input [type]="!showPassword?'password':'text'" id="password" name="password" [(ngModel)]="user.password"
+              required #password="ngModel">
+            <button type="button" (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()"
+              (mouseout)="showPassword=false" style="background-color: transparent; border-color:transparent;">
+              <mat-icon fontIcon="remove_red_eye"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit">Login</button>
+    <hr />
+    <div style="display: flex;flex-direction: row;padding-left: 30%;padding-right:30%">
+      <button class="btn btn-secondary" routerLink="/student_register" routerLinkActive="active"
+        areaCurrentWhenActive="page">
+        student register
+      </button>
+      <mat-divider vertical style="height:50px;color:white"></mat-divider>
+      <button class="btn btn-secondary" routerLink="/partner_register" routerLinkActive="active"
+        areaCurrentWhenActive="page">
+        partner register
+      </button>
+    </div>
+  </form>
 </div>
