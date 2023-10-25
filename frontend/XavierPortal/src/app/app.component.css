@@ -131,6 +131,7 @@ input{
 	font-size: 10px;
 }
 
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css'
 /*footer{
 height: 25px;
 background-color: black;
