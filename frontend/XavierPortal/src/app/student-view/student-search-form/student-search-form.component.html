@@ -1,13 +1,18 @@
-<input type="text" class="form-control" id="searchString" required [(ngModel)]="searchString" (input)="filter()">
-{{searchString}}
-<div *ngFor="let item of filteredOpportunities" style="text-align:center">
-  <div class="btn" display="flex">
-    <button [routerLink]="['/student_view/opportunity_view/',item.id]" routerLinkActive="active"
-      areaCurrentWhenActive="page">
-      <div *ngFor="let stat of item | keyvalue">
-        {{stat.key}}:{{stat.value}}
-      </div>
-    </button>
-  </div>
-  <hr style="width:500px" />
+<div style="padding: 10%">
+  <input type="text" class="form-control" id="searchString" required [(ngModel)]="searchString" (input)="filter()">
+  {{searchString}}
+  <table>
+    <tr>
+      <th *ngFor="let data of this.filteredOpportunities[0] | keyvalue">
+        {{data.key}}
+      </th>
+    </tr>
+
+    <tr *ngFor="let data of this.filteredOpportunities" [routerLink]="['/student_view/opportunity_view/',data.id]"
+      routerLinkActive="active">
+      <td *ngFor="let info of data | keyvalue">
+        {{info.value}}
+      </td>
+    </tr>
+  </table>
 </div>

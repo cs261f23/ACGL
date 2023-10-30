@@ -1,18 +1,61 @@
-<div style="padding-left: 30%; padding-right: 30%">
-  title
-  <input type="text" class="form-control" id="title" required [(ngModel)]="title">
-  email
-  <input type="text" class="form-control" id="email" required [(ngModel)]="email">
-  password
+<!-- <div style="padding-left: 30%; padding-right: 30%"> -->
+<!--   title -->
+<!--   <input type="text" class="form-control" id="title" required [(ngModel)]="partnerRegister.title"> -->
+<!--   email -->
+<!--   <input type="text" class="form-control" id="email" required [(ngModel)]="partnerRegister.email"> -->
+<!--   password -->
+<!--   <div style="display: flex;flex-direction: row"> -->
+<!--     <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="partnerRegister.password" -->
+<!--       style="float:left"> -->
+<!--     <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false" -->
+<!--       style="background-color: transparent; border-color:transparent;"> -->
+<!--       <mat-icon fontIcon="remove_red_eye"></mat-icon> -->
+<!--     </button> -->
+<!--   </div> -->
+<!--   <button (click)="register()"> -->
+<!--     Register -->
+<!--   </button> -->
+<!-- </div> -->
+<!---->
+
+<form (ngSubmit)="register()" [ngFormOptions]="{updateOn: 'submit'}" style="padding: 30%">
+  <h2>Partner Signup</h2>
+
+  <div class="form-group">
+    <label for="name">Title:</label>
+    <div>
+      <input class="form-control" type="text" required name="title" [(ngModel)]="partnerRegister.title"
+        #title="ngModel">
+    </div>
+    <div [hidden]="title.valid || (title.pristine && !submitted)" class="alert alert-danger">
+      Title is required and must not contain numbers.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <div>
+      <input type="email" id="partnerRegister.email" name="partnerRegister.email" [(ngModel)]="partnerRegister.email"
+        required [ngModelOptions]="{updateOn: 'blur'}" #email="ngModel"
+        pattern="[a-zA-Z0-9._%+-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}">
+    </div>
+    <div [hidden]="email.valid || (email.pristine && !submitted)" class="alert alert-danger">
+      Email is required and must be valid.
+    </div>
+  </div>
   <div style="display: flex;flex-direction: row">
-    <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="password"
-      style="float:left">
-    <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false"
-      style="background-color: transparent; border-color:transparent;">
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <div>
+        <input [type]="!showPassword?'password':'text'" id="password" name="password"
+          [(ngModel)]="partnerRegister.password" required #password="ngModel">
+
+      </div>
+    </div>
+    <button type="button" (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()"
+      (mouseout)="showPassword=false" style="background-color: transparent; border-color:transparent;">
       <mat-icon fontIcon="remove_red_eye"></mat-icon>
     </button>
   </div>
-  <button (click)="register()">
-    Register
-  </button>
-</div>
+  <button type="submit">Submit</button>
+</form>

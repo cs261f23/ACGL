@@ -1,18 +1,58 @@
-<div style="padding-left: 30%; padding-right: 30%">
-  name
-  <input type="text" class="form-control" id="name" required [(ngModel)]="name">
-  email
-  <input type="text" class="form-control" id="email" required [(ngModel)]="email">
-  password
-  <div style="display: flex;flex-direction: row">
-    <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="password"
-      style="float:left">
-    <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false"
-      style="background-color: transparent; border-color:transparent;">
-      <mat-icon fontIcon="remove_red_eye"></mat-icon>
-    </button>
+<!-- <div style="padding-left: 30%; padding-right: 30%"> -->
+<!--   name -->
+<!--   <input type="text" class="form-control" id="name" required [(ngModel)]="name"> -->
+<!--   email -->
+<!--   <input type="text" class="form-control" id="email" required [(ngModel)]="email"> -->
+<!--   password -->
+<!--   <div style="display: flex;flex-direction: row"> -->
+<!--     <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="password" -->
+<!--       style="float:left"> -->
+<!--     <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false" -->
+<!--       style="background-color: transparent; border-color:transparent;"> -->
+<!--       <mat-icon fontIcon="remove_red_eye"></mat-icon> -->
+<!--     </button> -->
+<!--   </div> -->
+<!--   <button (click)="register()"> -->
+<!--     Register -->
+<!--   </button> -->
+<!-- </div> -->
+
+
+<form (ngSubmit)="register()" [ngFormOptions]="{updateOn: 'submit'}">
+  <h2>
+    Student User Register
+  </h2>
+
+  <div class="form-group">
+    <label for="name"> Name: </label>
+    <div>
+      <input class="form-control" type="text" id="student.name" name="student.name" required [(ngModel)]="student.name"
+        #name="ngModel" [pattern]="validNamePattern">
+    </div>
   </div>
-  <button (click)="register()">
-    Register
-  </button>
-</div>
+
+  <div class="form-group">
+    <label for="email"> Email: </label>
+    <div>
+      <input class="form-control" type="email" id="student.email" name="student.email" required
+        [(ngModel)]="student.email" [ngModelOptions]="{updateOn: 'blur'}" #email="ngModel"
+        pattern="[a-zA-Z0-9._%+-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}">
+    </div>
+    <div [hidden]="email.valid || (email.pristine && !submitted)" class="alert alert-danger">
+      Email is required and must be valid.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">password</label>
+    <div>
+      <input type="password" id="student.password" name="student.password" [(ngModel)]="student.password" required
+        #password="ngModel" pattern="\d{3}-\d{3}-\d{4}">
+    </div>
+    <div [hidden]="password.valid || (password.pristine && !submitted)" class="alert alert-danger">
+      Phone Number is required and must be in the format 333-333-3333, containing only digits.
+    </div>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
