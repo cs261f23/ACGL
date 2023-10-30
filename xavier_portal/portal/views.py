@@ -222,3 +222,16 @@ def attempt_login(request) -> HttpResponse:
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
     else:
         return JsonResponse({}, headers=post_headers, safe=False)
+
+# @csrf_exempt
+# def signup_for_opportunity(request)-> HttpResponse:
+#     """
+#     signs up hash's student for id's opportunity
+#     """
+#
+#     import json
+#     import hashlib
+#     body_unicode = request.body.decode('utf-8')
+#     if len(body_unicode) > 0:
+#         signup = json.loads(body_unicode)
+#

@@ -4,6 +4,7 @@ import {
 } from '@angular/common/http';
 import { Opportunity } from './models/opportunity';
 import { Observable } from 'rxjs';
+import { Binary } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,10 @@ export class ApiCallService {
   partnerRegister(email: string, title: string, password: string): Observable<any> {
     let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
     return this.http.post(this.url + 'portal/attempt_partner_register', { email: email, title: title, password: password }, headers = headers)
+  }
+
+  signUpForOpportunity(object: {}, id: number) {
+    let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
+    return this.http.post(this.url + 'portal/route you made in backend', object, headers = headers)
   }
 }

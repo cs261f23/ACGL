@@ -5,8 +5,9 @@ from django.db import models
 class student(models.Model):
     name = models.CharField(max_length=50, null=False, default='')
     student_email = models.EmailField()
+    id = models.AutoField(primary_key=True)
     student_id = models.IntegerField(
-        unique=True, default=0, null=False, primary_key=True)
+        unique=True, default=0)
     password = models.CharField(
         max_length=256, null=True)  # need to hash passwords
     salt = models.BinaryField(
@@ -29,8 +30,7 @@ class community_partner(models.Model):
     partner_email = models.EmailField()
     partner_title = models.CharField(max_length=30, default='')
     password = models.CharField(max_length=256)  # need to hash passwords
-    partner_id = models.IntegerField(
-        unique=True, default=0, null=False, primary_key=True)
+    partner_id = models.AutoField(primary_key=True)
     salt = models.BinaryField(max_length=32, null=True)
     # salt = models.CharField(
     #     max_length=256, null=True)
