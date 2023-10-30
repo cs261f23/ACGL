@@ -5,9 +5,9 @@ from django.db import models
 class student(models.Model):
     name = models.CharField(max_length=50, null=False, default='')
     student_email = models.EmailField()
-    id = models.AutoField(primary_key=True)
-    student_id = models.IntegerField(
-        unique=True, default=0)
+    student_id = models.AutoField(primary_key=True)
+    # student_id = models.IntegerField(
+    #     unique=True, default=0, null=True)
     password = models.CharField(
         max_length=256, null=True)  # need to hash passwords
     salt = models.BinaryField(
@@ -65,7 +65,7 @@ class opportunity_to_student(models.Model):
     opportunity_id = models.ForeignKey(
         opportunity, on_delete=models.CASCADE, related_name='+', default=0)
     student_id = models.ForeignKey(
-        student, on_delete=models.CASCADE, related_name='+', to_field='student_id', default=0)
+        student, on_delete=models.CASCADE, related_name='+',  default=0)
 
     def dict(self):
         return {'opportunity_id': self.opportunity_id.id, 'student_id': self.student_id.student_id}

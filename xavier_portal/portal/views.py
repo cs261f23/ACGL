@@ -173,9 +173,9 @@ def attempt_student_register(request) -> HttpResponse:
                     student_email=student_json['email'],
                     name=student_json['name'],
                     salt=salt,
-                    password=hashed_password
+                    password=hashed_password,
                 )
-                stu.save()
+                stu.save(force_insert=True)
                 return JsonResponse("success", headers=post_headers, safe=False)
         return JsonResponse("failed", headers=post_headers, safe=False)
     return JsonResponse({}, headers=post_headers, safe=False)
