@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApiCallService } from 'src/app/api-call.service';
+import { AuthService } from 'src/app/auth.service';
 
 interface signup {
   name: string,
@@ -12,11 +15,20 @@ interface signup {
 })
 export class StudentSignupFormComponent {
 
+  validNamePattern = '^[A-Za-z]*$';
+
   model: signup = { name: '', phoneNumber: '', email: '' };
+
+  @Output() updateMyOpportunities = new EventEmitter<boolean>();
   submitted: boolean = false;
 
-  validNamePattern = '^[A-Za-z]*$';
+  constructor(private apiCallService: ApiCallService, private authService: AuthService, private activatedRoute: ActivatedRoute) {
+
+  }
+  
   onSubmit() {
-    this.submitted = true;
+    this.apiCallService.studentSignup(this.model.email, this.model.name).subscribe((response) => {
+      this.updateMyOpportunities.emit();
+    })
   }
 }

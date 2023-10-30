@@ -85,6 +85,25 @@ def create_opportunity(request) -> HttpResponse:
     return JsonResponse(new_opportunity, headers=post_headers, safe=False)
 
 
+@csrf_exempt
+def student_signup(request) -> HttpResponse:
+    import json
+    body_unicode = request.body.decode('utf-8')
+    new_opportunity = {}
+    if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
+        json_opportunity = json.loads(body_unicode)
+        email = email
+        name = name
+        description = json_opportunity['description']
+        keywords = json_opportunity['keywords']
+        new_opportunity = opportunity(description=description, keywords=keywords,
+                                      email=email, name=name)
+        new_opportunity.save()
+    if isinstance(new_opportunity, opportunity):
+        new_opportunity = new_opportunity.dict()
+    return JsonResponse(new_opportunity, headers=post_headers, safe=False)
+
+
 # @csrf_exempt
 # def attempt_login(request) -> HttpResponse:
 #     """
