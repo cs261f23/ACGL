@@ -5,8 +5,9 @@ from django.db import models
 class student(models.Model):
     name = models.CharField(max_length=50, null=False, default='')
     student_email = models.EmailField()
-    student_id = models.IntegerField(
-        unique=True, default=0, null=False, primary_key=True)
+    student_id = models.AutoField(primary_key=True)
+    # student_id = models.IntegerField(
+    #     unique=True, default=0, null=True)
     password = models.CharField(
         max_length=256, null=True)  # need to hash passwords
     salt = models.BinaryField(
@@ -29,8 +30,7 @@ class community_partner(models.Model):
     partner_email = models.EmailField()
     partner_title = models.CharField(max_length=30, default='')
     password = models.CharField(max_length=256)  # need to hash passwords
-    partner_id = models.IntegerField(
-        unique=True, default=0, null=False, primary_key=True)
+    partner_id = models.AutoField(primary_key=True)
     salt = models.BinaryField(max_length=32, null=True)
     # salt = models.CharField(
     #     max_length=256, null=True)
@@ -65,7 +65,7 @@ class opportunity_to_student(models.Model):
     opportunity_id = models.ForeignKey(
         opportunity, on_delete=models.CASCADE, related_name='+', default=0)
     student_id = models.ForeignKey(
-        student, on_delete=models.CASCADE, related_name='+', to_field='student_id', default=0)
+        student, on_delete=models.CASCADE, related_name='+',  default=0)
 
     def dict(self):
         return {'opportunity_id': self.opportunity_id.id, 'student_id': self.student_id.student_id}
