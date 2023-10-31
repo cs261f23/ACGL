@@ -91,16 +91,13 @@ def student_signup(request) -> HttpResponse:
     body_unicode = request.body.decode('utf-8')
     new_opportunity = {}
     if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
-        json_opportunity = json.loads(body_unicode)
-        email = email
-        name = name
-        description = json_opportunity['description']
-        keywords = json_opportunity['keywords']
-        new_opportunity = opportunity(description=description, keywords=keywords,
-                                      email=email, name=name)
-        new_opportunity.save()
-    if isinstance(new_opportunity, opportunity):
-        new_opportunity = new_opportunity.dict()
+        json_request = json.loads(body_unicode)
+        student_check = student.objects.get(student_id=json_request['student_id'])
+        opportunity_check = opportunity.objects.get(id=json_request['id'])
+        new_op = opportunity_to_student(opportunity_id=opportunity_check, student_id = student_check)
+        # new_opportunity = opportunity_to_student(student_id=json_request['student_id'], opportunity_id=json_request['id'])
+        new_op.save()
+
     return JsonResponse(new_opportunity, headers=post_headers, safe=False)
 
 
