@@ -53,8 +53,8 @@ export class ApiCallService {
     return this.http.post(this.url + 'portal/attempt_partner_register', { email: email, title: title, password: password }, headers = headers)
   }
 
-  signUpForOpportunity(object: {}, id: number) {
+  studentSignup(student_id: number, id: number) {
     let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
-    return this.http.post(this.url + 'portal/route you made in backend', object, headers = headers)
+    return this.http.post(this.url + 'portal/attempt_student_signup', { student_id: student_id, id: id }, headers = headers)
   }
 }

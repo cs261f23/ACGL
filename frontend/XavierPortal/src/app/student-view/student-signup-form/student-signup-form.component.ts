@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiCallService } from 'src/app/api-call.service';
 import { AuthService } from 'src/app/auth.service';
@@ -15,17 +15,21 @@ interface signup {
 })
 export class StudentSignupFormComponent implements OnInit {
 
-  constructor(private apiCallService: ApiCallService, private activatedRoute: ActivatedRoute, private authService: AuthService) {
+  constructor(private apiCallService: ApiCallService, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
 
-  }
+  validNamePattern = '^[A-Za-z]*$';
+
   model: signup = { name: '', phoneNumber: '', email: '' };
   submitted = false;
 
+  @Output() updateMyOpportunities = new EventEmitter<boolean>();
+
   id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
-  validNamePattern = '^[A-Za-z]*$';
+
   onSubmit() {
-    this.submitted = true;
-    this.apiCallService.signUpForOpportunity(this.model, this.id);
+    this.apiCallService.studentSignup(this.authService.studentID, this.id).subscribe((response) => {
+      
+    })
   }
   ngOnInit(): void { }
 }
