@@ -14,7 +14,7 @@ interface studentuser {
 @Component({
   selector: 'app-student-user-register',
   templateUrl: './student-user-register.component.html',
-  styleUrls: ['./student-user-register.component.css', '../material-icons.css']
+  styleUrls: ['./student-user-register.component.css']
 })
 export class StudentUserRegisterComponent {
 

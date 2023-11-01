@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CommunityPartnerOpportunityViewComponent } from './community-partner-view/community-partner-opportunity-view/community-partner-opportunity-view.component';
 import { CommunityPartnerViewComponent } from './community-partner-view/community-partner-view.component';
 import { LoginComponent } from './login/login.component';
 import { PartnerUserRegisterComponent } from './partner-user-register/partner-user-register.component';
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'student_register', component: StudentUserRegisterComponent },
   { path: 'partner_register', component: PartnerUserRegisterComponent },
   { path: 'student_view/opportunity_view/:id', component: StudentOpportunityViewComponent },
-  { path: 'student_signup', component: StudentViewComponent }
+  { path: 'community_partner_view/opportunity_view/:id', component: CommunityPartnerOpportunityViewComponent }
 ];
 
 

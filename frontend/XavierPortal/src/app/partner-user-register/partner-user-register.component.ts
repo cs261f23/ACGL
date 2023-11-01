@@ -12,7 +12,7 @@ interface partnerregister {
 @Component({
   selector: 'app-partner-user-register',
   templateUrl: './partner-user-register.component.html',
-  styleUrls: ['./partner-user-register.component.css', '../material-icons.css']
+  styleUrls: ['./partner-user-register.component.css']
 })
 export class PartnerUserRegisterComponent implements OnInit {
   showPassword: boolean = false;

@@ -1,4 +1,5 @@
 import { Component, } from '@angular/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ApiCallService } from '../api-call.service';
 import { AuthService } from '../auth.service';
@@ -10,7 +11,7 @@ interface user {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css', '../material-icons.css']
+  styleUrls: ['./login.component.css']
 })
 
 export class LoginComponent {

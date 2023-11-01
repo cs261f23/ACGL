@@ -31,10 +31,14 @@ export class CommunityPartnerViewComponent implements OnInit {
       ? this.router.navigate(['/'], { relativeTo: this.route })
       : this.getOpportunitiesByPartnerID()
   }
-  getOpportunitiesByPartnerID() {
+
+  getOpportunitiesByPartnerID(update: number = 0) {
     this.apiCallService.getOpportunitiesByPartnerID(this.authService.partnerID!).subscribe((response: any) => {
       this.myOpportunities = response;
     })
+    if (update) {
+      this.section = 'my_opportunities'
+    }
 
   }
 
