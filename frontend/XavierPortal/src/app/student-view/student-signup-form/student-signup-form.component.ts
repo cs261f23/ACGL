@@ -15,7 +15,7 @@ interface signup {
 })
 export class StudentSignupFormComponent implements OnInit {
 
-  constructor(private apiCallService: ApiCallService, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
+  constructor(private apiCallService: ApiCallService, private activatedRoute: ActivatedRoute, private authService: AuthService) { }
 
   validNamePattern = '^[A-Za-z]*$';
 
@@ -28,8 +28,10 @@ export class StudentSignupFormComponent implements OnInit {
 
   onSubmit() {
     this.apiCallService.studentSignup(this.authService.studentID, this.id).subscribe((response) => {
-      
+
     })
+    this.submitted = true;
+    // this.apiCallService.signUpForOpportunity(this.authService.studentID, this.id);
   }
   ngOnInit(): void { }
 }

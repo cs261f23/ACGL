@@ -18,6 +18,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { StudentUserRegisterComponent } from './student-user-register/student-user-register.component';
 import { PartnerUserRegisterComponent } from './partner-user-register/partner-user-register.component';
 import { StudentSignupFormComponent } from './student-view/student-signup-form/student-signup-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,13 +39,17 @@ import { StudentSignupFormComponent } from './student-view/student-signup-form/s
     StudentSignupFormComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
     FormsModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
+    BrowserAnimationsModule
   ],
   providers: [HttpClientModule,],
   bootstrap: [AppComponent]

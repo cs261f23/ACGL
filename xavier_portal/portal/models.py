@@ -58,7 +58,7 @@ class opportunity(models.Model):
         ]
 
     def dict(self):
-        return {'description': self.description, 'keywords': self.keywords, 'community_partner_id': self.community_partner_id.partner_title}
+        return {'description': self.description, 'keywords': self.keywords, 'community_partner_title': self.community_partner_id.partner_title, 'id': self.id}
 
 
 class opportunity_to_student(models.Model):

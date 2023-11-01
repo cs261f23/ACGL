@@ -10,7 +10,7 @@
   <div *ngIf="section=='new_opportunity'">
     <div style="display: flex; justify-content:center;">
       <app-community-partner-opportunity-creation-form [id]="form"
-        (updateMyOpportunities)="this.getOpportunitiesByPartnerID()"></app-community-partner-opportunity-creation-form>
+        (updateMyOpportunities)="this.getOpportunitiesByPartnerID(1)"></app-community-partner-opportunity-creation-form>
     </div>
   </div>
 

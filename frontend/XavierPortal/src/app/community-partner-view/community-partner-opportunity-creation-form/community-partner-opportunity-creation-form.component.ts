@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { ApiCallService } from 'src/app/api-call.service';
 import { AuthService } from 'src/app/auth.service';
 import { Opportunity } from 'src/app/models/opportunity';
@@ -12,7 +13,8 @@ export class CommunityPartnerOpportunityCreationFormComponent {
   info: any = {
     description: '',
     keywords: '',
-    id: this.authService.partnerID
+    id: this.authService.partnerID,
+    date: Date
 
   }
   @Output() updateMyOpportunities = new EventEmitter<boolean>();
@@ -24,6 +26,7 @@ export class CommunityPartnerOpportunityCreationFormComponent {
   onSubmit() {
     this.apiCallService.createOpportunity(this.info).subscribe(() => {
       this.updateMyOpportunities.emit();
+
     })
   }
 }

@@ -35,9 +35,9 @@ def get_available_opportunities_for_student(request) -> HttpResponse:
         partner = community_partner.objects.filter(
             partner_id=i.community_partner_id.partner_id)
         idict = i.dict()
-        idict['community_partner_title'] = partner[0].partner_title
+        # idict['community_partner_title'] = partner[0].partner_title
         idict['id'] = i.id
-        idict.pop('community_partner_id')
+        # idict.pop('community_partner_id')
         y.append(idict)
     return JsonResponse(y, headers=get_headers, safe=False)
 
