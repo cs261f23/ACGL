@@ -1,1 +1,19 @@
 <p>community-partner-opportunity-view works!</p>
+
+
+<h2>
+  Students signed up
+</h2>
+<table>
+  <tr>
+    <th *ngFor="let data of this.students[0] | keyvalue">
+      {{data.key}}
+    </th>
+  </tr>
+
+  <tr *ngFor="let data of this.students" routerLinkActive="active">
+    <td *ngFor="let info of data | keyvalue">
+      {{info.value}}
+    </td>
+  </tr>
+</table>

@@ -1,9 +1,9 @@
 <div *ngIf="!loggedIn" style="padding-left: 30%; padding-right: 30%">
   email
-  <input type="text" class="form-control" id="email" required [(ngModel)]="email">
+  <input type="text" class="form-control" id="email" required [(ngModel)]="user.email">
   password
   <div style="display: flex;flex-direction: row">
-    <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="password"
+    <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="user.password"
       style="float:left">
     <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false"
       style="background-color: transparent; border-color:transparent;">
