@@ -32,12 +32,8 @@ def get_available_opportunities_for_student(request) -> HttpResponse:
     opportunities = opportunity.objects.all()
     y = []
     for i in list(opportunities):
-        partner = community_partner.objects.filter(
-            partner_id=i.community_partner_id.partner_id)
         idict = i.dict()
-        # idict['community_partner_title'] = partner[0].partner_title
         idict['id'] = i.id
-        # idict.pop('community_partner_id')
         y.append(idict)
     return JsonResponse(y, headers=get_headers, safe=False)
 
@@ -89,45 +85,22 @@ def create_opportunity(request) -> HttpResponse:
 def student_signup(request) -> HttpResponse:
     import json
     body_unicode = request.body.decode('utf-8')
-    new_opportunity = {}
+    # new_opportunity = {}
     if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
         json_request = json.loads(body_unicode)
-        student_check = student.objects.get(student_id=json_request['student_id'])
-        opportunity_check = opportunity.objects.get(id=json_request['id'])
-        new_op = opportunity_to_student(opportunity_id=opportunity_check, student_id = student_check)
-        # new_opportunity = opportunity_to_student(student_id=json_request['student_id'], opportunity_id=json_request['id'])
-        new_op.save()
+        try:
+            student_check = student.objects.get(
+                student_id=json_request['student_id'])
+            opportunity_check = opportunity.objects.get(id=json_request['id'])
+            new_op_to_stu = opportunity_to_student(
+                opportunity_id=opportunity_check, student_id=student_check)
+            new_op_to_stu.save()
+            print(new_op_to_stu)
+            return JsonResponse('success', headers=post_headers, safe=False)
+        except student.DoesNotExist or opportunity.DoesNotExist:
+            return JsonResponse('failure', headers=post_headers, safe=False)
 
-    return JsonResponse(new_opportunity, headers=post_headers, safe=False)
-
-
-# @csrf_exempt
-# def attempt_login(request) -> HttpResponse:
-#     """
-#     Attempts to login by first checking for email/password in the partners table, then if there isn't a match there, it checks the student table
-#     """
-#     import json
-#     import hashlib
-#     body_unicode = request.body.decode('utf-8')
-#     if len(body_unicode) > 0:
-#         hash = hashlib.new('sha256')
-#         login = json.loads(body_unicode)
-#         hash.update(bytes(login['password'], 'utf-8'))
-#         try:
-#             partner_check = community_partner.objects.get(
-#                 password=hash.hexdigest(), partner_email=login['email'])
-#             return JsonResponse({'outcome': 'partner', 'id': partner_check.partner_id, 'hash': auth_hash}, headers=post_headers)
-#         except community_partner.DoesNotExist:
-#             try:
-#                 student_check = student.objects.get(
-#                     password=hash.hexdigest(), student_email=login['email'])
-#                 auth_hash = os.urandom(32)
-#                 authorization_hashes.append({auth_hash: student_check})
-#                 return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': auth_hash}, headers=post_headers)
-#             except student.DoesNotExist:
-#                 return JsonResponse({'outcome': 'failed'}, headers=post_headers)
-#     else:
-#         return JsonResponse({}, headers=post_headers)
+    return JsonResponse({}, headers=post_headers, safe=False)
 
 
 @csrf_exempt
@@ -238,16 +211,3 @@ def attempt_login(request) -> HttpResponse:
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
     else:
         return JsonResponse({}, headers=post_headers, safe=False)
-
-# @csrf_exempt
-# def signup_for_opportunity(request)-> HttpResponse:
-#     """
-#     signs up hash's student for id's opportunity
-#     """
-#
-#     import json
-#     import hashlib
-#     body_unicode = request.body.decode('utf-8')
-#     if len(body_unicode) > 0:
-#         signup = json.loads(body_unicode)
-#
