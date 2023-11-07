@@ -20,5 +20,8 @@ urlpatterns = [
          views.attempt_partner_register, name='attempt_partner_register'),
     path('get_opportunity_info', views.get_opportunity_info,
          name='get_opportunity_info'),
-    path('attempt_student_signup', views.student_signup, name='attempt_student_signup')
+    path('attempt_student_signup', views.student_signup,
+         name='attempt_student_signup'),
+    path('get_opportunities_by_student_id', views.get_opportunities_by_student_id,
+         name='get_opportunities_by_student_id')
 ]

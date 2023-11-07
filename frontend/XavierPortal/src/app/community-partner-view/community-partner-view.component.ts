@@ -28,8 +28,8 @@ export class CommunityPartnerViewComponent implements OnInit {
   }
 
   selectOpportunity(opp: Opportunity) {
-    this.selectedOpportunity = this.myOpportunities.indexOf(opp);
-    this.section = 'opportunity_edit'
+    this.selectedOpportunity = opp.id;
+    this.section = 'opportunity_edit';
   }
 
   ngOnInit() {

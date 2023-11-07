@@ -1,5 +1,6 @@
 <div class="navbar-dark" style="text-align: center">
   <button (click)="section='search_form'">Search Opportunities</button>
+  <button (click)="section='my_opportunities'"> my opportunities</button>
 </div>
 
 <div style="padding: 10%">
@@ -13,7 +14,7 @@
         </th>
       </tr>
 
-      <tr *ngFor="let data of this.filteredOpportunities" (click)="selectOpportunity(data.id)"
+      <tr *ngFor="let data of this.filteredOpportunities" (click)="selectOpportunity(data.id,true)"
         routerLinkActive="active">
         <td *ngFor="let info of data | keyvalue">
           {{info.value}}
@@ -22,6 +23,9 @@
     </table>
   </div>
 
-  <app-student-opportunity-view *ngIf="section=='opportunity_view'"
-    [id]="selectedOpportunity"></app-student-opportunity-view>
+  <app-student-opportunity-view *ngIf="section=='opportunity_view'" [id]="selectedOpportunity"
+    [signup]="signup"></app-student-opportunity-view>
+
+  <app-signed-up-opportunities *ngIf="section=='my_opportunities'"
+    (select)="selectOpportunity($event.id)"></app-signed-up-opportunities>
 </div>

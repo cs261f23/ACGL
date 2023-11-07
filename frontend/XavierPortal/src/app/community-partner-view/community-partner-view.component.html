@@ -1,5 +1,7 @@
 <div class="navbar-dark" style="text-align: center">
-  <button (click)="section='my_opportunities'">my opportunities</button>
+  <button (click)="section='my_opportunities'">
+    my opportunities
+  </button>
 
 
   <button (click)="section='new_opportunity'">
@@ -14,9 +16,6 @@
       (updateMyOpportunities)="this.getOpportunitiesByPartnerID(1)"></app-community-partner-opportunity-creation-form>
   </div>
 
-  <div *ngIf="section=='opportunity_edit'">
-    <app-community-partner-opportunity-view [id]="selectedOpportunity"></app-community-partner-opportunity-view>
-  </div>
 </div>
 
 

@@ -1,0 +1,13 @@
+<table>
+  <tr>
+    <th *ngFor="let data of this.opportunities[0] | keyvalue">
+      {{data.key}}
+    </th>
+  </tr>
+
+  <tr *ngFor="let data of this.opportunities" (click)="selectOpportunity(data)" routerLinkActive="active">
+    <td *ngFor="let info of data | keyvalue">
+      {{info.value}}
+    </td>
+  </tr>
+</table>

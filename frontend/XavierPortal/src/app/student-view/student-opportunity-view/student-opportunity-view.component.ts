@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/auth.service';
 export class StudentOpportunityViewComponent implements OnInit {
   // id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
   @Input() id!: number;
-  signup: boolean = false;
+  @Input() signup: boolean = false;
   info!: {}
 
 

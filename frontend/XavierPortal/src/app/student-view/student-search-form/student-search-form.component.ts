@@ -13,13 +13,15 @@ export class StudentSearchFormComponent {
   filteredOpportunities: Array<Opportunity> = [];
   section: string = "search_form";
   selectedOpportunity: number = -1;
+  signup: boolean = false;
 
   constructor(private apiCallService: ApiCallService) {
   }
 
-  selectOpportunity(id: number) {
+  selectOpportunity(id: number, signup: boolean = false) {
     this.section = "opportunity_view";
     this.selectedOpportunity = id;
+    this.signup = signup;
   }
 
   ngOnInit(): void {

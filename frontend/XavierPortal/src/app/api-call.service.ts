@@ -57,4 +57,8 @@ export class ApiCallService {
     let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
     return this.http.post(this.url + 'portal/attempt_student_signup', { student_id: student_id, id: id }, headers = headers)
   }
+
+  getSignedUpOpportunities(student_id: number) {
+    return this.http.get(this.url + 'portal/get_opportunities_by_student_id?id=' + student_id)
+  }
 }

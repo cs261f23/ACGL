@@ -59,7 +59,15 @@ def get_opportunities_by_partner_id(request) -> HttpResponse:
     return JsonResponse([i.dict() for i in ops], headers=get_headers, safe=False)
 
 
-@csrf_exempt
+def get_opportunities_by_student_id(request) -> HttpResponse:
+    ids = list(opportunity_to_student.objects.filter(
+        student_id=request.GET.get('id')))
+
+    print(ids)
+    return JsonResponse([i.opportunity_id.dict() for i in ids], headers=get_headers, safe=False)
+
+
+@ csrf_exempt
 def create_opportunity(request) -> HttpResponse:
     """
     creates an opportunity object and puts its attributes into the database
@@ -81,7 +89,7 @@ def create_opportunity(request) -> HttpResponse:
     return JsonResponse(new_opportunity, headers=post_headers, safe=False)
 
 
-@csrf_exempt
+@ csrf_exempt
 def student_signup(request) -> HttpResponse:
     import json
     body_unicode = request.body.decode('utf-8')

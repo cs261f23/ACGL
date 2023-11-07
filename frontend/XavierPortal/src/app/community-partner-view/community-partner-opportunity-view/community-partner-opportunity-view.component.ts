@@ -10,15 +10,19 @@ import { ApiCallService } from 'src/app/api-call.service';
 export class CommunityPartnerOpportunityViewComponent implements OnInit {
 
   students: Array<{}> = [];
+  info: {} = {};
   @Input() id!: number;
-  constructor(private activatedRoute: ActivatedRoute, private apiCallService: ApiCallService) {
+  constructor(private apiCallService: ApiCallService) {
 
   }
 
   ngOnInit(): void {
     this.apiCallService.getStudentsByOpportunity(this.id).subscribe((response: any) => {
       this.students = response
-    })
+    });
+    this.apiCallService.getOpportunityInfo(this.id).subscribe((response: any) => {
+      this.info = response;
+    });
 
   }
 
