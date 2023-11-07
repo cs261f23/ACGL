@@ -24,12 +24,15 @@
         </th>
       </tr>
 
-      <tr *ngFor="let data of this.myOpportunities" [routerLink]="['/community_partner_view/opportunity_view/',data.id]"
-        routerLinkActive="active">
+      <tr *ngFor="let data of this.myOpportunities" (click)="selectOpportunity(data)">
         <td *ngFor="let info of data | keyvalue">
           {{info.value}}
         </td>
       </tr>
     </table>
+  </div>
+
+  <div *ngIf="section=='opportunity_edit'">
+    <app-community-partner-opportunity-view [id]="selectedOpportunity"></app-community-partner-opportunity-view>
   </div>
 </div>

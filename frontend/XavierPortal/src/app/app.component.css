@@ -1,12 +1,3 @@
-body{
-
-	background-color: #141D2C;
-	font-family: 'Lato', sans-serif;
-	min-height:1000px;
-	background-size: cover;
-	/*-webkit-filter: blur(5px);*/
-	color: black;
-}
 
 .navbar-dark .nav-item .nav-link:hover {
 	background-color: rgba(255, 255, 255, 0.1);
@@ -20,11 +11,6 @@ h1, h2, h3, h4, h5, h6{
 h4{
 	color: black;
 }
-#search{
-	display: none;
-	padding-left: 50px;
-	padding-bottom: 20px;
-}
 
 form{
 	margin-top: 20px;
@@ -35,7 +21,6 @@ form{
 }
 
 
-
 .btn{
 
 	background-color: #0099f6;
@@ -43,54 +28,20 @@ form{
 
 .header{
 	background-color: #0099f6;
-
 	color: white;
 	padding-left: 50px;
 }
 
 
-.movie-row >div{
-
-	float: left;
-	margin-left: 10px;
-	cursor: pointer;
-
-}
-
-.movie-row{
-	overflow: hidden;
-	margin-top: 10px;
-	transition: 500ms ease;
-}
-.movie-row:hover, .watchlist>div:hover{
-	color: #1f1f1f;
-
-}
-.watchlist{
-	font-size: 20px;
-	cursor: pointer;
-
-}
-
-.watchlist>div{
-	margin-top: 10px;
-	transition: 500ms ease;
-}
-
-#tag{
-	background-color: #000;
-	padding-left: 50px;
-	color: white;
-}
 
 
 button{
 
-	width: 300px;
+	/* width: 300px; */
 	background-color: #000;
 	color: white;
 	border: none;
-	height: 42px;
+	/* height: 42px; */
 	padding-top: 6px;
 	box-sizing:border-box;
 }
@@ -106,37 +57,3 @@ input{
 	box-sizing:border-box;
 
 }
-::-webkit-input-placeholder{
-	color: #eee;
-	font-size: 18px;
-	padding-left: 10px;
-}
-
-.title{
-	font-size: 18px;
-}
-
-.year{
-	font-size: 18px;
-}
-.id, .type{
-
-	clear: both;
-}
-.type{
-	font-size: 16px;
-}
-
-.id{
-	font-size: 10px;
-}
-
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css'
-/*footer{
-height: 25px;
-background-color: black;
-position: fixed;
-bottom: 0;
-left: 0;
-}*/
-	/* Style the button that is used to open and close the collapsible content */

@@ -11,8 +11,15 @@ export class StudentSearchFormComponent {
   searchString: string = "";
   opportunities: Array<Opportunity> = [];
   filteredOpportunities: Array<Opportunity> = [];
+  section: string = "search_form";
+  selectedOpportunity: number = -1;
 
   constructor(private apiCallService: ApiCallService) {
+  }
+
+  selectOpportunity(id: number) {
+    this.section = "opportunity_view";
+    this.selectedOpportunity = id;
   }
 
   ngOnInit(): void {

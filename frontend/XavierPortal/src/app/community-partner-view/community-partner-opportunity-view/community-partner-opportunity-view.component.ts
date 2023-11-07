@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiCallService } from 'src/app/api-call.service';
 
@@ -10,7 +10,7 @@ import { ApiCallService } from 'src/app/api-call.service';
 export class CommunityPartnerOpportunityViewComponent implements OnInit {
 
   students: Array<{}> = [];
-  id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
+  @Input() id!: number;
   constructor(private activatedRoute: ActivatedRoute, private apiCallService: ApiCallService) {
 
   }

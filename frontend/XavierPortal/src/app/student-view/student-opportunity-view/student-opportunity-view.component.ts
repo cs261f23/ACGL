@@ -1,4 +1,4 @@
-import { Component, Input, numberAttribute, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from 'src/app/api-call.service';
 import { AuthService } from 'src/app/auth.service';
@@ -9,15 +9,13 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./student-opportunity-view.component.css']
 })
 export class StudentOpportunityViewComponent implements OnInit {
-  id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
+  // id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
+  @Input() id!: number;
   signup: boolean = false;
   info!: {}
 
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private authService: AuthService,
     private apiCallService: ApiCallService
   ) {
   }

@@ -14,8 +14,6 @@ const routes: Routes = [
   { path: 'student_view', component: StudentViewComponent },
   { path: 'student_register', component: StudentUserRegisterComponent },
   { path: 'partner_register', component: PartnerUserRegisterComponent },
-  { path: 'student_view/opportunity_view/:id', component: StudentOpportunityViewComponent },
-  { path: 'community_partner_view/opportunity_view/:id', component: CommunityPartnerOpportunityViewComponent }
 ];
 
 
