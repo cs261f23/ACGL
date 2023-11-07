@@ -13,6 +13,10 @@
     <app-community-partner-opportunity-creation-form [id]="form"
       (updateMyOpportunities)="this.getOpportunitiesByPartnerID(1)"></app-community-partner-opportunity-creation-form>
   </div>
+
+  <div *ngIf="section=='opportunity_edit'">
+    <app-community-partner-opportunity-view [id]="selectedOpportunity"></app-community-partner-opportunity-view>
+  </div>
 </div>
 
 
