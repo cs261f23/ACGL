@@ -1,18 +1,27 @@
-<div style="padding: 10%">
-  <input type="text" class="form-control" id="searchString" required [(ngModel)]="searchString" (input)="filter()">
-  {{searchString}}
-  <table>
-    <tr>
-      <th *ngFor="let data of this.filteredOpportunities[0] | keyvalue">
-        {{data.key}}
-      </th>
-    </tr>
+<div class="navbar-dark" style="text-align: center">
+  <button (click)="section='search_form'">Search Opportunities</button>
+</div>
 
-    <tr *ngFor="let data of this.filteredOpportunities" [routerLink]="['/student_view/opportunity_view/',data.id]"
-      routerLinkActive="active">
-      <td *ngFor="let info of data | keyvalue">
-        {{info.value}}
-      </td>
-    </tr>
-  </table>
+<div style="padding: 10%">
+  <div *ngIf="section=='search_form'">
+    <input type="text" class="form-control" id="searchString" required [(ngModel)]="searchString" (input)="filter()">
+    {{searchString}}
+    <table>
+      <tr>
+        <th *ngFor="let data of this.filteredOpportunities[0] | keyvalue">
+          {{data.key}}
+        </th>
+      </tr>
+
+      <tr *ngFor="let data of this.filteredOpportunities" (click)="selectOpportunity(data.id)"
+        routerLinkActive="active">
+        <td *ngFor="let info of data | keyvalue">
+          {{info.value}}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <app-student-opportunity-view *ngIf="section=='opportunity_view'"
+    [id]="selectedOpportunity"></app-student-opportunity-view>
 </div>

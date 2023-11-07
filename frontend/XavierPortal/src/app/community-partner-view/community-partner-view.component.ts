@@ -15,6 +15,7 @@ export class CommunityPartnerViewComponent implements OnInit {
   form?: CommunityPartnerOpportunityCreationFormComponent
 
   myOpportunities: Array<Opportunity> = [];
+  selectedOpportunity: number = -1;
   section: string = "";
   constructor(private apiCallService: ApiCallService, private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
@@ -24,6 +25,11 @@ export class CommunityPartnerViewComponent implements OnInit {
     this.apiCallService.getStudentsByOpportunity(id).subscribe((response: any) => {
       let studentList: Array<Student> = response;
     })
+  }
+
+  selectOpportunity(opp: Opportunity) {
+    this.selectedOpportunity = this.myOpportunities.indexOf(opp);
+    this.section = 'opportunity_edit'
   }
 
   ngOnInit() {

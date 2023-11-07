@@ -1,7 +1,3 @@
-<button routerLink="/student_view" routerLinkActive="true">
-  back
-</button>
-
 <div>
   <div *ngFor="let data of this.info | keyvalue" style="display: flex; justify-content: center;">
     {{data.key}} : {{data.value}}
@@ -14,5 +10,5 @@
   </button>
 </div>
 <div *ngIf="signup==true" style="display: flex; justify-content: center;">
-  <app-student-signup-form></app-student-signup-form>
+  <app-student-signup-form [id]="id"></app-student-signup-form>
 </div>
