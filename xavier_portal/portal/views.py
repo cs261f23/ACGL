@@ -34,7 +34,12 @@ def get_available_opportunities_for_student(request) -> HttpResponse:
     for i in list(opportunities):
         idict = i.dict()
         idict['id'] = i.id
-        y.append(idict)
+        try:
+            _ = opportunity_to_student.objects.get(
+                student_id=student.objects.get(student_id=request.GET.get('student_id')), opportunity_id=i)
+
+        except opportunity_to_student.DoesNotExist:
+            y.append(idict)
     return JsonResponse(y, headers=get_headers, safe=False)
 
 

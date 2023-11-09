@@ -12,6 +12,7 @@ export class StudentViewComponent implements OnInit {
 
   opportunities: Array<Opportunity> = [];
   selectedOpportunities: Array<Opportunity> = [];
+  sidebarSection: string = "search_form"
 
   constructor(
     private apiCallService: ApiCallService,
@@ -31,7 +32,7 @@ export class StudentViewComponent implements OnInit {
   * Make an api call to get a list of the currently listed opportunities
   * */
   getAvailableOpportunitiesForStudent(): void {
-    this.apiCallService.getAvailableOpportunitiesForStudent().subscribe((response: any) => {
+    this.apiCallService.getAvailableOpportunitiesForStudent(this.authService.studentID).subscribe((response: any) => {
       this.opportunities = response;
     })
   }

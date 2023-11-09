@@ -21,15 +21,11 @@ export class StudentSignupFormComponent implements OnInit {
 
   model: signup = { name: '', phoneNumber: '', email: '' };
   submitted = false;
-
-
   @Input() id!: number;
   // id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
 
   onSubmit() {
-    this.apiCallService.studentSignup(this.authService.studentID, this.id).subscribe((response) => {
-
-    })
+    this.apiCallService.studentSignup(this.authService.studentID, this.id).subscribe((response) => { })
     this.submitted = true;
     // this.apiCallService.signUpForOpportunity(this.authService.studentID, this.id);
   }

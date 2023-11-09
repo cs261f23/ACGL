@@ -5,8 +5,16 @@
     <mat-icon fontIcon="book" (click)="expand(1)" />
   </mat-sidenav>
   <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" [opened]="icons[0]">Drawer content</mat-drawer>
-    <mat-drawer mode="side" [opened]="icons[1]">Drawer content 2</mat-drawer>
+    <mat-drawer mode="side" [opened]="expanded" (click)="emitChooser().emit()">
+      <p *ngIf="icons[0]">
+        My Opportunities
+      </p>
+
+      <p *ngIf="icons[1]">
+        Opportunity search
+      </p>
+
+    </mat-drawer>
     <mat-drawer-content>
       <div (click)="expand('clear')">
         <ng-content></ng-content>
