@@ -1,3 +1,4 @@
-<app-sidebar>
-  <app-student-search-form></app-student-search-form>
+<app-sidebar (opportunitySearchEmitter)="sidebarSection='search_form'"
+  (myOpportunitiesEmitter)="sidebarSection='my_opportunities'">
+  <app-student-search-form [section]="sidebarSection"></app-student-search-form>
 </app-sidebar>

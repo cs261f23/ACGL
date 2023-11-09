@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ApiCallService } from 'src/app/api-call.service';
+import { AuthService } from 'src/app/auth.service';
 import { Opportunity } from 'src/app/models/opportunity';
 
 @Component({
@@ -11,11 +12,11 @@ export class StudentSearchFormComponent {
   searchString: string = "";
   opportunities: Array<Opportunity> = [];
   filteredOpportunities: Array<Opportunity> = [];
-  section: string = "search_form";
+  @Input() section: string = "search_form";
   selectedOpportunity: number = -1;
   signup: boolean = false;
 
-  constructor(private apiCallService: ApiCallService) {
+  constructor(private apiCallService: ApiCallService, private authService: AuthService) {
   }
 
   selectOpportunity(id: number, signup: boolean = false) {
@@ -25,7 +26,7 @@ export class StudentSearchFormComponent {
   }
 
   ngOnInit(): void {
-    this.apiCallService.getAvailableOpportunitiesForStudent().subscribe((response: any) => {
+    this.apiCallService.getAvailableOpportunitiesForStudent(this.authService.studentID).subscribe((response: any) => {
       this.opportunities = response;
       this.filteredOpportunities = this.opportunities;
 

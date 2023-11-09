@@ -23,8 +23,8 @@ export class ApiCallService {
     return this.http.get(this.url + '/portal/get_students_by_opportunity?id=' + opportunityID);
   }
 
-  getAvailableOpportunitiesForStudent(): any {
-    return this.http.get(this.url + '/portal/get_available_opportunities_for_student');
+  getAvailableOpportunitiesForStudent(studentID: number): any {
+    return this.http.get(this.url + '/portal/get_available_opportunities_for_student?student_id=' + studentID);
   }
   getOpportunityInfo(id: number) {
     return this.http.get(this.url + 'portal/get_opportunity_info?id=' + id);
