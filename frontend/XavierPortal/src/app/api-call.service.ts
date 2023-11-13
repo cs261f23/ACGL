@@ -5,6 +5,7 @@ import {
 import { Opportunity } from './models/opportunity';
 import { Observable } from 'rxjs';
 import { Binary } from '@angular/compiler';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ApiCallService {
   url: string;
   headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
     this.url = 'http://127.0.0.1:8000/';
   }
 
@@ -24,8 +25,9 @@ export class ApiCallService {
   }
 
   getAvailableOpportunitiesForStudent(): any {
-    return this.http.get(this.url + '/portal/get_available_opportunities_for_student');
+    return this.http.get(this.url + '/portal/get_available_opportunities_for_student?id=' + this.authService.hash!);
   }
+
   getOpportunityInfo(id: number) {
     return this.http.get(this.url + 'portal/get_opportunity_info?id=' + id);
   }

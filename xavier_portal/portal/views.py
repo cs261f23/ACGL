@@ -9,7 +9,7 @@ from .models import student, opportunity, opportunity_to_student, community_part
 post_headers = {'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'}
 get_headers = {'Access-Control-Allow-Origin': '*'}
-authorization_hashes: list = []
+authorization_hashes: dict = {}
 
 
 def get_students_by_opportunity(request) -> HttpResponse:
@@ -198,7 +198,7 @@ def attempt_login(request) -> HttpResponse:
             print(partner_check.password)
             if str(hashed_password) == str(partner_check.password):
                 auth_hash = os.urandom(32)
-                authorization_hashes.append({auth_hash: partner_check})
+                authorization_hashes[str(auth_hash)] = partner_check
                 return JsonResponse({'outcome': 'partner', 'id': partner_check.partner_id, 'hash': str(auth_hash)}, headers=post_headers, safe=False)
             return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
         except community_partner.DoesNotExist:
@@ -212,7 +212,7 @@ def attempt_login(request) -> HttpResponse:
                 print(student_check.password)
                 if str(hashed_password) == str(student_check.password):
                     auth_hash = os.urandom(32)
-                    authorization_hashes.append({auth_hash: student_check})
+                    authorization_hashes[str(auth_hash)] = student_check
                     return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': str(auth_hash)}, headers=post_headers, safe=False)
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
             except student.DoesNotExist:
