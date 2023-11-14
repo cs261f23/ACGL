@@ -12,7 +12,7 @@ get_headers = {'Access-Control-Allow-Origin': '*'}
 authorization_hashes: dict = {}
 
 
-def get_students_by_opportunity(request) -> HttpResponse:
+def get_students_by_opportunity(request: HttpRequest) -> HttpResponse:
     """
     returns all the students' information associated with a particular opportunity
     url = http://ip_address:port/portal/get_students_by_opportunity?id=1 (for example)
@@ -24,7 +24,7 @@ def get_students_by_opportunity(request) -> HttpResponse:
     return JsonResponse(ids, headers=get_headers, safe=False)
 
 
-def get_available_opportunities_for_student(request) -> HttpResponse:
+def get_available_opportunities_for_student(request: HttpRequest) -> HttpResponse:
     """
     returns all the opportunities that are currently posted
     url = http://ip_address:port/portal/get_available_opportunities_for_student
@@ -36,14 +36,14 @@ def get_available_opportunities_for_student(request) -> HttpResponse:
         idict['id'] = i.id
         try:
             _ = opportunity_to_student.objects.get(
-                student_id=student.objects.get(student_id=request.GET.get('student_id')), opportunity_id=i)
+                student_id=student.objects.get(student_id=authorization_hashes[str(request.GET.get('id'))].student_id), opportunity_id=i)
 
         except opportunity_to_student.DoesNotExist:
             y.append(idict)
     return JsonResponse(y, headers=get_headers, safe=False)
 
 
-def get_opportunity_info(request) -> HttpResponse:
+def get_opportunity_info(request: HttpRequest) -> HttpResponse:
     """
     gets opportunity info by id
     """
@@ -54,7 +54,7 @@ def get_opportunity_info(request) -> HttpResponse:
         return JsonResponse("major error")
 
 
-def get_opportunities_by_partner_id(request) -> HttpResponse:
+def get_opportunities_by_partner_id(request: HttpRequest) -> HttpResponse:
     """
     returns all the opportunities that are associated with the given partner_id
     url = http://ip_address:port/porta/get_opportunities_by_partner_id?id=1
@@ -64,16 +64,16 @@ def get_opportunities_by_partner_id(request) -> HttpResponse:
     return JsonResponse([i.dict() for i in ops], headers=get_headers, safe=False)
 
 
-def get_opportunities_by_student_id(request) -> HttpResponse:
+def get_opportunities_by_student_id(request: HttpRequest) -> HttpResponse:
     ids = list(opportunity_to_student.objects.filter(
-        student_id=request.GET.get('id')))
+        student_id=authorization_hashes[request.GET.get('id')].student_id))
 
     print(ids)
     return JsonResponse([i.opportunity_id.dict() for i in ids], headers=get_headers, safe=False)
 
 
 @ csrf_exempt
-def create_opportunity(request) -> HttpResponse:
+def create_opportunity(request: HttpRequest) -> HttpResponse:
     """
     creates an opportunity object and puts its attributes into the database
     """
@@ -95,7 +95,7 @@ def create_opportunity(request) -> HttpResponse:
 
 
 @ csrf_exempt
-def student_signup(request) -> HttpResponse:
+def student_signup(request: HttpRequest) -> HttpResponse:
     import json
     body_unicode = request.body.decode('utf-8')
     # new_opportunity = {}
@@ -117,7 +117,7 @@ def student_signup(request) -> HttpResponse:
 
 
 @csrf_exempt
-def attempt_partner_register(request) -> HttpResponse:
+def attempt_partner_register(request: HttpRequest) -> HttpResponse:
     """
     Checks validity of wannabe partner's info and creates partner
     """
@@ -152,7 +152,7 @@ def attempt_partner_register(request) -> HttpResponse:
 
 
 @csrf_exempt
-def attempt_student_register(request) -> HttpResponse:
+def attempt_student_register(request: HttpRequest) -> HttpResponse:
     """
     Checks validity of wannabe partner's info and creates partner
     """
@@ -184,7 +184,7 @@ def attempt_student_register(request) -> HttpResponse:
 
 
 @csrf_exempt
-def attempt_login(request) -> HttpResponse:
+def attempt_login(request: HttpRequest) -> HttpResponse:
     """
     Attempts to login by first checking for email/password in the partners table, then if there isn't a match there, it checks the student table
     """
@@ -203,8 +203,8 @@ def attempt_login(request) -> HttpResponse:
             print(partner_check.password)
             if str(hashed_password) == str(partner_check.password):
                 auth_hash = os.urandom(32)
-                authorization_hashes[str(auth_hash)] = partner_check
-                return JsonResponse({'outcome': 'partner', 'id': partner_check.partner_id, 'hash': str(auth_hash)}, headers=post_headers, safe=False)
+                authorization_hashes[str(auth_hash)[2:]] = partner_check
+                return JsonResponse({'outcome': 'partner', 'id': partner_check.partner_id, 'hash': str(auth_hash)[2:]}, headers=post_headers, safe=False)
             return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
         except community_partner.DoesNotExist:
             try:
@@ -217,8 +217,8 @@ def attempt_login(request) -> HttpResponse:
                 print(student_check.password)
                 if str(hashed_password) == str(student_check.password):
                     auth_hash = os.urandom(32)
-                    authorization_hashes[str(auth_hash)] = student_check
-                    return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': str(auth_hash)}, headers=post_headers, safe=False)
+                    authorization_hashes[str(auth_hash)[2:]] = student_check
+                    return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': str(auth_hash)[2:]}, headers=post_headers, safe=False)
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
             except student.DoesNotExist:
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)

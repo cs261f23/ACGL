@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  selector: 'app-student-sidebar',
+  templateUrl: './student-sidebar.component.html',
+  styleUrls: ['./student-sidebar.component.css']
 })
-export class SidebarComponent {
+export class StudentSidebarComponent {
   events: Array<string> = [];
   opened?: any = '';
   expanded: boolean = false;

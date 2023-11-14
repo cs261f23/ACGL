@@ -21,11 +21,11 @@ export class ApiCallService {
 
 
   getStudentsByOpportunity(opportunityID: number): any {
-    return this.http.get(this.url + '/portal/get_students_by_opportunity?id=' + opportunityID);
+    return this.http.get(this.url + 'portal/get_students_by_opportunity?id=' + opportunityID);
   }
 
   getAvailableOpportunitiesForStudent(): any {
-    return this.http.get(this.url + '/portal/get_available_opportunities_for_student?id=' + this.authService.hash!);
+    return this.http.get(this.url + 'portal/get_available_opportunities_for_student?id=' + this.authService.hash!);
   }
 
   getOpportunityInfo(id: number) {
@@ -35,6 +35,11 @@ export class ApiCallService {
   getOpportunitiesByPartnerID(partnerID: number): any {
     // let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
     return this.http.get(this.url + 'portal/get_opportunities_by_partner_id?id=' + partnerID)
+  }
+
+  getSignedUpOpportunities(student_id: number) {
+    // return this.http.get(this.url + 'portal/get_opportunities_by_student_id?id=' + student_id)
+    return this.http.get(this.url + 'portal/get_opportunities_by_student_id?id=' + this.authService.hash!)
   }
 
   attemptLogin(email: string, password: string) {
@@ -60,7 +65,4 @@ export class ApiCallService {
     return this.http.post(this.url + 'portal/attempt_student_signup', { student_id: student_id, id: id }, headers = headers)
   }
 
-  getSignedUpOpportunities(student_id: number) {
-    return this.http.get(this.url + 'portal/get_opportunities_by_student_id?id=' + student_id)
-  }
 }

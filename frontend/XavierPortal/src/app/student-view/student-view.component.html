@@ -1,4 +1,4 @@
-<app-sidebar (opportunitySearchEmitter)="sidebarSection='search_form'"
-  (myOpportunitiesEmitter)="sidebarSection='my_opportunities'">
-  <app-student-search-form [section]="sidebarSection"></app-student-search-form>
-</app-sidebar>
+<app-student-sidebar (opportunitySearchEmitter)="openSearchForm()" (myOpportunitiesEmitter)="openMyOpportunities()">
+  <app-student-search-form [section]="sidebarSection" (innerSection)="sidebarSection='opportunity_view'"
+    class="search-form"></app-student-search-form>
+</app-student-sidebar>

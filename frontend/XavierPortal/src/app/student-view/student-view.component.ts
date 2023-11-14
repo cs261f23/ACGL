@@ -32,8 +32,18 @@ export class StudentViewComponent implements OnInit {
   * Make an api call to get a list of the currently listed opportunities
   * */
   getAvailableOpportunitiesForStudent(): void {
-    this.apiCallService.getAvailableOpportunitiesForStudent(this.authService.studentID).subscribe((response: any) => {
+    this.apiCallService.getAvailableOpportunitiesForStudent().subscribe((response: any) => {
       this.opportunities = response;
-    })
+    });
   }
+
+  openSearchForm(): void {
+    this.sidebarSection = "search_form";
+  }
+
+  openMyOpportunities(): void {
+    this.sidebarSection = "my_opportunities"
+  }
+
+
 }
