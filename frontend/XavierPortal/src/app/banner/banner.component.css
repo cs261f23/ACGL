@@ -1,0 +1,21 @@
+/*banner.component.css*/
+.banner {
+  background-color: #0C2340; /* Set your desired background color */
+  color: #ffffff; /* Set your desired text color */
+  padding: 10px;
+  text-align: center;
+}
+
+
+.logo {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 50px; /* Adjust the width as needed */
+  height: 50px; /* Adjust the height as needed */
+}
+
+
+.banner h1 {
+  margin: 0;
+}
