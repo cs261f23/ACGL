@@ -24,6 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignedUpOpportunitiesComponent } from './student-view/signed-up-opportunities/signed-up-opportunities.component';
+import { BannerComponent } from './banner/banner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { SignedUpOpportunitiesComponent } from './student-view/signed-up-opportu
     PartnerUserRegisterComponent,
     StudentSignupFormComponent,
     SignedUpOpportunitiesComponent,
+    BannerComponent,
   ],
   imports: [
     AppRoutingModule,

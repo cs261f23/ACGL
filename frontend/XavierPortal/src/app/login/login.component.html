@@ -1,3 +1,8 @@
+<!--
+
+***login.component.html
+
+
 <div *ngIf="!loggedIn" style="padding-left: 30%; padding-right: 30%">
   email
   <input type="text" class="form-control" id="email" required [(ngModel)]="user.email">
@@ -19,4 +24,32 @@
   <button routerLink="/partner_register" routerLinkActive="active" areaCurrentWhenActive="page">
     partner register
   </button>
+</div>
+-->
+<div *ngIf="!loggedIn" class="login-form-container">
+  <h2>Login</h2>
+
+  <label for="email">Email:</label>
+  <input type="text" class="form-control" id="email" required [(ngModel)]="user.email">
+
+  <label for="password">Password:</label>
+
+  
+  <div class="password-input-container">
+    <input [type]="showPassword ? 'text' : 'password'" class="form-control" required [(ngModel)]="user.password">
+    <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false">
+      <mat-icon fontIcon="remove_red_eye"></mat-icon>
+    </button>
+  </div>
+
+  <button class="login-button" (click)="login()">Login</button>
+
+  <div class="register-buttons">
+    <button routerLink="/student_register" routerLinkActive="active" areaCurrentWhenActive="page">
+      Student Register
+    </button>
+    <button routerLink="/partner_register" routerLinkActive="active" areaCurrentWhenActive="page">
+      Partner Register
+    </button>
+  </div>
 </div>
