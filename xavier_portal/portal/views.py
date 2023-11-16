@@ -203,8 +203,9 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
             print(partner_check.password)
             if str(hashed_password) == str(partner_check.password):
                 auth_hash = os.urandom(32)
-                authorization_hashes[str(auth_hash)[2:]] = partner_check
-                return JsonResponse({'outcome': 'partner', 'id': partner_check.partner_id, 'hash': str(auth_hash)[2:]}, headers=post_headers, safe=False)
+                auth_hash = str(auth_hash)[2:].replace('\'', '')
+                authorization_hashes[auth_hash] = partner_check
+                return JsonResponse({'outcome': 'partner', 'id': partner_check.partner_id, 'hash': auth_hash}, headers=post_headers, safe=False)
             return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
         except community_partner.DoesNotExist:
             try:
@@ -217,8 +218,9 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
                 print(student_check.password)
                 if str(hashed_password) == str(student_check.password):
                     auth_hash = os.urandom(32)
-                    authorization_hashes[str(auth_hash)[2:]] = student_check
-                    return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': str(auth_hash)[2:]}, headers=post_headers, safe=False)
+                    auth_hash = str(auth_hash)[2:].replace('\'', '')
+                    authorization_hashes[auth_hash] = student_check
+                    return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': auth_hash}, headers=post_headers, safe=False)
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
             except student.DoesNotExist:
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
