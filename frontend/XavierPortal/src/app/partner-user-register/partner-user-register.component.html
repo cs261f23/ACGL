@@ -1,4 +1,8 @@
-<!-- <div style="padding-left: 30%; padding-right: 30%"> -->
+<!--
+  
+  ***partner-user-register.component.html
+  
+  <div style="padding-left: 30%; padding-right: 30%"> -->
 <!--   title -->
 <!--   <input type="text" class="form-control" id="title" required [(ngModel)]="partnerRegister.title"> -->
 <!--   email -->
@@ -18,8 +22,8 @@
 <!-- </div> -->
 <!---->
 
-<form (ngSubmit)="register()" [ngFormOptions]="{updateOn: 'submit'}" style="padding: 30%">
-  <h2>Partner Signup</h2>
+<form (ngSubmit)="register()" [ngFormOptions]="{updateOn: 'submit'}" class = "register-form">
+  <h2>Partner Register</h2>
 
   <div class="form-group">
     <label for="name">Title:</label>
@@ -35,27 +39,25 @@
   <div class="form-group">
     <label for="email">Email:</label>
     <div>
-      <input type="email" id="partnerRegister.email" name="partnerRegister.email" [(ngModel)]="partnerRegister.email"
+      <input class="form-control" type="email" id="partnerRegister.email" name="partnerRegister.email" [(ngModel)]="partnerRegister.email"
         required [ngModelOptions]="{updateOn: 'blur'}" #email="ngModel"
         pattern="[a-zA-Z0-9._%+-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}">
-    </div>
-    <div [hidden]="email.valid || (email.pristine && !submitted)" class="alert alert-danger">
-      Email is required and must be valid.
-    </div>
-  </div>
-  <div style="display: flex;flex-direction: row">
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <div>
-        <input [type]="!showPassword?'password':'text'" id="password" name="password"
-          [(ngModel)]="partnerRegister.password" required #password="ngModel">
-
+      <div [hidden]="email.valid || (email.pristine && !submitted)" class="alert alert-danger">
+        Email is required and must be valid.
       </div>
     </div>
-    <button type="button" (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()"
-      (mouseout)="showPassword=false" style="background-color: transparent; border-color:transparent;">
-      <mat-icon fontIcon="remove_red_eye"></mat-icon>
-    </button>
   </div>
-  <button type="submit">Submit</button>
+
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <div>
+      <input class="form-control" [type]="!showPassword?'password':'text'" id="password" name="password"
+        [(ngModel)]="partnerRegister.password" required #password="ngModel">
+      <div [hidden]="password.valid || (password.pristine && !submitted)" class="alert alert-danger">
+        Password is required and must meet the specified pattern.
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="submit-button">Submit</button>
 </form>

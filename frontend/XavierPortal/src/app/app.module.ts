@@ -26,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignedUpOpportunitiesComponent } from './student-view/signed-up-opportunities/signed-up-opportunities.component';
 import { StudentSidebarComponent } from './student-view/student-sidebar/student-sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { BannerComponent } from './banner/banner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     StudentSignupFormComponent,
     SignedUpOpportunitiesComponent,
     StudentSidebarComponent,
+    BannerComponent,
   ],
   imports: [
     AppRoutingModule,
