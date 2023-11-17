@@ -1,22 +1,24 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" opened="true" role="region">
-    <mat-icon fontIcon="folder" (click)="expand(0)" />
+    <mat-icon fontIcon="menu" (click)="expand()" />
     <mat-divider />
-    <mat-icon fontIcon="search" (click)="expand(1)" />
   </mat-sidenav>
   <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" [opened]="expanded" (click)="emitChooser().emit()">
-      <p *ngIf="icons[0]">
+    <mat-drawer mode="side" [opened]="expanded">
+      <p (click)="emitChooser(0).emit()">
+        <!-- *ngIf="icons[0]"> -->
         My Opportunities
       </p>
 
-      <p *ngIf="icons[1]">
+      <hr />
+      <p (click)="emitChooser(1).emit()">
+        <!-- *ngIf="icons[1]"> -->
         Opportunity search
       </p>
 
     </mat-drawer>
     <mat-drawer-content>
-      <div (click)="expand('clear')">
+      <div (click)="expand(1)">
         <ng-content></ng-content>
       </div>
     </mat-drawer-content>

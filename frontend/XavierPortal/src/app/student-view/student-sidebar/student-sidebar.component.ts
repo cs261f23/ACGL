@@ -12,31 +12,16 @@ export class StudentSidebarComponent {
   icons: Array<boolean> = [false, false]
   @Output() myOpportunitiesEmitter: EventEmitter<boolean> = new EventEmitter();
   @Output() opportunitySearchEmitter: EventEmitter<boolean> = new EventEmitter();
+  emitters: Array<EventEmitter<boolean>> = [this.myOpportunitiesEmitter, this.opportunitySearchEmitter]
 
-  emitChooser(): EventEmitter<boolean> {
-    for (let i = 0; i < this.icons.length; i++) {
-      if (this.icons[i]) {
-        if (i == 0)
-          return this.myOpportunitiesEmitter;
-        return this.opportunitySearchEmitter;
-      }
-    }
-    return this.opportunitySearchEmitter;
+  emitChooser(id: number): EventEmitter<boolean> {
+    return this.emitters[id]
   }
 
-  expand(number: any): void {
-    let toggle;
-    try {
-      toggle = this.icons[number];
-    }
-    catch {
-      toggle = false
-    }
-
-    this.icons = [false, false]
-    if (!toggle) {
-      this.expanded = true
-      this.icons[number] = true
+  expand(clear: number = 0): void {
+    this.expanded = !this.expanded
+    if (clear) {
+      this.expanded = false
     }
 
   }
