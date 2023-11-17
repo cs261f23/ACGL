@@ -25,6 +25,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignedUpOpportunitiesComponent } from './student-view/signed-up-opportunities/signed-up-opportunities.component';
 import { BannerComponent } from './banner/banner.component';
+import { StudentSidebarComponent } from './student-view/student-sidebar/student-sidebar.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,7 @@ import { BannerComponent } from './banner/banner.component';
     StudentSignupFormComponent,
     SignedUpOpportunitiesComponent,
     BannerComponent,
+    StudentSidebarComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -53,6 +56,7 @@ import { BannerComponent } from './banner/banner.component';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    MatSidenavModule,
     BrowserAnimationsModule
   ],
   providers: [HttpClientModule,],

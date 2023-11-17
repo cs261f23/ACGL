@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiCallService } from 'src/app/api-call.service';
+import { AuthService } from 'src/app/auth.service';
 import { Opportunity } from 'src/app/models/opportunity';
 
 @Component({
@@ -11,17 +12,20 @@ export class StudentSearchFormComponent {
   searchString: string = "";
   opportunities: Array<Opportunity> = [];
   filteredOpportunities: Array<Opportunity> = [];
-  section: string = "search_form";
+  @Input() section: string = "search_form";
+  @Output() innerSection: EventEmitter<boolean> = new EventEmitter();
+
   selectedOpportunity: number = -1;
   signup: boolean = false;
 
-  constructor(private apiCallService: ApiCallService) {
+  constructor(private apiCallService: ApiCallService, private authService: AuthService) {
   }
 
   selectOpportunity(id: number, signup: boolean = false) {
     this.section = "opportunity_view";
     this.selectedOpportunity = id;
     this.signup = signup;
+    this.innerSection.emit()
   }
 
   ngOnInit(): void {
@@ -36,6 +40,7 @@ export class StudentSearchFormComponent {
     this.filteredOpportunities = this.opportunities.filter((opp: Opportunity) => {
       return (opp.keywords.includes(this.searchString) || opp.description.includes(this.searchString))
     })
+
   }
 
 }

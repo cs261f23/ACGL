@@ -53,9 +53,6 @@
       <input type="password" id="student.password" name="student.password" [(ngModel)]="student.password" required
         #password="ngModel" pattern="\d{3}-\d{3}-\d{4}">
     </div>
-    <div [hidden]="password.valid || (password.pristine && !submitted)" class="alert alert-danger">
-      Phone Number is required and must be in the format 333-333-3333, containing only digits.
-    </div>
   </div>
 
   <button type="submit">Submit</button>
