@@ -27,6 +27,7 @@ import { SignedUpOpportunitiesComponent } from './student-view/signed-up-opportu
 import { BannerComponent } from './banner/banner.component';
 import { StudentSidebarComponent } from './student-view/student-sidebar/student-sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { PartnerSidebarComponent } from './community-partner-view/partner-sidebar/partner-sidebar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     SignedUpOpportunitiesComponent,
     BannerComponent,
     StudentSidebarComponent,
+    PartnerSidebarComponent,
   ],
   imports: [
     AppRoutingModule,
