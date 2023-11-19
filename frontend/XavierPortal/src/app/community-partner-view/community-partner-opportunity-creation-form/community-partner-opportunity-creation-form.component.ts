@@ -15,7 +15,6 @@ export class CommunityPartnerOpportunityCreationFormComponent {
     keywords: '',
     id: this.authService.partnerID,
     date: Date
-
   }
   @Output() updateMyOpportunities = new EventEmitter<boolean>();
   submitted: boolean = false;

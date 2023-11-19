@@ -3,7 +3,7 @@
 <!--   <button (click)="section='my_opportunities'"> my opportunities</button> -->
 <!-- </div> -->
 
-<div style="padding: 10%">
+<div class="search-form">
   <div *ngIf="section=='search_form'">
     <input type="text" class="form-control" id="searchString" required [(ngModel)]="searchString" (input)="filter()">
     {{searchString}}

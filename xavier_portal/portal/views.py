@@ -86,8 +86,11 @@ def create_opportunity(request: HttpRequest) -> HttpResponse:
             partner_id=json_opportunity['id'])[0]
         description = json_opportunity['description']
         keywords = json_opportunity['keywords']
+        date = json_opportunity['date']
+        date = date[:date.index('T')]
+
         new_opportunity = opportunity(description=description, keywords=keywords,
-                                      community_partner_id=id)
+                                      community_partner_id=id, date=date)
         new_opportunity.save()
     if isinstance(new_opportunity, opportunity):
         new_opportunity = new_opportunity.dict()
@@ -204,7 +207,7 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
             if str(hashed_password) == str(partner_check.password):
                 auth_hash = os.urandom(32)
                 auth_hash = str(auth_hash)[2:]
-                for i in ('\\ \\|!@#$%^&*()\'\"~`'):
+                for i in '\\  \\|+!@#$%^&*()\'\"~`,/.;:{[]}x-=':
                     auth_hash.replace(i, '')
                 # .replace('\'', '').replace('^', '').replace( '(', '').replace(')', '').replace('<', '').replace('>', '').replace('$', '').replace(' ', '')
                 authorization_hashes[auth_hash] = partner_check
@@ -223,7 +226,8 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
                     auth_hash = os.urandom(32)
                     auth_hash = str(auth_hash)[2:]
 
-                    for i in ('\\ \\|!@#$%^&*()\'\"~`'):
+                    for i in '\\  \\|+!@#$%^&*()\'\"~`,/.;:{[]}x-=':
+                        auth_hash.replace(i, '')
                         auth_hash = auth_hash.replace(i, '')
                     authorization_hashes[auth_hash] = student_check
                     return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': auth_hash}, headers=post_headers, safe=False)

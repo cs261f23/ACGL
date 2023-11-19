@@ -1,8 +1,8 @@
 <hr />
 description
 <div>
-  <input type="text" class="form-control" id="email" required [(ngModel)]="info.description" name="email">
-  {{info.description}}
+  <input style="height: 18ch;width:50ch" class="form-control" id="email" required [(ngModel)]="info.description"
+    name="email">
 </div>
 keywords
 <div>
@@ -10,7 +10,7 @@ keywords
 </div>
 
 <mat-form-field>
-  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+  <input [(ngModel)]="info.date" matInput [matDatepicker]="picker" placeholder="Choose a date">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>

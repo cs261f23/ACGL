@@ -34,9 +34,10 @@
 
   <label for="password">Password:</label>
 
-  
+
   <div class="password-input-container">
-    <input [type]="showPassword ? 'text' : 'password'" class="form-control" required [(ngModel)]="user.password">
+    <input (keyup.enter)="login()" [type]="showPassword ? 'text' : 'password'" class="form-control" required
+      [(ngModel)]="user.password">
     <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false">
       <mat-icon fontIcon="remove_red_eye"></mat-icon>
     </button>
