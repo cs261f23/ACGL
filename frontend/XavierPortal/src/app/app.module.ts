@@ -24,12 +24,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignedUpOpportunitiesComponent } from './student-view/signed-up-opportunities/signed-up-opportunities.component';
-import { StudentSidebarComponent } from './student-view/student-sidebar/student-sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BannerComponent } from './banner/banner.component';
-import { BannerComponent } from './banner/banner.component';
 import { StudentSidebarComponent } from './student-view/student-sidebar/student-sidebar.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { PartnerSidebarComponent } from './community-partner-view/partner-sidebar/partner-sidebar.component';
 @NgModule({
   declarations: [

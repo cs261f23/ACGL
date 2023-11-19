@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
@@ -13,12 +13,23 @@ import { CommunityPartnerOpportunityCreationFormComponent } from './community-pa
 })
 export class CommunityPartnerViewComponent implements OnInit {
   form?: CommunityPartnerOpportunityCreationFormComponent
-
+  @Input() section: string = "my_opportunities";
+  @Output() innerSection: EventEmitter<boolean> = new EventEmitter();
+  sidebarSection: string = "my_opportunities"
   myOpportunities: Array<Opportunity> = [];
   selectedOpportunity: number = -1;
-  section: string = "";
   constructor(private apiCallService: ApiCallService, private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
+  }
+
+  openCreationForm() {
+    this.sidebarSection = "new_opportunity"
+    this.section = "new_opportunity"
+  }
+
+  openMyOpportunities() {
+    this.sidebarSection = "my_opportunities"
+    this.section = "my_opportunities"
   }
 
   getStudentsByOpportunity(id: number) {

@@ -88,7 +88,6 @@ def create_opportunity(request: HttpRequest) -> HttpResponse:
         keywords = json_opportunity['keywords']
         date = json_opportunity['date']
         date = date[:date.index('T')]
-
         new_opportunity = opportunity(description=description, keywords=keywords,
                                       community_partner_id=id, date=date)
         new_opportunity.save()
