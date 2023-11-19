@@ -6,7 +6,6 @@
 <div class="search-form">
   <div *ngIf="section=='search_form'">
     <input type="text" class="form-control" id="searchString" required [(ngModel)]="searchString" (input)="filter()">
-    {{searchString}}
     <table>
       <tr>
         <th *ngFor="let data of this.filteredOpportunities[0] | keyvalue">
@@ -23,9 +22,7 @@
     </table>
   </div>
 
-  <app-student-opportunity-view *ngIf="section=='opportunity_view'" [id]="selectedOpportunity"
-    [signup]="signup"></app-student-opportunity-view>
+  <app-student-opportunity-view *ngIf="section=='opportunity_view'" [id]="selectedOpportunity" [signup]="signup" />
 
-  <app-signed-up-opportunities *ngIf="section=='my_opportunities'"
-    (select)="selectOpportunity($event.id)"></app-signed-up-opportunities>
+  <app-signed-up-opportunities *ngIf="section=='my_opportunities'" (select)="selectOpportunity($event.id)" />
 </div>

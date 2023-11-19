@@ -227,7 +227,6 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
 
                     for i in '\\  \\|+!@#$%^&*()\'\"~`,/.;:{[]}x-=':
                         auth_hash.replace(i, '')
-                        auth_hash = auth_hash.replace(i, '')
                     authorization_hashes[auth_hash] = student_check
                     return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': auth_hash}, headers=post_headers, safe=False)
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)

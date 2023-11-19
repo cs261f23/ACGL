@@ -1,28 +1,21 @@
 <app-partner-sidebar (opportunityCreateEmitter)="openCreationForm()" (myOpportunitiesEmitter)="openMyOpportunities()"
   (innerSection)="section">
-
   <div *ngIf="section=='new_opportunity'">
     <div style="display: flex; justify-content:center;">
       <app-community-partner-opportunity-creation-form [id]="form"
-        (updateMyOpportunities)="this.getOpportunitiesByPartnerID(1)"></app-community-partner-opportunity-creation-form>
+        (updateMyOpportunities)="this.getOpportunitiesByPartnerID(1)" />
     </div>
-
   </div>
-
-
-  <div *ngIf="section=='my_opportunities'" style="padding: 15%">
-
+  <div *ngIf="section=='my_opportunities'" style="padding: 5%">
     <h2>
       My Opportunities
     </h2>
-
     <table>
       <tr>
         <th *ngFor="let data of this.myOpportunities[0] | keyvalue">
           {{data.key}}
         </th>
       </tr>
-
       <tr *ngFor="let data of this.myOpportunities" (click)="selectOpportunity(data)">
         <td *ngFor="let info of data | keyvalue">
           {{info.value}}
@@ -30,8 +23,7 @@
       </tr>
     </table>
   </div>
-
   <div *ngIf="section=='opportunity_edit'">
-    <app-community-partner-opportunity-view [id]="selectedOpportunity"></app-community-partner-opportunity-view>
+    <app-community-partner-opportunity-view [id]="selectedOpportunity" />
   </div>
 </app-partner-sidebar>

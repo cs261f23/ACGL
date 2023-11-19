@@ -10,11 +10,12 @@ import { Opportunity } from 'src/app/models/opportunity';
   styleUrls: ['./community-partner-opportunity-creation-form.component.css']
 })
 export class CommunityPartnerOpportunityCreationFormComponent {
-  info: any = {
+  info: Opportunity = {
+    communityPartnerTitle: '',
     description: '',
     keywords: '',
     id: this.authService.partnerID,
-    date: Date
+    date: new Date(),
   }
   @Output() updateMyOpportunities = new EventEmitter<boolean>();
   submitted: boolean = false;
