@@ -1,13 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 body {
   background-color: #D7D3CC;
+  height: 10lh;
 }
 
 h2 {
   text-align: center;
 }
 
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
   table {
     font-family: arial, sans-serif;
     border-collapse: collapse;

@@ -50,6 +50,7 @@ class opportunity(models.Model):
     keywords = models.CharField(max_length=200,  null=True)
     community_partner_id = models.ForeignKey(
         community_partner, on_delete=models.CASCADE, related_name='+', to_field='partner_id', default=0)
+    date = models.DateField(null=True)
 
     def students(self):
         return [
@@ -58,7 +59,7 @@ class opportunity(models.Model):
         ]
 
     def dict(self):
-        return {'description': self.description, 'keywords': self.keywords, 'community_partner_title': self.community_partner_id.partner_title, 'id': self.id}
+        return {'date': self.date, 'description': self.description, 'keywords': self.keywords, 'community_partner_title': self.community_partner_id.partner_title, 'id': self.id}
 
 
 class opportunity_to_student(models.Model):

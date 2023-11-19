@@ -12,6 +12,7 @@ export class StudentViewComponent implements OnInit {
 
   opportunities: Array<Opportunity> = [];
   selectedOpportunities: Array<Opportunity> = [];
+  sidebarSection: string = "search_form"
 
   constructor(
     private apiCallService: ApiCallService,
@@ -33,6 +34,16 @@ export class StudentViewComponent implements OnInit {
   getAvailableOpportunitiesForStudent(): void {
     this.apiCallService.getAvailableOpportunitiesForStudent().subscribe((response: any) => {
       this.opportunities = response;
-    })
+    });
   }
+
+  openSearchForm(): void {
+    this.sidebarSection = "search_form";
+  }
+
+  openMyOpportunities(): void {
+    this.sidebarSection = "my_opportunities"
+  }
+
+
 }

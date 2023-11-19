@@ -6,4 +6,5 @@ export interface Opportunity {
   description: string;
   keywords: string;
   id: number;
+  // date?: Date;
 }

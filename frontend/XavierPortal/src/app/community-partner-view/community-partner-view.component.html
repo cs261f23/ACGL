@@ -1,41 +1,33 @@
-<div class="navbar-dark" style="text-align: center">
-  <button (click)="section='my_opportunities'">
-    my opportunities
-  </button>
+<app-partner-sidebar (opportunityCreateEmitter)="openCreationForm()" (myOpportunitiesEmitter)="openMyOpportunities()"
+  (innerSection)="section">
 
+  <div *ngIf="section=='new_opportunity'">
+    <div style="display: flex; justify-content:center;">
+      <app-community-partner-opportunity-creation-form [id]="form"
+        (updateMyOpportunities)="this.getOpportunitiesByPartnerID(1)"></app-community-partner-opportunity-creation-form>
+    </div>
 
-  <button (click)="section='new_opportunity'">
-    create new opportunity
-  </button>
-
-</div>
-
-<div *ngIf="section=='new_opportunity'">
-  <div style="display: flex; justify-content:center;">
-    <app-community-partner-opportunity-creation-form [id]="form"
-      (updateMyOpportunities)="this.getOpportunitiesByPartnerID(1)"></app-community-partner-opportunity-creation-form>
   </div>
 
-</div>
 
+  <div *ngIf="section=='my_opportunities'" style="padding-left:20%;padding-right:20%">
 
-<div *ngIf="section=='my_opportunities'" style="padding-left:20%;padding-right:20%">
+    <table>
+      <tr>
+        <th *ngFor="let data of this.myOpportunities[0] | keyvalue">
+          {{data.key}}
+        </th>
+      </tr>
 
-  <table>
-    <tr>
-      <th *ngFor="let data of this.myOpportunities[0] | keyvalue">
-        {{data.key}}
-      </th>
-    </tr>
+      <tr *ngFor="let data of this.myOpportunities" (click)="selectOpportunity(data)">
+        <td *ngFor="let info of data | keyvalue">
+          {{info.value}}
+        </td>
+      </tr>
+    </table>
+  </div>
 
-    <tr *ngFor="let data of this.myOpportunities" (click)="selectOpportunity(data)">
-      <td *ngFor="let info of data | keyvalue">
-        {{info.value}}
-      </td>
-    </tr>
-  </table>
-</div>
-
-<div *ngIf="section=='opportunity_edit'">
-  <app-community-partner-opportunity-view [id]="selectedOpportunity"></app-community-partner-opportunity-view>
-</div>
+  <div *ngIf="section=='opportunity_edit'">
+    <app-community-partner-opportunity-view [id]="selectedOpportunity"></app-community-partner-opportunity-view>
+  </div>
+</app-partner-sidebar>
