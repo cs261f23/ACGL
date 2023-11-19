@@ -1,22 +1,20 @@
-<form>
-  <hr />
-  description
-  <div>
-    <textarea type="text" style="height: 18ch;width:50ch;text-wrap: wrap;" class="form-control" id="email" required
-      [(ngModel)]="info.description" name="description">
-    </textarea>
-  </div>
-  keywords
-  <div>
-    <input type="text" class="form-control" id="password" required [(ngModel)]="info.keywords" name="keywords">
-  </div>
+<hr />
+description
+<div>
+  <textarea type="text" style="height: 18ch;width:50ch;text-wrap: wrap;" class="form-control" id="email" required
+    [(ngModel)]="info.description" name="description">
+  </textarea>
+</div>
+keywords
+<div>
+  <input type="text" class="form-control" id="password" required [(ngModel)]="info.keywords" name="keywords">
+</div>
 
-  <mat-form-field>
-    <input class="form-control" required [(ngModel)]="info.date" matInput [matDatepicker]="picker"
-      placeholder="Choose a date" />
-    <mat-datepicker-toggle matSuffix [for]="picker" />
-    <mat-datepicker #picker startView="month" touchUi="true" />
-  </mat-form-field>
-</form>
+<mat-form-field>
+  <input class="form-control" required [(ngModel)]="info.date" matInput [matDatepicker]="picker"
+    placeholder="Choose a date" />
+  <mat-datepicker-toggle matSuffix [for]="picker" />
+  <mat-datepicker #picker startView="month" />
+</mat-form-field>
 
 <button (click)="onSubmit()">Submit</button>
