@@ -1,6 +1,7 @@
 <mat-sidenav-container style="border-color:#d7d3cc;">
   <mat-sidenav #sidenav mode="side" opened="true" role="region" class="sidebar">
-    <mat-icon fontIcon="menu" (click)="expand()" style="size: 150%;padding-left: 20%;padding-top: 20%" />
+    <mat-icon fontIcon="menu" (click)="expand()"
+      style="size: 150%;padding-left: 20%;padding-top: 20%; cursor: pointer" />
   </mat-sidenav>
   <mat-drawer-container class="sidebar">
 
@@ -8,7 +9,6 @@
       <hr />
       <span (click)="emitChooser(0).emit()">
         <p class="sidebar-p">
-          <!-- *ngIf="icons[0]"> -->
           My Opportunities
         </p>
       </span>
@@ -16,7 +16,6 @@
       <hr />
       <span (click)="emitChooser(1).emit()">
         <p class="sidebar-p">
-          <!-- *ngIf="icons[1]"> -->
           Opportunity search
         </p>
       </span>

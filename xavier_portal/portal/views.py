@@ -207,7 +207,7 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
                 auth_hash = os.urandom(32)
                 auth_hash = str(auth_hash)[2:]
                 for i in '\\  \\|+!@#$%^&*()\'\"~`,/.;:{[]}x-=':
-                    auth_hash.replace(i, '')
+                    auth_hash = auth_hash.replace(i, '')
                 # .replace('\'', '').replace('^', '').replace( '(', '').replace(')', '').replace('<', '').replace('>', '').replace('$', '').replace(' ', '')
                 authorization_hashes[auth_hash] = partner_check
                 return JsonResponse({'outcome': 'partner', 'id': partner_check.partner_id, 'hash': auth_hash}, headers=post_headers, safe=False)
@@ -226,7 +226,7 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
                     auth_hash = str(auth_hash)[2:]
 
                     for i in '\\  \\|+!@#$%^&*()\'\"~`,/.;:{[]}x-=':
-                        auth_hash.replace(i, '')
+                        auth_hash = auth_hash.replace(i, '')
                     authorization_hashes[auth_hash] = student_check
                     return JsonResponse({'outcome': 'student', 'id': student_check.student_id, 'hash': auth_hash}, headers=post_headers, safe=False)
                 return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
