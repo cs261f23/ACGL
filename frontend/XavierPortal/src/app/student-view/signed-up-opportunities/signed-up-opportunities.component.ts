@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ApiCallService } from 'src/app/api-call.service';
 import { AuthService } from 'src/app/auth.service';
 import { Opportunity } from 'src/app/models/opportunity';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-signed-up-opportunities',
@@ -10,8 +11,9 @@ import { Opportunity } from 'src/app/models/opportunity';
 })
 export class SignedUpOpportunitiesComponent implements OnInit {
 
-  opportunities: Array<Opportunity> = [];
+  @Input() opportunities!: Array<Opportunity>;
   @Output() select: EventEmitter<Opportunity> = new EventEmitter<Opportunity>();
+
   constructor(
     private apiCallService: ApiCallService,
     private authService: AuthService,
@@ -20,12 +22,13 @@ export class SignedUpOpportunitiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiCallService.getSignedUpOpportunities(this.authService.studentID!).subscribe((response: any) => {
-      this.opportunities = response;
-    })
   }
 
   selectOpportunity(opp: Opportunity) {
     this.select.emit(opp);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.opportunities, event.previousIndex, event.currentIndex);
   }
 }

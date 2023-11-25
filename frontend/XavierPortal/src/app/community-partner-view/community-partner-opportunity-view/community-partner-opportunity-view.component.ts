@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiCallService } from 'src/app/api-call.service';
+import { Opportunity } from 'src/app/models/opportunity';
 
 @Component({
   selector: 'app-community-partner-opportunity-view',
@@ -10,7 +11,7 @@ import { ApiCallService } from 'src/app/api-call.service';
 export class CommunityPartnerOpportunityViewComponent implements OnInit {
 
   students: Array<{}> = [];
-  info: {} = {};
+  info?: Opportunity;
   @Input() id!: number;
   constructor(private apiCallService: ApiCallService) {
 
@@ -26,5 +27,11 @@ export class CommunityPartnerOpportunityViewComponent implements OnInit {
 
   }
 
+
+  submitEdits(): void {
+    this.apiCallService.editOpportunity(this.info!).subscribe((response: any) => {
+
+    })
+  }
 
 }

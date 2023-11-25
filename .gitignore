@@ -5,3 +5,4 @@ xavier_portal/xavier_portal/__pycache__
 xavier_portal/db.sqlite3
 xavier_portal/env
 serve
+frontend/XavierPortal/package-lock.json

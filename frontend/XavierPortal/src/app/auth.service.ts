@@ -7,6 +7,6 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   partnerID: number = -1;
   studentID: number = -1;
-  hash?: String;
+  hash?: string;
   constructor() { }
 }

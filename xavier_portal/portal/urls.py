@@ -23,5 +23,7 @@ urlpatterns = [
     path('attempt_student_signup', views.student_signup,
          name='attempt_student_signup'),
     path('get_opportunities_by_student_id', views.get_opportunities_by_student_id,
-         name='get_opportunities_by_student_id')
+         name='get_opportunities_by_student_id'),
+    path('edit_opportunity', views.edit_opportunity,
+         name='views.edit_opportunity')
 ]

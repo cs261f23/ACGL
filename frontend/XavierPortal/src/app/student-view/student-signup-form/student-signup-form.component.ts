@@ -22,11 +22,15 @@ export class StudentSignupFormComponent implements OnInit {
   model: signup = { name: '', phoneNumber: '', email: '' };
   submitted = false;
   @Input() id!: number;
+  @Output() submittedEmitter: EventEmitter<boolean> = new EventEmitter();
   // id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
 
   onSubmit() {
-    this.apiCallService.studentSignup(this.authService.studentID, this.id).subscribe((response) => { })
-    this.submitted = true;
+    this.apiCallService.studentSignup(this.authService.studentID, this.id).subscribe((response) => {
+
+      this.submitted = true;
+      this.submittedEmitter.emit()
+    })
     // this.apiCallService.signUpForOpportunity(this.authService.studentID, this.id);
   }
   ngOnInit(): void { }

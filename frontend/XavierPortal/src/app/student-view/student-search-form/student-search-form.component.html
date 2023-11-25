@@ -22,7 +22,9 @@
     </table>
   </div>
 
-  <app-student-opportunity-view *ngIf="section=='opportunity_view'" [id]="selectedOpportunity" [signup]="signup" />
+  <app-student-opportunity-view *ngIf="section=='opportunity_view'" [id]="selectedOpportunity" [signup]="signup"
+    (submittedEmitter)="ngOnInit();section='my_opportunities';" />
 
-  <app-signed-up-opportunities *ngIf="section=='my_opportunities'" (select)="selectOpportunity($event.id)" />
+  <app-signed-up-opportunities *ngIf="section=='my_opportunities'" (select)="selectOpportunity($event.id)"
+    [opportunities]="signedUpOpportunities" />
 </div>

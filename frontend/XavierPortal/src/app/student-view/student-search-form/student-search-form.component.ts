@@ -11,6 +11,7 @@ import { Opportunity } from 'src/app/models/opportunity';
 export class StudentSearchFormComponent {
   searchString: string = "";
   opportunities: Array<Opportunity> = [];
+  signedUpOpportunities: Array<Opportunity> = [];
   filteredOpportunities: Array<Opportunity> = [];
   @Input() section: string = "search_form";
   @Output() innerSection: EventEmitter<boolean> = new EventEmitter();
@@ -32,8 +33,10 @@ export class StudentSearchFormComponent {
     this.apiCallService.getAvailableOpportunitiesForStudent().subscribe((response: any) => {
       this.opportunities = response;
       this.filteredOpportunities = this.opportunities;
-
     });
+    this.apiCallService.getSignedUpOpportunities().subscribe((response: any) => {
+      this.signedUpOpportunities = response;
+    })
   }
 
   filter(): void {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpClient, HttpHeaders
+  HttpClient, HttpHeaders, HttpParams
 } from '@angular/common/http';
 import { Opportunity } from './models/opportunity';
 import { Observable } from 'rxjs';
@@ -21,11 +21,15 @@ export class ApiCallService {
 
 
   getStudentsByOpportunity(opportunityID: number): any {
-    return this.http.get(this.url + 'portal/get_students_by_opportunity?id=' + opportunityID);
+    let param = new HttpParams().appendAll({ "id": opportunityID })
+    return this.http.get(this.url + 'portal/get_students_by_opportunity', { params: param });
   }
 
+
+  // {params: new HttpParams().appendAll({"id": this.authService.hash!})}
+
   getAvailableOpportunitiesForStudent(): any {
-    return this.http.get(this.url + 'portal/get_available_opportunities_for_student?id=' + this.authService.hash!);
+    return this.http.get(this.url + 'portal/get_available_opportunities_for_student', { params: new HttpParams().appendAll({ "id": this.authService.hash! }) });
   }
 
   getOpportunityInfo(id: number) {
@@ -34,12 +38,12 @@ export class ApiCallService {
 
   getOpportunitiesByPartnerID(partnerID: number): any {
     // let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
-    return this.http.get(this.url + 'portal/get_opportunities_by_partner_id?id=' + partnerID)
+    return this.http.get(this.url + 'portal/get_opportunities_by_partner_id', { params: new HttpParams().appendAll({ "id": this.authService.hash! }) });
   }
 
-  getSignedUpOpportunities(student_id: number) {
+  getSignedUpOpportunities() {
     // return this.http.get(this.url + 'portal/get_opportunities_by_student_id?id=' + student_id)
-    return this.http.get(this.url + 'portal/get_opportunities_by_student_id?id=' + this.authService.hash!)
+    return this.http.get(this.url + 'portal/get_opportunities_by_student_id', { params: new HttpParams().appendAll({ "id": this.authService.hash! }) })
   }
 
   attemptLogin(email: string, password: string) {
@@ -63,6 +67,11 @@ export class ApiCallService {
   studentSignup(student_id: number, id: number) {
     let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
     return this.http.post(this.url + 'portal/attempt_student_signup', { student_id: student_id, id: id }, headers = headers)
+  }
+
+  editOpportunity(opportunity: Opportunity): Observable<any> {
+    let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
+    return this.http.post(this.url + 'portal/edit_opportunity', opportunity, headers = headers)
   }
 
 }

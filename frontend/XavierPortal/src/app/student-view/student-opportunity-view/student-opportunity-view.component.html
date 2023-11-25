@@ -5,5 +5,5 @@
 </div>
 
 <div *ngIf="signup==true" style="display: flex; justify-content: center;">
-  <app-student-signup-form [id]="id"></app-student-signup-form>
+  <app-student-signup-form [id]="id" (submittedEmitter)="submittedEmitter.emit();ngOnInit()"></app-student-signup-form>
 </div>

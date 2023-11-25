@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from 'src/app/api-call.service';
 import { AuthService } from 'src/app/auth.service';
@@ -12,6 +12,7 @@ export class StudentOpportunityViewComponent implements OnInit {
   // id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
   @Input() id!: number;
   @Input() signup: boolean = false;
+  @Output() submittedEmitter: EventEmitter<boolean> = new EventEmitter();
   info!: {}
 
 

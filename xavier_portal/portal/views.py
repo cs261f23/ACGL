@@ -60,7 +60,7 @@ def get_opportunities_by_partner_id(request: HttpRequest) -> HttpResponse:
     url = http://ip_address:port/porta/get_opportunities_by_partner_id?id=1
     """
     ops = list(opportunity.objects.filter(
-        community_partner_id=request.GET.get('id')))
+        community_partner_id=authorization_hashes[request.GET.get('id')].partner_id))
     return JsonResponse([i.dict() for i in ops], headers=get_headers, safe=False)
 
 
@@ -70,6 +70,28 @@ def get_opportunities_by_student_id(request: HttpRequest) -> HttpResponse:
 
     print(ids)
     return JsonResponse([i.opportunity_id.dict() for i in ids], headers=get_headers, safe=False)
+
+
+@csrf_exempt
+def edit_opportunity(request: HttpRequest) -> HttpResponse:
+    """
+    edits existing opportunity
+    """
+    import json
+    body_unicode = request.body.decode('utf-8')
+    if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
+        try:
+            json_opportunity = json.loads(body_unicode)
+            opp = opportunity.objects.get(
+                id=json_opportunity['id'])
+            opp.description = json_opportunity['description']
+            opp.keywords = json_opportunity['keywords']
+            opp.save()
+            print(opp.dict())
+            return JsonResponse('success', headers=post_headers, safe=False)
+        except opportunity.DoesNotExist:
+            return JsonResponse('failure', headers=post_headers, safe=False)
+    return JsonResponse({}, headers=post_headers, safe=False)
 
 
 @ csrf_exempt

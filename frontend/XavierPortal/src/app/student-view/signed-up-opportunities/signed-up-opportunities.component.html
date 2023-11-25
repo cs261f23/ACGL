@@ -1,11 +1,11 @@
-<table>
+<table cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <tr>
-    <th *ngFor="let data of this.opportunities[0] | keyvalue">
+    <th *ngFor="let data of opportunities[0] | keyvalue">
       {{data.key}}
     </th>
   </tr>
 
-  <tr *ngFor="let data of this.opportunities" (click)="selectOpportunity(data)" routerLinkActive="active">
+  <tr *ngFor="let data of opportunities" (click)="selectOpportunity(data)" routerLinkActive="active" cdkDrag>
     <td *ngFor="let info of data | keyvalue">
       {{info.value}}
     </td>
