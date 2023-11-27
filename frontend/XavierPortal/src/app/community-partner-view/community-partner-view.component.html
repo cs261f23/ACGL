@@ -24,6 +24,6 @@
     </table>
   </div>
   <div *ngIf="section=='opportunity_edit'">
-    <app-community-partner-opportunity-view [id]="selectedOpportunity" />
+    <app-community-partner-opportunity-view [id]="selectedOpportunity" (update)="getOpportunitiesByPartnerID(1)" />
   </div>
 </app-partner-sidebar>

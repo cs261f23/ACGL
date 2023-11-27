@@ -52,10 +52,10 @@ export class CommunityPartnerViewComponent implements OnInit {
   getOpportunitiesByPartnerID(update: number = 0) {
     this.apiCallService.getOpportunitiesByPartnerID(this.authService.partnerID!).subscribe((response: any) => {
       this.myOpportunities = response;
+      if (update) {
+        this.section = 'my_opportunities'
+      }
     })
-    if (update) {
-      this.section = 'my_opportunities'
-    }
 
   }
 

@@ -2,7 +2,7 @@ import subprocess
 import asyncio
 
 
-async def serve():
+def serve():
     f = subprocess.Popen(args=['ng', 's'], cwd='frontend/XavierPortal')
     try:
         subprocess.run(args=['python3', 'manage.py',
@@ -12,4 +12,4 @@ async def serve():
 
 
 if __name__ == '__main__':
-    asyncio.run(serve())
+    serve()

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Output, Component, Input, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiCallService } from 'src/app/api-call.service';
 import { Opportunity } from 'src/app/models/opportunity';
@@ -13,6 +13,7 @@ export class CommunityPartnerOpportunityViewComponent implements OnInit {
   students: Array<{}> = [];
   info?: Opportunity;
   @Input() id!: number;
+  @Output() update: EventEmitter<boolean> = new EventEmitter()
   constructor(private apiCallService: ApiCallService) {
 
   }
@@ -30,7 +31,7 @@ export class CommunityPartnerOpportunityViewComponent implements OnInit {
 
   submitEdits(): void {
     this.apiCallService.editOpportunity(this.info!).subscribe((response: any) => {
-
+      this.update.emit()
     })
   }
 
