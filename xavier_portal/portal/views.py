@@ -1,8 +1,6 @@
 # pyright: reportGeneralTypeIssues=false
 import os
-import hashlib
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from .models import student, opportunity, opportunity_to_student, community_partner
 
