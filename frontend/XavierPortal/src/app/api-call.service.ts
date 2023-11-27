@@ -37,7 +37,7 @@ export class ApiCallService {
     return this.http.get(this.url + 'portal/get_opportunity_info?id=' + id);
   }
 
-  getOpportunitiesByPartnerID(partnerID: number): any {
+  getOpportunitiesByPartnerID(): any {
     return this.http.get(this.url + 'portal/get_opportunities_by_partner_id', { params: new HttpParams().appendAll({ "id": this.authService.hash! }) });
   }
 

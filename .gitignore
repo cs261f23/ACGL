@@ -6,3 +6,4 @@ xavier_portal/db.sqlite3
 xavier_portal/env
 serve
 frontend/XavierPortal/package-lock.json
+frontend/XavierPortal/out

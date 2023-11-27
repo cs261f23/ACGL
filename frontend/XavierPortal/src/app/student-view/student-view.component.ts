@@ -23,7 +23,8 @@ export class StudentViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.studentID == -1
+    this.authService.getHash();
+    !this.authService.hash
       ? this.router.navigate(['/'], { relativeTo: this.route })
       : undefined;
   }

@@ -44,13 +44,14 @@ export class CommunityPartnerViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    (this.authService.partnerID == -1)
+    this.authService.getHash();
+    !this.authService
       ? this.router.navigate(['/'], { relativeTo: this.route })
       : this.getOpportunitiesByPartnerID()
   }
 
   getOpportunitiesByPartnerID(update: number = 0) {
-    this.apiCallService.getOpportunitiesByPartnerID(this.authService.partnerID!).subscribe((response: any) => {
+    this.apiCallService.getOpportunitiesByPartnerID().subscribe((response: any) => {
       this.myOpportunities = response;
       if (update) {
         this.section = 'my_opportunities'

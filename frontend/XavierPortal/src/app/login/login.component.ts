@@ -35,6 +35,7 @@ export class LoginComponent {
         this.loggedIn = true;
         this.authService.partnerID = response["id"]
         this.authService.hash = response['hash']
+        this.authService.cacheHash()
         this.authService.studentID = -1
         this.router.navigate(['/community_partner_view'], { relativeTo: this.route })
         return
@@ -44,6 +45,7 @@ export class LoginComponent {
         this.loggedIn = true;
         this.authService.studentID = response["id"]
         this.authService.hash = response['hash']
+        this.authService.cacheHash()
         this.authService.partnerID = -1
         this.router.navigate(['/student_view'], { relativeTo: this.route })
         return
