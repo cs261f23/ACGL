@@ -29,17 +29,21 @@ def get_available_opportunities_for_student(request: HttpRequest) -> HttpRespons
     returns all the opportunities that are currently posted
     url = http://ip_address:port/portal/get_available_opportunities_for_student
     """
+    o2s = opportunity_to_student.objects.filter(
+        student_id=authorization_hashes[request.GET.get('id')].student_id)
     opportunities = opportunity.objects.all()
+    for i in o2s:
+        opportunities = opportunities.exclude(id=i.opportunity_id.id)
     y = []
     for i in list(opportunities):
         idict = i.dict()
         idict['id'] = i.id
-        try:
-            _ = opportunity_to_student.objects.get(
-                student_id=student.objects.get(student_id=authorization_hashes[str(request.GET.get('id'))].student_id), opportunity_id=i)
-
-        except opportunity_to_student.DoesNotExist:
-            y.append(idict)
+        # try:
+        #     _ = opportunity_to_student.objects.get(
+        #         student_id=student.objects.get(student_id=authorization_hashes[str(request.GET.get('id'))].student_id), opportunity_id=i)
+        #
+        # except opportunity_to_student.DoesNotExist:
+        y.append(idict)
     return JsonResponse(y, headers=get_headers, safe=False)
 
 
