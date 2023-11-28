@@ -3,6 +3,8 @@ import os
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from .models import student, opportunity, opportunity_to_student, community_partner
+import json
+import hashlib
 
 post_headers = {'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'}
@@ -75,7 +77,6 @@ def edit_opportunity(request: HttpRequest) -> HttpResponse:
     """
     edits existing opportunity
     """
-    import json
     body_unicode = request.body.decode('utf-8')
     if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
         try:
@@ -97,7 +98,6 @@ def create_opportunity(request: HttpRequest) -> HttpResponse:
     """
     creates an opportunity object and puts its attributes into the database
     """
-    import json
     body_unicode = request.body.decode('utf-8')
     new_opportunity = {}
     if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
@@ -118,7 +118,6 @@ def create_opportunity(request: HttpRequest) -> HttpResponse:
 
 @ csrf_exempt
 def student_signup(request: HttpRequest) -> HttpResponse:
-    import json
     body_unicode = request.body.decode('utf-8')
     # new_opportunity = {}
     if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
@@ -143,9 +142,6 @@ def attempt_partner_register(request: HttpRequest) -> HttpResponse:
     """
     Checks validity of wannabe partner's info and creates partner
     """
-    import json
-    import hashlib
-    import os
     body_unicode = request.body.decode('utf-8')
     if len(body_unicode) > 0:
         partner_json = json.loads(body_unicode)
@@ -178,9 +174,6 @@ def attempt_student_register(request: HttpRequest) -> HttpResponse:
     """
     Checks validity of wannabe partner's info and creates partner
     """
-    import json
-    import hashlib
-    import os
     body_unicode = request.body.decode('utf-8')
     if len(body_unicode) > 0:
         student_json = json.loads(body_unicode)
@@ -210,8 +203,6 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
     """
     Attempts to login by first checking for email/password in the partners table, then if there isn't a match there, it checks the student table
     """
-    import json
-    import hashlib
     body_unicode = request.body.decode('utf-8')
     if len(body_unicode) > 0:
         login = json.loads(body_unicode)
@@ -221,8 +212,6 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
             salt = partner_check.salt
             hashed_password = hashlib.pbkdf2_hmac(
                 'sha256', login['password'].encode('utf-8'), salt, 100000)
-            print(hashed_password)
-            print(partner_check.password)
             if str(hashed_password) == str(partner_check.password):
                 auth_hash = os.urandom(32)
                 auth_hash = str(auth_hash)[2:]
