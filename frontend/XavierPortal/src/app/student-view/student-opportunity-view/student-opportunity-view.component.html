@@ -4,6 +4,8 @@
   </div>
 </div>
 
-<div *ngIf="signup==true" style="display: flex; justify-content: center;">
+<div *ngIf="signup" style="display: flex; justify-content: center;">
   <app-student-signup-form [id]="id" (submittedEmitter)="submittedEmitter.emit();ngOnInit()"></app-student-signup-form>
 </div>
+
+<div *ngIf="!signup"></div>

@@ -1,31 +1,3 @@
-<!--
-
-***login.component.html
-
-
-<div *ngIf="!loggedIn" style="padding-left: 30%; padding-right: 30%">
-  email
-  <input type="text" class="form-control" id="email" required [(ngModel)]="user.email">
-  password
-  <div style="display: flex;flex-direction: row">
-    <input [type]="showPassword? 'text':'password'" class="form-control" required [(ngModel)]="user.password"
-      style="float:left">
-    <button (mousedown)="toggleShowPassword()" (mouseup)="toggleShowPassword()" (mouseout)="showPassword=false"
-      style="background-color: transparent; border-color:transparent;">
-      <mat-icon fontIcon="remove_red_eye"></mat-icon>
-    </button>
-  </div>
-  <button (click)="login()">
-    Login
-  </button>
-  <button routerLink="/student_register" routerLinkActive="active" areaCurrentWhenActive="page">
-    student register
-  </button>
-  <button routerLink="/partner_register" routerLinkActive="active" areaCurrentWhenActive="page">
-    partner register
-  </button>
-</div>
--->
 <div *ngIf="!loggedIn" class="login-form-container">
   <h2>Login</h2>
 

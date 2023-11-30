@@ -56,6 +56,12 @@ export class ApiCallService {
     return this.http.post(this.url + 'portal/create_opportunity', opportunity, headers = headers)
   }
 
+  deleteOpportunity(opportunityID: number) {
+    let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
+    return this.http.post(this.url + 'portal/delete_opportunity', { id: opportunityID, hash: this.authService.hash! }, headers = headers)
+  }
+
+
   studentRegister(email: string, name: string, password: string): Observable<any> {
     let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
     return this.http.post(this.url + 'portal/attempt_student_register', { email: email, name: name, password: password }, headers = headers)
@@ -65,9 +71,15 @@ export class ApiCallService {
     return this.http.post(this.url + 'portal/attempt_partner_register', { email: email, title: title, password: password }, headers = headers)
   }
 
-  studentSignup(student_id: number, id: number) {
+  studentUnSignup(id: number) {
     let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
-    return this.http.post(this.url + 'portal/attempt_student_signup', { student_id: student_id, id: id }, headers = headers)
+    return this.http.post(this.url + 'portal/attempt_student_signup', { hash: this.authService.hash!, id: id }, headers = headers)
+
+  }
+
+  studentSignup(id: number) {
+    let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
+    return this.http.post(this.url + 'portal/attempt_student_signup', { hash: this.authService.hash!, id: id }, headers = headers)
   }
 
   editOpportunity(opportunity: Opportunity): Observable<any> {

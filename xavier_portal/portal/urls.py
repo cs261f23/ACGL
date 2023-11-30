@@ -22,8 +22,12 @@ urlpatterns = [
          name='get_opportunity_info'),
     path('attempt_student_signup', views.student_signup,
          name='attempt_student_signup'),
+    path('attempt_student_unsignup', views.student_unsignup,
+         name='attempt_student_unsignup'),
     path('get_opportunities_by_student_id', views.get_opportunities_by_student_id,
          name='get_opportunities_by_student_id'),
     path('edit_opportunity', views.edit_opportunity,
-         name='views.edit_opportunity')
+         name='views.edit_opportunity'),
+    path('delete_opportunity', views.delete_opportunity,
+         name='views.delete_opportunity')
 ]

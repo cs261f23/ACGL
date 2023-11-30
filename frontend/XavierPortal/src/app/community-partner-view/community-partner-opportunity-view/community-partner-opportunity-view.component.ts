@@ -35,4 +35,10 @@ export class CommunityPartnerOpportunityViewComponent implements OnInit {
     })
   }
 
+  deleteOpportunity(): void {
+    this.apiCallService.deleteOpportunity(this.id).subscribe((response: any) => {
+      this.update.emit()
+    })
+  }
+
 }

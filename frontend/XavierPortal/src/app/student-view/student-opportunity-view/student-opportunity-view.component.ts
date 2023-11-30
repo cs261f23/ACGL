@@ -27,5 +27,9 @@ export class StudentOpportunityViewComponent implements OnInit {
     })
   }
 
+  removeSignUp(): void {
+    this.apiCallService.studentUnSignup(this.id).subscribe((response) => { })
+  }
+
 
 }

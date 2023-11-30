@@ -38,11 +38,6 @@ def get_available_opportunities_for_student(request: HttpRequest) -> HttpRespons
     for i in list(opportunities):
         idict = i.dict()
         idict['id'] = i.id
-        # try:
-        #     _ = opportunity_to_student.objects.get(
-        #         student_id=student.objects.get(student_id=authorization_hashes[str(request.GET.get('id'))].student_id), opportunity_id=i)
-        #
-        # except opportunity_to_student.DoesNotExist:
         y.append(idict)
     return JsonResponse(y, headers=get_headers, safe=False)
 
@@ -65,15 +60,42 @@ def get_opportunities_by_partner_id(request: HttpRequest) -> HttpResponse:
     """
     ops = list(opportunity.objects.filter(
         community_partner_id=authorization_hashes[request.GET.get('id')].partner_id))
-    return JsonResponse([i.dict() for i in ops], headers=get_headers, safe=False)
+
+    def add_num_students_signed_up(op):
+        op = op.dict()
+        students = len(opportunity_to_student.objects.filter(
+            opportunity_id=op['id']))
+        op['students'] = students
+        return op
+    ops = list(map(lambda x: add_num_students_signed_up(x), ops))
+    return JsonResponse(ops, headers=get_headers, safe=False)
 
 
 def get_opportunities_by_student_id(request: HttpRequest) -> HttpResponse:
     ids = list(opportunity_to_student.objects.filter(
         student_id=authorization_hashes[request.GET.get('id')].student_id))
-
     print(ids)
     return JsonResponse([i.opportunity_id.dict() for i in ids], headers=get_headers, safe=False)
+
+
+@csrf_exempt
+def delete_opportunity(request: HttpRequest) -> HttpResponse:
+    """
+    deletes given opportunity
+    """
+    body_unicode = request.body.decode('utf-8')
+    if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
+        try:
+            json_opportunity = json.loads(body_unicode)
+            opp = opportunity.objects.get(
+                id=json_opportunity['id'])
+            if opp.community_partner_id == authorization_hashes[json_opportunity['hash']]:
+                opp.delete()
+                return JsonResponse('success', headers=post_headers, safe=False)
+            return JsonResponse('failed', headers=post_headers, safe=False)
+        except opportunity.DoesNotExist:
+            return JsonResponse('failure', headers=post_headers, safe=False)
+    return JsonResponse({}, headers=post_headers, safe=False)
 
 
 @csrf_exempt
@@ -97,7 +119,7 @@ def edit_opportunity(request: HttpRequest) -> HttpResponse:
     return JsonResponse({}, headers=post_headers, safe=False)
 
 
-@ csrf_exempt
+@csrf_exempt
 def create_opportunity(request: HttpRequest) -> HttpResponse:
     """
     creates an opportunity object and puts its attributes into the database
@@ -120,20 +142,39 @@ def create_opportunity(request: HttpRequest) -> HttpResponse:
     return JsonResponse(new_opportunity, headers=post_headers, safe=False)
 
 
-@ csrf_exempt
+@csrf_exempt
 def student_signup(request: HttpRequest) -> HttpResponse:
     body_unicode = request.body.decode('utf-8')
     # new_opportunity = {}
     if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
         json_request = json.loads(body_unicode)
         try:
-            student_check = student.objects.get(
-                student_id=json_request['student_id'])
+            student_check = authorization_hashes[json_request['hash']]
             opportunity_check = opportunity.objects.get(id=json_request['id'])
             new_op_to_stu = opportunity_to_student(
                 opportunity_id=opportunity_check, student_id=student_check)
             new_op_to_stu.save()
             print(new_op_to_stu)
+            return JsonResponse('success', headers=post_headers, safe=False)
+        except student.DoesNotExist or opportunity.DoesNotExist:
+            return JsonResponse('failure', headers=post_headers, safe=False)
+
+    return JsonResponse({}, headers=post_headers, safe=False)
+
+
+@csrf_exempt
+def student_unsignup(request: HttpRequest) -> HttpResponse:
+    body_unicode = request.body.decode('utf-8')
+    # new_opportunity = {}
+    if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
+        json_request = json.loads(body_unicode)
+        try:
+            user = authorization_hashes[json_request['hash']].student_id
+            opportunity_check = opportunity.objects.get(
+                id=json_request['id']).id
+            op_to_stu = opportunity_to_student.objects.get(
+                opportunity_id=opportunity_check, student_id=user)
+            op_to_stu.delete()
             return JsonResponse('success', headers=post_headers, safe=False)
         except student.DoesNotExist or opportunity.DoesNotExist:
             return JsonResponse('failure', headers=post_headers, safe=False)
@@ -221,7 +262,6 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
                 auth_hash = str(auth_hash)[2:]
                 for i in '\\  \\|+!@#$%^&*()\'\"~`,/.;:{[]}x-=':
                     auth_hash = auth_hash.replace(i, '')
-                # .replace('\'', '').replace('^', '').replace( '(', '').replace(')', '').replace('<', '').replace('>', '').replace('$', '').replace(' ', '')
                 authorization_hashes[auth_hash] = partner_check
                 return JsonResponse({'outcome': 'partner', 'id': partner_check.partner_id, 'hash': auth_hash}, headers=post_headers, safe=False)
             return JsonResponse({'outcome': 'failed'}, headers=post_headers, safe=False)
@@ -232,12 +272,9 @@ def attempt_login(request: HttpRequest) -> HttpResponse:
                 salt = student_check.salt
                 hashed_password = hashlib.pbkdf2_hmac(
                     'sha256', login['password'].encode('utf-8'), salt, 100000)
-                print(hashed_password)
-                print(student_check.password)
                 if str(hashed_password) == str(student_check.password):
                     auth_hash = os.urandom(32)
                     auth_hash = str(auth_hash)[2:]
-
                     for i in '\\  \\|+!@#$%^&*()\'\"~`,/.;:{[]}x-=':
                         auth_hash = auth_hash.replace(i, '')
                     authorization_hashes[auth_hash] = student_check

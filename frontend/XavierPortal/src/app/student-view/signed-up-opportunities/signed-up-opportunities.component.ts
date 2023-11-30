@@ -15,8 +15,6 @@ export class SignedUpOpportunitiesComponent implements OnInit {
   @Output() select: EventEmitter<Opportunity> = new EventEmitter<Opportunity>();
 
   constructor(
-    private apiCallService: ApiCallService,
-    private authService: AuthService,
   ) {
 
   }

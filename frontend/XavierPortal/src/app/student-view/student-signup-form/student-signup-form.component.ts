@@ -26,7 +26,7 @@ export class StudentSignupFormComponent implements OnInit {
   // id: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id')!);
 
   onSubmit() {
-    this.apiCallService.studentSignup(this.authService.studentID, this.id).subscribe((response) => {
+    this.apiCallService.studentSignup(this.id).subscribe((response) => {
 
       this.submitted = true;
       this.submittedEmitter.emit()

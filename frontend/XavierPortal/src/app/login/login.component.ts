@@ -1,9 +1,7 @@
 import { Component, } from '@angular/core';
-import { MatDatepicker } from '@angular/material/datepicker';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from '../api-call.service';
 import { AuthService } from '../auth.service';
-import { CommunityPartnerViewComponent } from '../community-partner-view/community-partner-view.component';
 interface user {
   email: string;
   password: string;
@@ -26,29 +24,29 @@ export class LoginComponent {
   }
 
   login(): void {
+
     this.apiCallService.attemptLogin(this.user.email, this.user.password).subscribe((response: any) => {
-      if (response["outcome"] == "failed") {
-        return
-      }
-      if (response["outcome"] == "partner") {
-        this.role = 1;
-        this.loggedIn = true;
-        this.authService.partnerID = response["id"]
-        this.authService.hash = response['hash']
-        this.authService.cacheHash()
-        this.authService.studentID = -1
-        this.router.navigate(['/community_partner_view'], { relativeTo: this.route })
-        return
-      }
-      if (response["outcome"] == "student") {
-        this.role = 0;
-        this.loggedIn = true;
-        this.authService.studentID = response["id"]
-        this.authService.hash = response['hash']
-        this.authService.cacheHash()
-        this.authService.partnerID = -1
-        this.router.navigate(['/student_view'], { relativeTo: this.route })
-        return
+      switch (response["outcome"]) {
+        case "failed":
+          return
+        case "partner":
+          this.role = 1;
+          this.loggedIn = true;
+          this.authService.partnerID = response["id"]
+          this.authService.hash = response['hash']
+          this.authService.cacheHash()
+          this.authService.studentID = -1
+          this.router.navigate(['/community_partner_view'], { relativeTo: this.route })
+          return
+        case "student":
+          this.role = 0;
+          this.loggedIn = true;
+          this.authService.studentID = response["id"]
+          this.authService.hash = response['hash']
+          this.authService.cacheHash()
+          this.authService.partnerID = -1
+          this.router.navigate(['/student_view'], { relativeTo: this.route })
+          return
       }
     });
   }
