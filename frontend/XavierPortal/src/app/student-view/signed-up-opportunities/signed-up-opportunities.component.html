@@ -1,6 +1,9 @@
 <h1>
   My Opportunities
 </h1>
+<h2 style="font-size: smaller; text-align: center; margin-top: 5px;">
+  Click on the table to view opportunity information
+</h2>
 <table cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <tr>
     <th *ngFor="let data of opportunities[0] | keyvalue">
