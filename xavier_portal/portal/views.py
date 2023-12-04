@@ -66,6 +66,7 @@ def get_opportunities_by_partner_id(request: HttpRequest) -> HttpResponse:
         students = len(opportunity_to_student.objects.filter(
             opportunity_id=op['id']))
         op['students'] = students
+        op.pop('community_partner_title')
         return op
     ops = list(map(lambda x: add_num_students_signed_up(x), ops))
     return JsonResponse(ops, headers=get_headers, safe=False)

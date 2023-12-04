@@ -4,9 +4,7 @@ import { ApiCallService } from 'src/app/api-call.service';
 import { AuthService } from 'src/app/auth.service';
 
 interface signup {
-  name: string,
   phoneNumber: string,
-  email: string
 }
 @Component({
   selector: 'app-student-signup-form',
@@ -19,7 +17,7 @@ export class StudentSignupFormComponent implements OnInit {
 
   validNamePattern = '^[A-Za-z]*$';
 
-  model: signup = { name: '', phoneNumber: '', email: '' };
+  model: signup = { phoneNumber: '' };
   submitted = false;
   @Input() id!: number;
   @Output() submittedEmitter: EventEmitter<boolean> = new EventEmitter();

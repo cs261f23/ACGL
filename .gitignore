@@ -7,3 +7,4 @@ xavier_portal/env
 serve
 frontend/XavierPortal/package-lock.json
 frontend/XavierPortal/out
+frontend/.DS_Store
