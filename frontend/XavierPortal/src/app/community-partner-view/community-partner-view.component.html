@@ -13,20 +13,22 @@
     <!-- Add the new header here -->
     <div style="margin-top: 10px; text-align: center;">
       Click on the table to view or edit an opportunity
-    </div>
 
-    <table style="text-align: center;">
-      <tr>
-        <th *ngFor="let data of this.myOpportunities[0] | keyvalue">
-          {{data.key.toUpperCase()}}
-        </th>
-      </tr>
-      <tr *ngFor="let data of this.myOpportunities" (click)="selectOpportunity(data)">
-        <td *ngFor="let info of data | keyvalue">
-          {{info.value}}
-        </td>
-      </tr>
-    </table>
+      <div style="padding-left: 23%">
+        <table style="padding-left:50%;">
+          <tr>
+            <th *ngFor="let data of this.myOpportunities[0] | keyvalue">
+              {{data.key.toUpperCase()}}
+            </th>
+          </tr>
+          <tr *ngFor="let data of this.myOpportunities" (click)="selectOpportunity(data)">
+            <td *ngFor="let info of data | keyvalue">
+              {{info.value}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
   <div *ngIf="section=='opportunity_edit'">
     <app-community-partner-opportunity-view [id]="selectedOpportunity" (update)="getOpportunitiesByPartnerID(1)" />
