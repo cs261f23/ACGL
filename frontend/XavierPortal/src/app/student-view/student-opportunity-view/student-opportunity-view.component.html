@@ -1,11 +1,11 @@
-<div>
+​<hr />
+<div class="generic-form-container">
   <div *ngFor="let data of this.info | keyvalue" style="display: flex; justify-content: center;">
-    {{data.key}} : {{data.value}}
+    {{data.key.replaceAll('_', " ").toUpperCase()}} : {{data.value}}
   </div>
 </div>
-
+<hr />​​​​​​​​​​​​​​​​​​
 <div *ngIf="signup" style="display: flex; justify-content: center;">
   <app-student-signup-form [id]="id" (submittedEmitter)="submittedEmitter.emit();ngOnInit()"></app-student-signup-form>
 </div>
-
 <div *ngIf="!signup"></div>

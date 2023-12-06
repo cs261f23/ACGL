@@ -3,13 +3,13 @@
 <!--   <button (click)="section='my_opportunities'"> my opportunities</button> -->
 <!-- </div> -->
 
-<div class="search-form">
+<div class="generic-form-container">
   <div *ngIf="section=='search_form'">
     <input type="text" class="form-control" id="searchString" required [(ngModel)]="searchString" (input)="filter()">
     <table>
       <tr>
         <th *ngFor="let data of this.filteredOpportunities[0] | keyvalue">
-          {{data.key}}
+          {{data.key.toUpperCase()}}
         </th>
       </tr>
 
