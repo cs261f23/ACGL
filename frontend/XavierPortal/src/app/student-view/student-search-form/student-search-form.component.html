@@ -3,8 +3,7 @@
 <!--   <button (click)="section='my_opportunities'"> my opportunities</button> -->
 <!-- </div> -->
 
-<div class="search-form" style="text-align: center;">
-  
+<div class="generic-form-container">
   <div *ngIf="section=='search_form'">
     <h1>Search Opportunities</h1>
   <p style="font-size: smaller;">Search by keywords for opportunities not yet signed up for</p>
@@ -12,7 +11,7 @@
     <table>
       <tr>
         <th *ngFor="let data of this.filteredOpportunities[0] | keyvalue">
-          {{data.key}}
+          {{data.key.toUpperCase()}}
         </th>
       </tr>
 

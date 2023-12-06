@@ -12,7 +12,6 @@ h2 {
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
 }
 
 td,
@@ -60,6 +59,13 @@ tr:nth-child(even) {
   padding: 10px;
   margin: 0 auto; /* Center the form horizontally */
   max-width: 400px; /* Set a maximum width for better readability */
+}
+
+.generic-form-container {
+  background-color: #D7D3CC; /* Match the background color */
+  padding: 10px;
+  margin: 0 auto; /* Center the form horizontally */
+  max-width: 500px; /* Set a maximum width for better readability */
 }
 
 .form-control {
@@ -152,3 +158,35 @@ tr:nth-child(even) {
   margin-top: 10px;
 }
 
+.delete-button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000;
+  background-color: #ff0019;
+  margin-top: 10px;
+}
+
+.submit-cp-button {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000;
+  background-color: #2ecc71;
+  margin-top: 10px;
+}
+
+.delete-cp-button {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000;
+  background-color: #ff0019;
+  margin-top: 10px;
+}
