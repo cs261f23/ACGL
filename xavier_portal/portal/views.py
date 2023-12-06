@@ -259,6 +259,7 @@ def logout(request: HttpRequest) -> HttpResponse:
             return JsonResponse("success", headers=post_headers, safe=False)
         except:
             return JsonResponse("failed", headers=post_headers, safe=False)
+    return JsonResponse({}, headers=post_headers, safe=False)
 
 
 @csrf_exempt

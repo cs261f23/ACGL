@@ -1,5 +1,4 @@
 import { Output, Component, Input, OnInit, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ApiCallService } from 'src/app/api-call.service';
 import { Opportunity } from 'src/app/models/opportunity';
 

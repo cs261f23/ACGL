@@ -64,9 +64,9 @@ class opportunity(models.Model):
 
 class opportunity_to_student(models.Model):
     opportunity_id = models.ForeignKey(
-        opportunity, on_delete=models.DO_NOTHING, related_name='+', default=0)
+        opportunity, on_delete=models.CASCADE, related_name='+', default=0)
     student_id = models.ForeignKey(
-        student, on_delete=models.DO_NOTHING, related_name='+',  default=0)
+        student, on_delete=models.CASCADE, related_name='+',  default=0)
 
     def dict(self):
         return {'opportunity_id': self.opportunity_id.id, 'student_id': self.student_id.student_id}

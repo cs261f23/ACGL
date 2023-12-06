@@ -1,7 +1,7 @@
-<!-- 
-  
+<!--
+
   ***student-user-register.component.html
-  
+
   <div style="padding-left: 30%; padding-right: 30%"> -->
 <!--   name -->
 <!--   <input type="text" class="form-control" id="name" required [(ngModel)]="name"> -->
@@ -87,13 +87,13 @@
   <div class="form-group">
     <label for="password">Password:</label>
     <div>
-      <input class="form-control" type="password" id="student.password" name="student.password" [(ngModel)]="student.password" required
-        #password="ngModel" pattern="\d{3}-\d{3}-\d{4}">
+      <input class="form-control" type="password" id="student.password" name="student.password"
+        [(ngModel)]="student.password" required #password="ngModel" pattern="\d{3}-\d{3}-\d{4}">
       <div [hidden]="password.valid || (password.pristine && !submitted)" class="alert alert-danger">
         Password is required and must meet the specified pattern.
       </div>
     </div>
   </div>
 
-  <button type="submit" class="submit-button">Submit</button>
+  <button type="submit" class="login-button">Submit</button>
 </form>
