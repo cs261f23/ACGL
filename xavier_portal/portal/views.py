@@ -130,7 +130,7 @@ def create_opportunity(request: HttpRequest) -> HttpResponse:
     if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
         json_opportunity = json.loads(body_unicode)
         id = community_partner.objects.filter(
-            partner_id=json_opportunity['id'])[0]
+            partner_id=authorization_hashes[json_opportunity['hash']].partner_id)[0]
         description = json_opportunity['description']
         keywords = json_opportunity['keywords']
         date = json_opportunity['date']

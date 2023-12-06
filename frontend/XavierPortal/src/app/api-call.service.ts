@@ -51,7 +51,9 @@ export class ApiCallService {
 
   createOpportunity(opportunity: Opportunity): Observable<any> {
     let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
-    return this.http.post(this.url + 'portal/create_opportunity', opportunity, headers = headers)
+    let opp: any = opportunity
+    opp['hash'] = this.authService.hash!
+    return this.http.post(this.url + 'portal/create_opportunity', opp, headers = headers)
   }
 
   deleteOpportunity(opportunityID: number): Observable<any> {

@@ -63,7 +63,7 @@ tr:nth-child(even) {
 
 .generic-form-container {
   background-color: #ffffff; /* Match the background color */
-  padding: 10px;
+  /* padding: 10px; */
   margin: 0 auto; /* Center the form horizontally */
   max-width: 500px; /* Set a maximum width for better readability */
 }

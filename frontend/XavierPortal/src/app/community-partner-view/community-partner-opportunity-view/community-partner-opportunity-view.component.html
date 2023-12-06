@@ -28,21 +28,21 @@
   </div>
 
   <hr />
+</div>
 
-  <h2>Students signed up</h2>
-  <div style="padding-right: 10%;padding-left: 10%; padding-bottom: 10%;align-items: center">
-    <table>
-      <tr>
-        <th *ngFor="let data of this.students[0] | keyvalue">
-          {{ data.key.replace("_"," ") }}
-        </th>
-      </tr>
+<h2>Students signed up</h2>
+<div style="padding-right: 10%;padding-left: 10%; padding-bottom: 10%;align-items: center">
+  <table>
+    <tr>
+      <th *ngFor="let data of this.students[0] | keyvalue">
+        {{ data.key.replace("_"," ") }}
+      </th>
+    </tr>
 
-      <tr *ngFor="let data of this.students" routerLinkActive="active">
-        <td *ngFor="let info of data | keyvalue">
-          {{ info.value }}
-        </td>
-      </tr>
-    </table>
-  </div>
+    <tr *ngFor="let data of this.students" routerLinkActive="active">
+      <td *ngFor="let info of data | keyvalue">
+        {{ info.value }}
+      </td>
+    </tr>
+  </table>
 </div>
