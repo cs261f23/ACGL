@@ -34,7 +34,7 @@
     <table>
       <tr>
         <th *ngFor="let data of this.students[0] | keyvalue">
-          {{ data.key }}
+          {{ data.key.replace("_"," ") }}
         </th>
       </tr>
 
