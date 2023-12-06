@@ -29,5 +29,6 @@ urlpatterns = [
     path('edit_opportunity', views.edit_opportunity,
          name='views.edit_opportunity'),
     path('delete_opportunity', views.delete_opportunity,
-         name='views.delete_opportunity')
+         name='views.delete_opportunity'),
+    path('logout', views.logout, name='views.logout')
 ]

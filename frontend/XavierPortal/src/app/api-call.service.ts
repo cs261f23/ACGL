@@ -39,6 +39,11 @@ export class ApiCallService {
     return this.http.get(this.url + 'portal/get_opportunities_by_student_id', { params: new HttpParams().appendAll({ "id": this.authService.hash! }) })
   }
 
+  logout(): Observable<any> {
+    let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
+    return this.http.post(this.url + 'portal/logout', { hash: this.authService.hash! }, headers = headers)
+  }
+
   attemptLogin(email: string, password: string): Observable<any> {
     let headers: any = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Origin' })
     return this.http.post(this.url + 'portal/attempt_login', { email: email, password: password }, headers = headers)

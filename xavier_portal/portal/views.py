@@ -245,6 +245,23 @@ def attempt_student_register(request: HttpRequest) -> HttpResponse:
 
 
 @csrf_exempt
+def logout(request: HttpRequest) -> HttpResponse:
+    """
+    removes given hash/user pair from authorization_hashes
+    """
+    body_unicode = request.body.decode('utf-8')
+    if len(body_unicode) > 0:
+        json_request = json.loads(body_unicode)
+        hash = json_request['hash']
+
+        try:
+            authorization_hashes.pop(hash)
+            return JsonResponse("success", headers=post_headers, safe=False)
+        except:
+            return JsonResponse("failed", headers=post_headers, safe=False)
+
+
+@csrf_exempt
 def attempt_login(request: HttpRequest) -> HttpResponse:
     """
     Attempts to login by first checking for email/password in the partners table, then if there isn't a match there, it checks the student table

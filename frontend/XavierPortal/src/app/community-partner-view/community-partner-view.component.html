@@ -18,7 +18,7 @@
     <table>
       <tr>
         <th *ngFor="let data of this.myOpportunities[0] | keyvalue">
-          {{data.key}}
+          {{data.key.toUpperCase()}}
         </th>
       </tr>
       <tr *ngFor="let data of this.myOpportunities" (click)="selectOpportunity(data)">

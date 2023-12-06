@@ -30,18 +30,19 @@
   <hr />
 
   <h2>Students signed up</h2>
+  <div style="padding-right: 10%;padding-left: 10%; align-items: center">
+    <table>
+      <tr>
+        <th *ngFor="let data of this.students[0] | keyvalue">
+          {{ data.key }}
+        </th>
+      </tr>
 
-  <table>
-    <tr>
-      <th *ngFor="let data of this.students[0] | keyvalue">
-        {{ data.key }}
-      </th>
-    </tr>
-
-    <tr *ngFor="let data of this.students" routerLinkActive="active">
-      <td *ngFor="let info of data | keyvalue">
-        {{ info.value }}
-      </td>
-    </tr>
-  </table>
+      <tr *ngFor="let data of this.students" routerLinkActive="active">
+        <td *ngFor="let info of data | keyvalue">
+          {{ info.value }}
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
