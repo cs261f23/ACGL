@@ -67,7 +67,7 @@ tr:nth-child(even) {
   margin: 0 auto;
   /* Center the form horizontally */
   align-items: center;
-  max-width: 500px; /* Set a maximum width for better readability*/
+  max-width: 800px; /* Set a maximum width for better readability*/
 }
 
 .form-control {

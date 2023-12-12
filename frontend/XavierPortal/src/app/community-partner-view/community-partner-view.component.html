@@ -11,14 +11,14 @@
       My Opportunities
     </h2>
     <!-- Add the new header here -->
-    <div style="margin-top: 10px; text-align: center;">
+    <div style="margin-top: 10px; text-align: center;align-items: center">
       Click on the table to view or edit an opportunity
 
-      <div style="padding-left: 23%">
-        <table style="padding-left:50%;">
+      <div style="padding-left: 16%">
+        <table>
           <tr>
             <th *ngFor="let data of this.myOpportunities[0] | keyvalue">
-              {{data.key.toUpperCase()}}
+              {{data.key.toUpperCase().replace("_"," ")}}
             </th>
           </tr>
           <tr *ngFor="let data of this.myOpportunities" (click)="selectOpportunity(data)">

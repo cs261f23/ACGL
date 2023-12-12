@@ -1,16 +1,14 @@
 <h2 style="text-align: center;">My Opportunities</h2>
-<div style="">
-  <table cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <tr>
-      <th *ngFor="let data of opportunities[0] | keyvalue">
-        {{data.key.replaceAll('_', ' ').toUpperCase()}}
-      </th>
-    </tr>
+<table cdkDropList (cdkDropListDropped)="drop($event)">
+  <tr>
+    <th *ngFor="let data of opportunities[0] | keyvalue">
+      {{data.key.replaceAll('_', ' ').toUpperCase()}}
+    </th>
+  </tr>
 
-    <tr *ngFor="let data of opportunities" (click)="selectOpportunity(data)" routerLinkActive="active" cdkDrag>
-      <td *ngFor="let info of data | keyvalue">
-        {{info.value}}
-      </td>
-    </tr>
-  </table>
-</div>
+  <tr *ngFor="let data of opportunities" (click)="selectOpportunity(data)" routerLinkActive="active" cdkDrag>
+    <td *ngFor="let info of data | keyvalue">
+      {{info.value}}
+    </td>
+  </tr>
+</table>
