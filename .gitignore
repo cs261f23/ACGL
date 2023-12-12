@@ -7,5 +7,6 @@ xavier_portal/env
 serve
 frontend/XavierPortal/package-lock.json
 frontend/XavierPortal/out
+.vscode
 frontend/.DS_Store
 xavier_portal/.vscode
