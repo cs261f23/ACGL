@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: #D7D3CC;
+  background-color: #ffffff;
   height: 10lh;
 }
 
@@ -9,22 +9,22 @@ h2 {
 }
 
 
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+}
 
-  td,
-  th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  cursor: pointer;
+}
 
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 
 
 
@@ -55,10 +55,19 @@ h2 {
 /* styles.css or styles.scss */
 
 .login-form-container {
-  background-color: #D7D3CC; /* Match the background color */
+  background-color: #ffffff; /* Match the background color */
   padding: 10px;
   margin: 0 auto; /* Center the form horizontally */
   max-width: 400px; /* Set a maximum width for better readability */
+}
+
+.generic-form-container {
+  background-color: #ffffff; /* Match the background color */
+  /* padding: 10px; */
+  margin: 0 auto;
+  /* Center the form horizontally */
+  align-items: center;
+  max-width: 500px; /* Set a maximum width for better readability*/
 }
 
 .form-control {
@@ -86,8 +95,8 @@ h2 {
   border: 1px solid #000; /* Green color for the border */
   border-radius: 5px;
   cursor: pointer;
-  color: #000;
-  background-color: #2ecc71; /* Green color for the button */
+  color: #ffffff;
+  background-color: #13355a; /* Green color for the button */
   margin-right: 0;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -104,14 +113,14 @@ h2 {
   border: 1px solid #000; /* Green color for the border */
   border-radius: 5px;
   cursor: pointer;
-  color: #000;
-  background-color: #D7D3CC; /* Green color for the button */
+  color: #ffffff;
+  background-color: #13355a; /* Green color for the button */
 }
 
 /* styles.css or styles.scss */
 
 .register-form {
-  background-color: #D7D3CC;
+  background-color: #ffffff;
   padding: 10px;
   margin: 0 auto;
   max-width: 400px;
@@ -143,11 +152,43 @@ h2 {
 .submit-button {
   width: 100%;
   padding: 10px;
-  border: 1px solid #000;
+  border: 1px solid #ffffff;
   border-radius: 5px;
   cursor: pointer;
-  color: #000;
-  background-color: #2ecc71;
+  color: #ffffff;
+  background-color: #13355a;
   margin-top: 10px;
 }
 
+.delete-button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #13355a;
+  margin-top: 10px;
+}
+
+.submit-cp-button {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #13355a;
+  margin-top: 10px;
+}
+
+.delete-cp-button {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #13355a;
+  margin-top: 10px;
+}

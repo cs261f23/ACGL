@@ -1,7 +1,7 @@
 <div style="text-align: center;">
   <h2>Edit Opportunity</h2>
 
-  <div style="max-width: 600px; margin: 0 auto;">
+  <div style="max-width: 600px; margin: 0 auto;" *ngIf="info">
     <h3>Description:</h3>
     <div style="margin-bottom: 20px;">
       <textarea type="text" style="height: 18ch; width:100%;" class="form-control" id="email" required
@@ -23,18 +23,19 @@
       </mat-form-field>
     </div>
 
-    <button (click)="submitEdits()">Submit</button>
-    <button (click)="deleteOpportunity()">Delete</button>
+    <button class="submit-cp-button" (click)="submitEdits()">Submit</button>
+    <button class="delete-cp-button" (click)="deleteOpportunity()">Delete</button>
   </div>
 
   <hr />
+</div>
 
-  <h2>Students signed up</h2>
-
+<h2>Students signed up</h2>
+<div style="padding-right: 10%;padding-left: 10%; padding-bottom: 10%;align-items: center">
   <table>
     <tr>
       <th *ngFor="let data of this.students[0] | keyvalue">
-        {{ data.key }}
+        {{ data.key.replace("_"," ") }}
       </th>
     </tr>
 

@@ -1,5 +1,5 @@
+<h2>Opportunity Signup</h2>
 <form (ngSubmit)="onSubmit()" [ngFormOptions]="{updateOn: 'submit'}">
-  <h2>Opportunity Signup</h2>
 
   <!-- <div class="form-group"> -->
   <!--   <label for="name">Name:</label> -->
@@ -28,11 +28,11 @@
     <div>
       <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="model.phoneNumber" required
         #phoneNumber="ngModel" pattern="\d{3}-\d{3}-\d{4}">
+        <button class="submit-button" style="width:37%; margin-left: 5%; padding: 6px;"(click)="onSubmit()">Signup</button>
     </div>
     <div [hidden]="phoneNumber.valid || (phoneNumber.pristine)" class="alert alert-danger">
       Phone Number is required and must be in the format 333-333-3333, containing only digits.
     </div>
   </div>
-
   <button type="submit">Submit</button>
 </form>

@@ -46,7 +46,7 @@ class community_partner(models.Model):
 
 
 class opportunity(models.Model):
-    description = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=2000, null=True)
     keywords = models.CharField(max_length=200,  null=True)
     community_partner_id = models.ForeignKey(
         community_partner, on_delete=models.CASCADE, related_name='+', to_field='partner_id', default=0)

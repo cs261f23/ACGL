@@ -66,6 +66,7 @@ def get_opportunities_by_partner_id(request: HttpRequest) -> HttpResponse:
         students = len(opportunity_to_student.objects.filter(
             opportunity_id=op['id']))
         op['students'] = students
+        op.pop('community_partner_title')
         return op
     ops = list(map(lambda x: add_num_students_signed_up(x), ops))
     return JsonResponse(ops, headers=get_headers, safe=False)
@@ -129,7 +130,7 @@ def create_opportunity(request: HttpRequest) -> HttpResponse:
     if len(body_unicode) > 0:  # this line avoids an error from the options request that precedes the post request
         json_opportunity = json.loads(body_unicode)
         id = community_partner.objects.filter(
-            partner_id=json_opportunity['id'])[0]
+            partner_id=authorization_hashes[json_opportunity['hash']].partner_id)[0]
         description = json_opportunity['description']
         keywords = json_opportunity['keywords']
         date = json_opportunity['date']
@@ -240,6 +241,24 @@ def attempt_student_register(request: HttpRequest) -> HttpResponse:
                 stu.save(force_insert=True)
                 return JsonResponse("success", headers=post_headers, safe=False)
         return JsonResponse("failed", headers=post_headers, safe=False)
+    return JsonResponse({}, headers=post_headers, safe=False)
+
+
+@csrf_exempt
+def logout(request: HttpRequest) -> HttpResponse:
+    """
+    removes given hash/user pair from authorization_hashes
+    """
+    body_unicode = request.body.decode('utf-8')
+    if len(body_unicode) > 0:
+        json_request = json.loads(body_unicode)
+        hash = json_request['hash']
+
+        try:
+            authorization_hashes.pop(hash)
+            return JsonResponse("success", headers=post_headers, safe=False)
+        except:
+            return JsonResponse("failed", headers=post_headers, safe=False)
     return JsonResponse({}, headers=post_headers, safe=False)
 
 
