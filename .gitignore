@@ -10,3 +10,6 @@ frontend/XavierPortal/out
 .vscode
 frontend/.DS_Store
 xavier_portal/.vscode
+
+backendGo/app/xavier_portal
+backendGo/app/xavier_portal.sqlite3

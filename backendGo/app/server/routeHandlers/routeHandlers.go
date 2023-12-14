@@ -2,16 +2,27 @@ package routeHandlers
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"xavier_portal/models"
+	"xavier_portal/models/student"
+
+	"github.com/gin-gonic/gin"
 )
 
-func GetStudents(w http.ResponseWriter, r *http.Request) {
-	x, _ := models.StudentStore.Get(context.TODO())
+func GetStudent(c *gin.Context) {
+	x := student.StudentStore.Get(context.TODO(), map[string]string{
+		"name": "example",
+	})
+	c.JSON(http.StatusOK,
+		&x,
+	)
+}
 
-	personString := fmt.Sprintf("%+v", *x)
-	fmt.Println(personString)
+// Create
+func CreateStudent(c *gin.Context) {
 
-	fmt.Fprintf(w, "%s", personString)
+	ctx := context.TODO()
+	student.StudentStore.Create(ctx)
+	c.String(http.StatusOK,
+		"yeahbitch",
+	)
 }
