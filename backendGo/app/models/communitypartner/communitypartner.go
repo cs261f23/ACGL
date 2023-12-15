@@ -1,5 +1,9 @@
 package communitypartner
 
+import (
+	"gorm.io/gorm"
+)
+
 /*
 CREATE TABLE `communitypartner` (
   `partner_email` varchar(254) NOT NULL,
@@ -14,3 +18,10 @@ CREATE TABLE `communitypartner` (
   UNIQUE KEY `unique_partner_id` (`partner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 */
+
+type CommunityPartner struct {
+	gorm.Model
+	PartnerID    int64
+	PartnerTitle string
+	PartnerEmail string
+}
