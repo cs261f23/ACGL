@@ -1,5 +1,16 @@
 package volunteeropportunity
 
+import "gorm.io/gorm"
+
+type VolunteerOpportunity struct {
+	gorm.Model
+	ID                 int
+	Description        string
+	Keywords           []string
+	CommunityPartnerID int
+	Date               string
+}
+
 /**
 CREATE TABLE `volunteeropportunity` (
   `id` int NOT NULL AUTO_INCREMENT,

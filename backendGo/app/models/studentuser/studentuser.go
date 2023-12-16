@@ -32,7 +32,7 @@ func (sus *studentUserStore) Open(ctx context.Context) {
 
 	// db, err := sql.Open("mysql",
 	// "root:root@tcp(localhost:3306)/xavier_portal")
-	db, err := gorm.Open(mysql.Open("root:geoffrey@tcp(localhost:3306)/xavier_portal"), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:3306)/xavierportal"), &gorm.Config{})
 
 	// ss.db.AutoMigrate(&Student{})
 	if err != nil {
@@ -60,6 +60,10 @@ func (ss *studentUserStore) Get(ctx context.Context, optionalFilters map[string]
 
 func (ss *studentUserStore) Create(ctx context.Context, student *student.Student) {
 	ss.db.Create(student)
+}
+
+func (ss *studentUserStore) Register(ctx context.Context, student *student.Student, password string) {
+
 }
 
 /*
