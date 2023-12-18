@@ -21,7 +21,7 @@ CREATE TABLE `communitypartner` (
 
 type CommunityPartner struct {
 	gorm.Model
-	PartnerID    int64
+	ID           int64
 	PartnerTitle string
 	PartnerEmail string
 }

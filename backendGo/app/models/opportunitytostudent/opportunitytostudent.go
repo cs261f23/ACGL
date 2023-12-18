@@ -1,5 +1,13 @@
 package opportunitytostudent
 
+import "gorm.io/gorm"
+
+type VolunteerOpportunityToStudent struct {
+	gorm.Model
+	OpportunityID int64
+	StudentID     int64
+}
+
 /*
 
 

@@ -6,9 +6,9 @@ type VolunteerOpportunity struct {
 	gorm.Model
 	ID                 int
 	Description        string
-	Keywords           []string
+	Keywords           string
 	CommunityPartnerID int
-	Date               string
+	Date               []byte
 }
 
 /**
