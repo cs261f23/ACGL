@@ -63,6 +63,7 @@ func (cpus *communityPartnerUserStore) Open(ctx context.Context) {
 	}
 	cpus.db = *db
 }
+
 func (ss *communityPartnerUserStore) Register(ctx context.Context, stu *communitypartner.CommunityPartner, password string) {
 
 	user := CommunityPartnerUser{}

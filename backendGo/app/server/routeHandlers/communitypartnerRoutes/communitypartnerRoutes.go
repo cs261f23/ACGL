@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"xavier_portal/models/communitypartner"
 	"xavier_portal/models/communitypartneruser"
+	CommunityPartnerModels "xavier_portal/server/routeHandlers/requestModels/communitypartner"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,24 +19,37 @@ func AttemptCommunityPartnerRegister(c *gin.Context) {
 
 	// ctx := context.TODO()
 
-	type body struct {
-		PartnerID    int64
-		PartnerEmail string
-		PartnerTitle string
-		Password     string
-	}
-	bod := new(body)
+	body := new(CommunityPartnerModels.AttemptCommunityPartnerRegisterRequest)
 
-	c.Bind(bod)
+	c.Bind(body)
 	comp := communitypartner.CommunityPartner{}
-	comp.PartnerEmail = bod.PartnerEmail
-	comp.PartnerTitle = bod.PartnerTitle
-	comp.ID = bod.PartnerID
-	fmt.Println(comp, bod)
-	communitypartneruser.CommunityPartnerUserStore.Register(context.TODO(), &comp, bod.Password)
+	comp.PartnerEmail = body.PartnerEmail
+	comp.PartnerTitle = body.PartnerTitle
+	comp.ID = body.PartnerID
+	fmt.Println(comp, body)
+	communitypartneruser.CommunityPartnerUserStore.Register(context.TODO(), &comp, body.Password)
 	c.JSON(http.StatusOK,
 		comp,
 	)
+}
+
+func GetOpportunitiesByPartnerID(c *gin.Context) {
+
+}
+
+func GetOpportunityInfo(c *gin.Context) {
+
+}
+
+func CreateOpportunity(c *gin.Context) {
+
+}
+func EditOpportunity(c *gin.Context) {
+
+}
+
+func DeleteOpportunity(c *gin.Context) {
+
 }
 
 // path('get_communityPartners_by_opportunity', views.get_communityPartners_by_opportunity,

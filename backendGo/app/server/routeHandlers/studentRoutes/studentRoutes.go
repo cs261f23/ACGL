@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"xavier_portal/models/student"
 	"xavier_portal/models/studentuser"
+	StudentModels "xavier_portal/server/routeHandlers/requestModels/student"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,13 +29,7 @@ func AttemptStudentRegister(c *gin.Context) {
 
 	// ctx := context.TODO()
 
-	type body struct {
-		StudentID    int64
-		StudentEmail string
-		Name         string
-		Password     string
-	}
-	bod := new(body)
+	bod := new(StudentModels.AttemptStudentRegisterRequest)
 
 	c.Bind(bod)
 	stu := student.Student{}
@@ -46,6 +41,20 @@ func AttemptStudentRegister(c *gin.Context) {
 	c.String(http.StatusOK,
 		"yeahbitch",
 	)
+}
+
+func AttemptStudentSignUp(c *gin.Context) {
+
+}
+
+func AttemptStudentUnSignUp(c *gin.Context) {
+
+}
+func GetAvailableOpportunities(c *gin.Context) {
+
+}
+func GetOpportunitiesByStudent(c *gin.Context) {
+
 }
 
 // func getOpportunitiesByPartnerID(c *gin.Context) {
