@@ -17,7 +17,6 @@ func Server() {
 	r.GET("student/get_student/:id", studentRoutes.GetStudent)
 	r.POST("student/attempt_student_register", studentRoutes.AttemptStudentRegister)
 	r.POST("partner/attempt_partner_register", communitypartnerRoutes.AttemptCommunityPartnerRegister)
-
 	err := r.Run("localhost:8000") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
 	if err != nil {

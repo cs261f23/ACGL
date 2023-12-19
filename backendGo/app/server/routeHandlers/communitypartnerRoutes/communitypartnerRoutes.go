@@ -21,20 +21,23 @@ func AttemptCommunityPartnerRegister(c *gin.Context) {
 
 	body := new(CommunityPartnerModels.AttemptCommunityPartnerRegisterRequest)
 
-	c.Bind(body)
 	comp := communitypartner.CommunityPartner{}
-	comp.PartnerEmail = body.PartnerEmail
-	comp.PartnerTitle = body.PartnerTitle
-	comp.ID = body.PartnerID
-	fmt.Println(comp, body)
-	communitypartneruser.CommunityPartnerUserStore.Register(context.TODO(), &comp, body.Password)
-	c.JSON(http.StatusOK,
-		comp,
-	)
+	func() {
+		c.Bind(body)
+		comp.PartnerEmail = body.PartnerEmail
+		comp.PartnerTitle = body.PartnerTitle
+		comp.ID = body.PartnerID
+		fmt.Println(comp, body)
+		communitypartneruser.CommunityPartnerUserStore.Register(context.TODO(), &comp, body.Password)
+		c.JSON(http.StatusOK,
+			comp,
+		)
+		return
+	}()
+
 }
 
 func GetOpportunitiesByPartnerID(c *gin.Context) {
-
 }
 
 func GetOpportunityInfo(c *gin.Context) {
