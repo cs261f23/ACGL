@@ -1,7 +1,7 @@
 package CommunityPartnerModels
 
 type AttemptCommunityPartnerRegisterRequest struct {
-	PartnerID    int64
+	PartnerID    uint
 	PartnerEmail string
 	PartnerTitle string
 	Password     string

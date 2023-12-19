@@ -1,8 +1,7 @@
 package server
 
 import (
-	"xavier_portal/models/communitypartneruser"
-	"xavier_portal/models/studentuser"
+	"xavier_portal/models"
 	"xavier_portal/server/routeHandlers/communitypartnerRoutes"
 	"xavier_portal/server/routeHandlers/studentRoutes"
 
@@ -12,8 +11,8 @@ import (
 func Server() {
 	r := gin.Default()
 	// r.StaticFS("/fs", gin.Dir("static", true))
-	studentuser.StudentUserStore.NewStudentUserStore()
-	communitypartneruser.CommunityPartnerUserStore.NewCommunityPartnerUserStore()
+	models.StudentUserStore.NewStudentUserStore()
+	models.CommunityPartnerUserStore.NewCommunityPartnerUserStore()
 	r.GET("student/get_student/:id", studentRoutes.GetStudent)
 	r.POST("student/attempt_student_register", studentRoutes.AttemptStudentRegister)
 	r.POST("partner/attempt_partner_register", communitypartnerRoutes.AttemptCommunityPartnerRegister)

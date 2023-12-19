@@ -1,4 +1,4 @@
-package communitypartner
+package models
 
 import (
 	"gorm.io/gorm"
@@ -21,7 +21,8 @@ CREATE TABLE `communitypartner` (
 
 type CommunityPartner struct {
 	gorm.Model
-	ID           int64
-	PartnerTitle string
-	PartnerEmail string
+	CommunityPartnerUserID uint
+	PartnerTitle           string
+	PartnerEmail           string
+	// VolunteerOpportunities []VolunteerOpportunity
 }

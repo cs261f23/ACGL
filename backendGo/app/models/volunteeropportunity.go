@@ -1,14 +1,18 @@
-package volunteeropportunity
+package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type VolunteerOpportunity struct {
 	gorm.Model
-	ID                 int
+	// ID                 uint
 	Description        string
 	Keywords           string
-	CommunityPartnerID int
+	CommunityPartnerID uint
 	Date               []byte
+
+	Students []*Student `gorm:"many2many:student_volunteeropportunities;"`
 }
 
 /**

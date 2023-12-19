@@ -2,22 +2,18 @@ package studentRoutes
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"xavier_portal/models/student"
-	"xavier_portal/models/studentuser"
+	"xavier_portal/models"
 	StudentModels "xavier_portal/server/routeHandlers/requestModels/student"
 
 	"github.com/gin-gonic/gin"
 )
 
 func GetStudent(c *gin.Context) {
-	x, y := c.Params.Get("id")
-	fmt.Println(x, y)
-	t := studentuser.StudentUserStore.Get(context.TODO(), map[string]string{
+	x, _ := c.Params.Get("id")
+	t := models.StudentUserStore.Get(context.TODO(), map[string]string{
 		"student_id": x,
 	})
-	fmt.Println(x, y, t)
 	c.JSON(0, t)
 }
 
@@ -32,18 +28,18 @@ func AttemptStudentRegister(c *gin.Context) {
 	bod := new(StudentModels.AttemptStudentRegisterRequest)
 
 	c.Bind(bod)
-	stu := student.Student{}
-	stu.StudentEmail = bod.StudentEmail
-	stu.Name = bod.Name
-	stu.StudentId = bod.StudentID
 
-	studentuser.StudentUserStore.Register(context.TODO(), &stu, bod.Password)
+	models.StudentUserStore.Register(context.TODO(), bod)
 	c.String(http.StatusOK,
-		"yeahbitch",
+		"yeah bitch",
 	)
 }
 
 func AttemptStudentSignUp(c *gin.Context) {
+	body := new(StudentModels.AttemptStudentSignUpRequest)
+	c.Bind(body)
+	models.StudentUserStore.SignUp(context.TODO(), body)
+	c.JSON(0, body)
 
 }
 

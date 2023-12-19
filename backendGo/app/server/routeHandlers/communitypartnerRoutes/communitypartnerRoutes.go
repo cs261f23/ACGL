@@ -2,10 +2,8 @@ package communitypartnerRoutes
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"xavier_portal/models/communitypartner"
-	"xavier_portal/models/communitypartneruser"
+	"xavier_portal/models"
 	CommunityPartnerModels "xavier_portal/server/routeHandlers/requestModels/communitypartner"
 
 	"github.com/gin-gonic/gin"
@@ -20,20 +18,11 @@ func AttemptCommunityPartnerRegister(c *gin.Context) {
 	// ctx := context.TODO()
 
 	body := new(CommunityPartnerModels.AttemptCommunityPartnerRegisterRequest)
-
-	comp := communitypartner.CommunityPartner{}
-	func() {
-		c.Bind(body)
-		comp.PartnerEmail = body.PartnerEmail
-		comp.PartnerTitle = body.PartnerTitle
-		comp.ID = body.PartnerID
-		fmt.Println(comp, body)
-		communitypartneruser.CommunityPartnerUserStore.Register(context.TODO(), &comp, body.Password)
-		c.JSON(http.StatusOK,
-			comp,
-		)
-		return
-	}()
+	c.Bind(body)
+	models.CommunityPartnerUserStore.Register(context.TODO(), body)
+	c.JSON(http.StatusOK,
+		body,
+	)
 
 }
 

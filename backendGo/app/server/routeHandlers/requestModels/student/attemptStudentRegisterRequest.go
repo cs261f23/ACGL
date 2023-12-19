@@ -1,7 +1,7 @@
 package StudentModels
 
 type AttemptStudentRegisterRequest struct {
-	StudentID    int64
+	StudentID    uint
 	StudentEmail string
 	Name         string
 	Password     string

@@ -1,4 +1,4 @@
-package student
+package models
 
 import (
 	"gorm.io/gorm"
@@ -8,10 +8,12 @@ import (
 
 type Student struct {
 	gorm.Model
-	ID           int64
-	Name         string
-	StudentEmail string
-	StudentId    int64
+	ID                     uint
+	StudentUserID          uint
+	Name                   string
+	StudentEmail           string
+	StudentId              uint
+	VolunteerOpportunities []VolunteerOpportunity `gorm:"many2many:student_volunteeropportunities;"`
 }
 
 /*
