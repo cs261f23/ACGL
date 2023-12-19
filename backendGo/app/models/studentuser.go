@@ -14,7 +14,7 @@ import (
 type StudentUser struct {
 	gorm.Model
 	ID        uint
-	StudentID Student
+	StudentID student
 	Password  string
 	Salt      []byte
 }
@@ -32,10 +32,10 @@ func (sus *studentUserStore) NewStudentUserStore() {
 	sus.Open(context.TODO())
 	sus.users = make(map[string]StudentUser)
 
-	c := new(CommunityPartner)
-	s := new(Student)
+	c := new(communityPartner)
+	s := new(student)
 	su := new(StudentUser)
-	v := new(VolunteerOpportunity)
+	v := new(volunteerOpportunity)
 
 	sus.db.AutoMigrate(c)
 	sus.db.AutoMigrate(s)
@@ -57,8 +57,8 @@ func (sus *studentUserStore) Open(ctx context.Context) {
 	sus.db = *db
 }
 
-func (ss *studentUserStore) Get(ctx context.Context, optionalFilters map[string]string) *[]Student {
-	var student []Student
+func (ss *studentUserStore) Get(ctx context.Context, optionalFilters map[string]string) *[]student {
+	var student []student
 	s1 := ""
 	s2 := ""
 	for key, value := range optionalFilters {
@@ -77,16 +77,18 @@ func (ss *studentUserStore) Get(ctx context.Context, optionalFilters map[string]
 
 func (ss *studentUserStore) Register(ctx context.Context, body *StudentModels.AttemptStudentRegisterRequest) {
 
-	stu := Student{}
+	stu := student{}
 	stu.StudentEmail = body.StudentEmail
 	stu.Name = body.Name
 	stu.StudentId = body.StudentID
 	user := StudentUser{}
 	user.ID = stu.StudentId
 	user.Password = body.Password
+	user.StudentID = stu
+	stu.StudentUserID = user.ID
 
-	ss.db.Create(stu)
 	ss.db.Create(&user)
+	ss.db.Create(&stu)
 }
 
 func (sus *studentUserStore) SignUp(ctx context.Context, body *StudentModels.AttemptStudentSignUpRequest) {

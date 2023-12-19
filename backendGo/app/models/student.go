@@ -6,14 +6,14 @@ import (
 
 // student
 
-type Student struct {
+type student struct {
 	gorm.Model
 	ID                     uint
 	StudentUserID          uint
 	Name                   string
 	StudentEmail           string
 	StudentId              uint
-	VolunteerOpportunities []VolunteerOpportunity `gorm:"many2many:student_volunteeropportunities;"`
+	VolunteerOpportunities []volunteerOpportunity `gorm:"many2many:student_volunteeropportunities;"`
 }
 
 /*

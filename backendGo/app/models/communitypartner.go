@@ -19,10 +19,10 @@ CREATE TABLE `communitypartner` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 */
 
-type CommunityPartner struct {
+type communityPartner struct {
 	gorm.Model
 	CommunityPartnerUserID uint
 	PartnerTitle           string
 	PartnerEmail           string
-	// VolunteerOpportunities []VolunteerOpportunity
+	VolunteerOpportunities []volunteerOpportunity
 }

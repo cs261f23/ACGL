@@ -12,7 +12,7 @@ import (
 
 type CommunityPartnerUser struct {
 	gorm.Model
-	CommunityPartner CommunityPartner
+	CommunityPartner communityPartner
 	Password         string
 	Salt             []byte
 }
@@ -28,9 +28,9 @@ func (cpus *communityPartnerUserStore) NewCommunityPartnerUserStore() {
 	cpus.Open(context.TODO())
 	cpus.users = make(map[string]CommunityPartnerUser)
 	// ALTER TABLE `credit_cards` ADD CONSTRAINT `fk_users_community_partners` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
-	c := new(CommunityPartner)
-	s := new(Student)
-	v := new(VolunteerOpportunity)
+	c := new(communityPartner)
+	s := new(student)
+	v := new(volunteerOpportunity)
 	cpu := new(CommunityPartnerUser)
 	cpus.db.AutoMigrate(cpu)
 	cpus.db.AutoMigrate(c)
@@ -54,7 +54,7 @@ func (cpus *communityPartnerUserStore) Open(ctx context.Context) {
 
 func (ss *communityPartnerUserStore) Register(ctx context.Context, body *CommunityPartnerModels.AttemptCommunityPartnerRegisterRequest) {
 
-	comp := CommunityPartner{}
+	comp := communityPartner{}
 	comp.PartnerEmail = body.PartnerEmail
 	comp.PartnerTitle = body.PartnerTitle
 	comp.CommunityPartnerUserID = body.PartnerID

@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type VolunteerOpportunity struct {
+type volunteerOpportunity struct {
 	gorm.Model
 	// ID                 uint
 	Description        string
@@ -12,7 +12,7 @@ type VolunteerOpportunity struct {
 	CommunityPartnerID uint
 	Date               []byte
 
-	Students []*Student `gorm:"many2many:student_volunteeropportunities;"`
+	Students []*student `gorm:"many2many:student_volunteeropportunities;"`
 }
 
 /**
