@@ -13,6 +13,9 @@ import (
 // path('attempt_communityPartner_register',
 //      views.attempt_communityPartner_register, name='attempt_communityPartner_register'),
 
+/*
+Attempts to register as a community partner user
+*/
 func AttemptCommunityPartnerRegister(c *gin.Context) {
 
 	// ctx := context.TODO()

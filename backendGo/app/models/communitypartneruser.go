@@ -12,9 +12,10 @@ import (
 
 type CommunityPartnerUser struct {
 	gorm.Model
-	CommunityPartner communityPartner
-	Password         string
-	Salt             []byte
+	ID                 uint
+	CommunityPartnerID uint
+	Password           string
+	Salt               []byte
 }
 
 type communityPartnerUserStore struct {
@@ -32,8 +33,8 @@ func (cpus *communityPartnerUserStore) NewCommunityPartnerUserStore() {
 	s := new(student)
 	v := new(volunteerOpportunity)
 	cpu := new(CommunityPartnerUser)
-	cpus.db.AutoMigrate(cpu)
 	cpus.db.AutoMigrate(c)
+	cpus.db.AutoMigrate(cpu)
 	cpus.db.AutoMigrate(s)
 	cpus.db.AutoMigrate(v)
 
@@ -41,11 +42,8 @@ func (cpus *communityPartnerUserStore) NewCommunityPartnerUserStore() {
 
 func (cpus *communityPartnerUserStore) Open(ctx context.Context) {
 
-	// db, err := sql.Open("mysql",
-	// "root:root@tcp(localhost:3306)/xavier_portal")
 	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:3306)/xavier_portal"), &gorm.Config{})
 
-	// ss.db.AutoMigrate(&communityPartner{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -57,11 +55,11 @@ func (ss *communityPartnerUserStore) Register(ctx context.Context, body *Communi
 	comp := communityPartner{}
 	comp.PartnerEmail = body.PartnerEmail
 	comp.PartnerTitle = body.PartnerTitle
-	comp.CommunityPartnerUserID = body.PartnerID
 
 	user := CommunityPartnerUser{}
+	comp.CommunityPartnerUser = user
 	ss.db.Create(&comp)
-	user.CommunityPartner = comp
+	user.CommunityPartnerID = comp.ID
 	user.Password = body.Password
 
 	ss.db.Create(&user)

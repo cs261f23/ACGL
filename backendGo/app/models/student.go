@@ -8,11 +8,10 @@ import (
 
 type student struct {
 	gorm.Model
-	ID                     uint
-	StudentUserID          uint
+	StudentID              uint
+	StudentUser            StudentUser
 	Name                   string
 	StudentEmail           string
-	StudentId              uint
 	VolunteerOpportunities []volunteerOpportunity `gorm:"many2many:student_volunteeropportunities;"`
 }
 

@@ -2,6 +2,7 @@ package models
 
 import (
 	"context"
+	"fmt"
 	"log"
 	StudentModels "xavier_portal/server/routeHandlers/requestModels/student"
 
@@ -14,7 +15,7 @@ import (
 type StudentUser struct {
 	gorm.Model
 	ID        uint
-	StudentID student
+	StudentID uint
 	Password  string
 	Salt      []byte
 }
@@ -46,11 +47,8 @@ func (sus *studentUserStore) NewStudentUserStore() {
 
 func (sus *studentUserStore) Open(ctx context.Context) {
 
-	// db, err := sql.Open("mysql",
-	// "root:root@tcp(localhost:3306)/xavier_portal")
 	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:3306)/xavier_portal"), &gorm.Config{})
 
-	// ss.db.AutoMigrate(&Student{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -80,15 +78,18 @@ func (ss *studentUserStore) Register(ctx context.Context, body *StudentModels.At
 	stu := student{}
 	stu.StudentEmail = body.StudentEmail
 	stu.Name = body.Name
-	stu.StudentId = body.StudentID
-	user := StudentUser{}
-	user.ID = stu.StudentId
-	user.Password = body.Password
-	user.StudentID = stu
-	stu.StudentUserID = user.ID
+	stu.ID = body.StudentID
+	stu.StudentID = body.StudentID
 
+	user := StudentUser{}
+	user.Password = body.Password
+	user.StudentID = stu.StudentID
+
+	stu.StudentUser = user
+
+	err := ss.db.Create(&stu)
 	ss.db.Create(&user)
-	ss.db.Create(&stu)
+	fmt.Println(err)
 }
 
 func (sus *studentUserStore) SignUp(ctx context.Context, body *StudentModels.AttemptStudentSignUpRequest) {
