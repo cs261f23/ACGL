@@ -1,6 +1,8 @@
 package models
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
@@ -8,11 +10,13 @@ import (
 
 type student struct {
 	gorm.Model
-	StudentID              uint
-	StudentUser            StudentUser
+	StudentID uint
+	// StudentUser            StudentUser
 	Name                   string
 	StudentEmail           string
 	VolunteerOpportunities []volunteerOpportunity `gorm:"many2many:student_volunteeropportunities;"`
+	CreatedAt              time.Duration
+	UpdatedAt              time.Duration
 }
 
 /*

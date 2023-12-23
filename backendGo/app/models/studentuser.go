@@ -4,9 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"time"
 	StudentModels "xavier_portal/server/routeHandlers/requestModels/student"
-
-	_ "time"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -14,7 +13,6 @@ import (
 
 type StudentUser struct {
 	gorm.Model
-	ID        uint
 	StudentID uint
 	Password  string
 	Salt      []byte
@@ -55,8 +53,10 @@ func (sus *studentUserStore) Open(ctx context.Context) {
 	sus.db = *db
 }
 
-func (ss *studentUserStore) Get(ctx context.Context, optionalFilters map[string]string) *[]student {
-	var student []student
+func (ss *studentUserStore) Get(ctx context.Context, optionalFilters map[string]string) *student {
+	var student student = student{}
+	r := time.Time{}
+	fmt.Println(r)
 	s1 := ""
 	s2 := ""
 	for key, value := range optionalFilters {
@@ -68,7 +68,9 @@ func (ss *studentUserStore) Get(ctx context.Context, optionalFilters map[string]
 			s2 += "," + value
 		}
 	}
-	ss.db.Find(&student, s1, s2)
+	x := ss.db.Find(&student, optionalFilters["student_id"])
+	ss.db.Find(&student)
+	fmt.Println(x)
 	// ss.db.Find(&student)
 	return &student
 }
@@ -85,11 +87,11 @@ func (ss *studentUserStore) Register(ctx context.Context, body *StudentModels.At
 	user.Password = body.Password
 	user.StudentID = stu.StudentID
 
-	stu.StudentUser = user
+	// stu.StudentUser = user
 
 	err := ss.db.Create(&stu)
-	ss.db.Create(&user)
-	fmt.Println(err)
+	err2 := ss.db.Create(&user)
+	fmt.Println(err, err2)
 }
 
 func (sus *studentUserStore) SignUp(ctx context.Context, body *StudentModels.AttemptStudentSignUpRequest) {

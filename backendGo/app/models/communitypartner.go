@@ -1,6 +1,8 @@
 package models
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
@@ -21,9 +23,11 @@ CREATE TABLE `communitypartner` (
 
 type communityPartner struct {
 	gorm.Model
-	CommunityPartnerID     uint
-	CommunityPartnerUser   CommunityPartnerUser
+	CommunityPartnerID uint
+	// CommunityPartnerUser   CommunityPartnerUser
 	PartnerTitle           string
 	PartnerEmail           string
 	VolunteerOpportunities []volunteerOpportunity
+	CreatedAt              time.Duration
+	EditedAt               time.Duration
 }

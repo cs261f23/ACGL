@@ -55,14 +55,14 @@ func (ss *communityPartnerUserStore) Register(ctx context.Context, body *Communi
 	comp := communityPartner{}
 	comp.PartnerEmail = body.PartnerEmail
 	comp.PartnerTitle = body.PartnerTitle
+	comp.CommunityPartnerID = body.PartnerID
 
 	user := CommunityPartnerUser{}
-	comp.CommunityPartnerUser = user
-	ss.db.Create(&comp)
-	user.CommunityPartnerID = comp.ID
+	// comp.CommunityPartnerUser = user
+	user.CommunityPartnerID = comp.CommunityPartnerID
 	user.Password = body.Password
+	ss.db.Create(&comp)
 
-	ss.db.Create(&user)
 }
 
 /*

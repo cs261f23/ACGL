@@ -1,6 +1,8 @@
 package models
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
@@ -11,6 +13,8 @@ type volunteerOpportunity struct {
 	Keywords           string
 	CommunityPartnerID uint
 	Date               []byte
+	CreatedAt          time.Duration
+	EditedAt           time.Duration
 
 	Students []*student `gorm:"many2many:student_volunteeropportunities;"`
 }
